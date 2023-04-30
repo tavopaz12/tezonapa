@@ -38,7 +38,7 @@ export default function Dropdown({ title }) {
         onMouseOut={handleClickHidden}
         id="dropdownDelayButton"
         type="button"
-        className='max-md:text-[0.7rem] font-bold max-md:font-bold'
+        className='max-md:text-[1rem] font-bold max-md:font-bold'
         >
         {title}
       </button>

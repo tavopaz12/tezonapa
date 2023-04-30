@@ -16,7 +16,7 @@ export default function Nav({ linkActive }) {
             onClick={() => setShow(!show)}
             data-collapse-toggle="mega-menu-full"
             type="button"
-            className="inline-flex items-center p-2 ml-1 text-sm text-gray-400 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none"
+            className="inline-flex items-center p-2 ml-1 text-sm text-gray-400 rounded-lg md:hidden md:hover:bg-gray-100 focus:outline-none"
             aria-controls="mega-menu-full"
             aria-expanded="false">
             <svg
