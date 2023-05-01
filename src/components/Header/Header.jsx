@@ -12,7 +12,11 @@ export default function Header({ imgBanner, activeLink }) {
       <div className="flex justify-between mb-2">
         <div className="flex items-center justify-center gap-4 max-sm:gap-2">
           <div>
-            <Image className="w-14 h-14 max-md:h-10 max-md:w-10" alt="logo tezonapa" src={logo} />
+            <Image
+              className="w-14 h-14 max-md:h-10 max-md:w-10"
+              alt="logo tezonapa"
+              src={logo}
+            />
           </div>
           <p className="text-gray-500 max-md:hidden font-medium max-md:text-sm">
             {fecha.toLocaleDateString()}
@@ -24,7 +28,9 @@ export default function Header({ imgBanner, activeLink }) {
         </div>
 
         <div className="flex gap-4 items-center">
-          <h1 className='font-bold text-gray-500 md:text-base max-md:hidden'>Tezonapa, Veracruz</h1>
+          <h1 className="font-bold text-gray-500 md:text-base max-md:hidden">
+            Tezonapa, Veracruz
+          </h1>
           <Link
             target="_blank"
             href="https://www.facebook.com/profile.php?id=100076983524020">

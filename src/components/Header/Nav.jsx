@@ -10,7 +10,7 @@ export default function Nav({ linkActive }) {
   const [show, setShow] = useState(false)
   return (
     <>
-      <nav className="bg-[#2A2D34]  border-t-8 border-[#2D974B]">
+      <nav className="bg-[#2A2D34] border-t-8 border-[#2D974B]">
         <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl max-md:p-1">
           <button
             onClick={() => setShow(!show)}
@@ -76,7 +76,7 @@ function LinkNav({ link, linkActive, slug, subLinks, title, listLinks }) {
           onClick={handleHiddenDropdown}
           className={`flex items-center gap-1 max-md:text-base md:hover:text-[#BFFFF1] hover:[#BFFFF1] font-bold text-lg md:px-6 ${
             activeLink === link
-              ? 'md:bg-white text-black max-md:text-blue-500 md:hover:text-gray-700'
+              ? 'md:bg-white md:text-black max-md:text-blue-500 md:hover:text-gray-700'
               : ''
           } md:py-4 py-2 pl-3 pr-4 text-white `}
           aria-current="page">
@@ -114,6 +114,7 @@ function Dropdown({ links, visible }) {
           <li key={link.title}>
             <Link
               href={link.slug}
+              target={link.externo && '_blank'}
               className="block capitalize px-4 py-2 md:hover:bg-slate-50 max-md:text-gray-400 md:hover:text-black">
               {link.title}
             </Link>
