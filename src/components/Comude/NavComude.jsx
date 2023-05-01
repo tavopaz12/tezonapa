@@ -1,24 +1,14 @@
-import Link from "next/link";
+import Link from 'next/link'
 
-export default function NavComude({menuLinks, active}) {
+export default function NavComude({ menuLinks, active }) {
   return (
-    <nav
-      className="flex px-10 my-1 mb-4 rounded-lg bg-gray-50"
-      aria-label="Breadcrumb">
-      <ol className="inline-flex items-center space-x-1 md:space-x-3">
+    <nav className="flex px-10 max-md:px-4 my-1 mb-4" aria-label="Breadcrumb">
+      <ol className="inline-flex items-center space-x-1 md:space-x-3 max-md:space-x-0">
         <li className="inline-flex items-center">
           <Link
             href="comude"
-            className="inline-flex items-center text-base font-medium text-black hover:text-blue-600">
-            <svg
-              aria-hidden="true"
-              className="w-4 h-4 mr-2"
-              fill="currentColor"
-              viewBox="0 0 20 20"
-              xmlns="http://www.w3.org/2000/svg">
-              <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path>
-            </svg>
-            Inicio
+            className="inline-flex items-center text-base max-md:text-sm font-medium text-black hover:text-blue-600">
+            Comude
           </Link>
         </li>
 
@@ -27,7 +17,7 @@ export default function NavComude({menuLinks, active}) {
             <div className="flex items-center">
               <svg
                 aria-hidden="true"
-                className="w-6 h-6 text-black"
+                className="w-6 h-6 max-md:w-4 max-md:h-4 max-md:mt-1 text-black"
                 fill="currentColor"
                 viewBox="0 0 20 20"
                 xmlns="http://www.w3.org/2000/svg">
@@ -38,7 +28,7 @@ export default function NavComude({menuLinks, active}) {
               </svg>
               <Link
                 href={link.link}
-                className={`ml-1 text-base font-medium ${
+                className={`ml-1 max-md:text-sm text-base font-medium ${
                   link.name === active ? 'text-blue-500' : 'text-black'
                 }  hover:text-blue-600`}>
                 {link.title}

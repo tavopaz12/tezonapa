@@ -51,6 +51,7 @@ export default function Nav({ linkActive }) {
                   subLinks={link.subLinks}
                   title={link.title}
                   listLinks={link.listLinks}
+                  externo={link.externo}
                 />
               ))}
             </ul>
@@ -61,7 +62,15 @@ export default function Nav({ linkActive }) {
   )
 }
 
-function LinkNav({ link, linkActive, slug, subLinks, title, listLinks }) {
+function LinkNav({
+  link,
+  linkActive,
+  slug,
+  subLinks,
+  title,
+  listLinks,
+  externo,
+}) {
   const [activeLink, setActiveLink] = useState(linkActive)
   const [showDropdown, setShowDropdown] = useState(false)
 
@@ -75,21 +84,20 @@ function LinkNav({ link, linkActive, slug, subLinks, title, listLinks }) {
         <button
           onClick={handleHiddenDropdown}
           className={`flex items-center gap-1 max-md:text-base md:hover:text-[#BFFFF1] hover:[#BFFFF1] font-bold text-lg md:px-6 ${
-            activeLink === link
-              ? 'md:bg-white md:text-black max-md:text-blue-500 md:hover:text-gray-700'
-              : ''
+            activeLink === link &&
+            'md:bg-white md:text-black max-md:text-blue-500 md:hover:text-gray-700'
           } md:py-4 py-2 pl-3 pr-4 text-white `}
           aria-current="page">
           {title} <FontAwesomeIcon className="w-4 h-4" icon={faCaretDown} />
         </button>
       ) : (
         <Link
+          target={externo ? '_blank' : ''}
           href={slug}
-          onClick={() => setActiveLink(link)}
+          onClick={externo ? '' : () => setActiveLink(link)}
           className={`block max-md:text-base md:hover:text-[#BFFFF1] hover:[#BFFFF1] font-bold text-lg md:px-6 ${
-            activeLink === link
-              ? 'md:bg-white md:text-black max-md:text-blue-500 md:hover:text-gray-700'
-              : ''
+            activeLink === link &&
+            'md:bg-white md:text-black max-md:text-blue-500 md:hover:text-gray-700'
           } md:py-4 py-2 pl-3 pr-4 text-white `}
           aria-current="page">
           <h2>{title}</h2>

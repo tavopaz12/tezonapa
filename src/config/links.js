@@ -5,6 +5,7 @@ export const links = [
     link: 'home',
     subLinks: false,
     listLinks: [],
+    externo: false,
   },
   {
     title: 'Sobre Nosotros',
@@ -12,6 +13,7 @@ export const links = [
     link: 'about',
     subLinks: false,
     listLinks: [],
+    externo: false,
   },
   {
     title: 'Areas municipales',
@@ -28,6 +30,7 @@ export const links = [
       { title: 'fomento agropecuario', slug: '/fomento-agropecuario' },
       { title: 'eduación', slug: '/educaion' },
     ],
+    externo: false,
   },
   {
     title: 'Estructura',
@@ -51,6 +54,7 @@ export const links = [
         slug: 'http://tezonapa.gob.mx/transparencia/fracciones/especificas/Gac2022-194%20Martes%2017%20TOMO%20I%20Ext.pdf',
       },
     ],
+    externo: false,
   },
   {
     title: 'Transparencia',
@@ -58,6 +62,7 @@ export const links = [
     link: 'transparencia',
     subLinks: false,
     listLinks: [],
+    externo: true,
   },
   {
     title: 'Contabilidad',
@@ -65,6 +70,7 @@ export const links = [
     link: 'contabilidad',
     subLinks: false,
     listLinks: [],
+    externo: true,
   },
   {
     title: 'Citas',

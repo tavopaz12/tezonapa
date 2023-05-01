@@ -4,8 +4,12 @@ import Carousel from '@/components/UI/Carousel'
 import futbol from '@/assets/images/Comude/futbol.jpg'
 import beisbol from '@/assets/images/Comude/beisbol.jpg'
 import volleyball from '@/assets/images/Comude/voll.jpg'
+import visoria from '@/assets/images/Comude/visoria.jpg'
+import visoria1 from '@/assets/images/Comude/visoria1.jpg'
+
 import NavComude from '@/components/Comude/NavComude'
 import Title from '@/components/UI/Title'
+import Image from 'next/image'
 
 const images = [
   {
@@ -59,6 +63,7 @@ export default function Comude() {
     <Layout
       activeLink="areas-municipales"
       title="Comude - H. Ayuntamiento, Tezonapa">
+
       <NavComude menuLinks={menuLinks} />
 
       <section className="mb-8">
@@ -70,27 +75,44 @@ export default function Comude() {
         />
       </section>
 
-      <section className="px-10 mb-8 flex justify-between">
-        <div className="w-2/4 text-center">
+      <section className="px-10 mb-8 gap-8 flex justify-between max-md:flex-col max-md:gap-8">
+
+        <div className="w-2/4 text-center max-md:w-full">
           <Title title="Misión" />
-          <p className='text-left mt-2'>
-            Estimular, promover y apoyar la enseñanza del deporte para todos los
-            habitantes del Municipio en espacios deportivos con infraestructura
-            necesaria y personal calificado
-          </p>
+
+          <div className="grid place-items-center">
+            <p className="text-left mt-2 text-lg max-md:text-base">
+              Estimular, promover y apoyar la enseñanza del deporte para todos
+              los habitantes del Municipio en espacios deportivos con
+              infraestructura necesaria y personal calificado
+            </p>
+            <Image
+              alt="vision"
+              src={visoria}
+              className="h-[300px] w-[300px] object-cover mt-4"
+            />
+          </div>
         </div>
 
-        <div className="w-2/4 text-center">
+        <div className="w-2/4 text-center max-md:w-full">
           <Title title="Misión" />
-          <p className='text-left mt-2'>
-            Ser un referente de la Gestión Municipal del deporte; con un
-            compromiso de ofrecer y garantizar a los ciudadanos servicios
-            profesionales y especializados de activación física como Política de
-            Calidad. Así como Crear torneos en las diferentes categorías con una
-            estructura sólida dando el realce que se requiere, dando la
-            oportunidad a jóvenes de participar en eventos oficiales más allá
-            del municipio.
-          </p>
+
+          <div className="grid place-items-center">
+            <p className="text-left mt-2 text-lg max-md:text-base">
+              Ser un referente de la Gestión Municipal del deporte; con un
+              compromiso de ofrecer y garantizar a los ciudadanos servicios
+              profesionales y especializados de activación física como Política
+              de Calidad. Así como Crear torneos en las diferentes categorías
+              con una estructura sólida dando el realce que se requiere, dando
+              la oportunidad a jóvenes de participar en eventos oficiales más
+              allá del municipio.
+            </p>
+            <Image
+              alt="vision"
+              src={visoria1}
+              className="h-[300px] w-[300px] object-cover mt-4"
+            />
+          </div>
         </div>
       </section>
     </Layout>
