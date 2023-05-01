@@ -7,12 +7,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 
-export default function Carousel({
-  images,
-  autoPlay,
-  showButtons,
-  delay,
-}) {
+export default function Carousel({ images, autoPlay, showButtons, delay }) {
   const [selectedIndex, setSelectedIndex] = useState(0)
   const [selectedImage, setSelectedImage] = useState(images[0])
   const [loaded, setLoaded] = useState(false)
@@ -63,28 +58,28 @@ export default function Carousel({
   }
 
   return (
-    <div className={`w-full px-10 h-[400px] relative`}>
+    <div className={`w-full px-10 max-md:px-4 h-[400px] max-md:h-[180px] relative`}>
       <Image
         width={2000}
         height={2000}
         src={selectedImage.src}
         alt="Gentleman"
-        className={`w-full object-cover h-[400px] opacity-0 duration-[1s] ${
-          loaded && 'opacity-[1] translate-x-1'
+        className={`w-full object-cover h-[400px] max-md:h-[180px] opacity-0 duration-[1s] ${
+          loaded && 'opacity-[1] translate-x-1 max-md:translate-x-0'
         }`}
         onLoad={() => setLoaded(true)}
       />
 
       {selectedImage.title && (
         <div
-          className={`absolute grid place-content-center opacity-0 p-4 left-[3.2%] w-[94%] h-full text-white top-0 bg-[rgba(0,0,0,0.5)] duration-[1s] ${
+          className={`absolute grid place-content-center opacity-0 p-4 left-[3.2%] max-md:left-[4.5%] w-[94%] max-md:w-[91.2%] h-full text-white top-0 bg-[rgba(0,0,0,0.5)] duration-[1s] ${
             loaded && 'opacity-[1] bottom-[9%]'
           }`}>
-          <h2 className="font-extrabold text-4xl overflow-hidden text-center">
+          <h2 className="font-extrabold text-4xl max-md:text-lg overflow-hidden text-center">
             {selectedImage.title}
           </h2>
           <div className="w-full flex justify-center">
-            <p className="text-lg mt-4 font-semibold bg-[rgba(0,0,0,0.3)] p-2 text-center rounded w-2/4">
+            <p className="text-lg max-md:text-sm max-md:truncate max-md:w-[15rem] mt-4 max-md:mt-1 font-semibold bg-[rgba(0,0,0,0.3)] p-2 text-center rounded w-2/4">
               {selectedImage.desc}
             </p>
           </div>
@@ -92,7 +87,7 @@ export default function Carousel({
           {selectedImage.link && (
             <div className="flex justify-center mt-4">
               <Link
-                className="bg-red-400 capitalize font-lg font-bold rounded-2xl px-6 py-2"
+                className="bg-red-400 capitalize max-md:text-sm font-bold rounded-2xl px-6 py-2 max-md:py-1"
                 href={selectedImage.link}>
                 {selectedImage.titleLink}
               </Link>
@@ -106,9 +101,9 @@ export default function Carousel({
           <div
             onClick={() => selectImage(index)}
             key={img.title}
-            className={`bg-gray-600 ${
-              index === selectedIndex && 'bg-[#095227]'
-            } px-5 rounded cursor-pointer h-[5px]`}></div>
+            className={`${
+              index === selectedIndex ? 'bg-[#4cd384]' : 'bg-gray-500'
+            }  px-5 rounded cursor-pointer h-[5px]`}></div>
         ))}
       </div>
 
@@ -116,12 +111,12 @@ export default function Carousel({
         {showButtons && (
           <>
             <button
-              className="text-white absolute top-[50%]  bg-[#2D974B] p-2 m-1"
+              className="text-white absolute top-[50%]  bg-[#2D974B] p-2 m-1 max-md:hidden"
               onClick={previous}>
               <FontAwesomeIcon className="h1-4 w-4" icon={faArrowLeftLong} />
             </button>
             <button
-              className="absolute text-white top-[50%] right-8 bg-[#2D974B] p-2 m-1"
+              className="absolute text-white top-[50%] right-8 bg-[#2D974B] p-2 m-1 max-md:hidden"
               onClick={next}>
               <FontAwesomeIcon className="h1-4 w-4" icon={faArrowRightLong} />
             </button>
