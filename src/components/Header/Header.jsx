@@ -19,7 +19,7 @@ export default function Header({ imgBanner, activeLink }) {
             />
           </div>
           <p className="text-gray-500 max-md:hidden font-medium max-md:text-sm">
-            {fecha.toLocaleDateString()}
+            {/* {fecha.toLocaleDateString()} */}
           </p>
           <p className="max-md:hidden">|</p>
           <p>

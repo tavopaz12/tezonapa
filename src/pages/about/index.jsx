@@ -51,8 +51,8 @@ export default function Index() {
       <section className="px-10 mb-8">
         <Title title="Historia" />
 
-        <div className='flex items-center justify-center gap-8'>
-          <Image src={cultivo} alt="cultivos" className='h-[300px] w-[300px] object-cover rounded-lg shadow-gray-500 shadow-lg' />
+        <div className='flex items-center justify-center gap-8 max-md:flex-col'>
+          <Image src={cultivo} alt="cultivos" className='h-[300px] w-[300px] object-cover rounded-lg shadow-gray-500 shadow-lg max-md:mt-4' />
           <p className="text-lg mt-5 text-justify w-full max-md:text-base max-md:w-full">
             El municipio de Tezonapa fue creado por la ley No. 93 en 1960,
             separándose de Zongolica y englobando varias congregaciones. El

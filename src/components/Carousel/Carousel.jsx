@@ -19,9 +19,7 @@ export default function Carousel({ images }) {
   useEffect(() => {
     resetTimeOut()
     timeOutRef.current = setTimeout(() => {
-      setIndex((prevIndex) =>
-        prevIndex === images.length - 1 ? 0 : prevIndex + 1,
-      )
+      setIndex((prevIndex) => (prevIndex + 1) % images.length)
     }, delay)
 
     return () => {
