@@ -40,7 +40,7 @@ export default function Home() {
               <iframe
                 className="h-full w-[500px] max-md:w-full max-md:h-[20rem]"
                 src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fprofile.php%3Fid%3D100076983524020&tabs=timeline&width=500&small_header=false&adapt_container_width=false&hide_cover=false&show_facepile=true&appId"
-                allowfullscreen="true"
+                allowFullScreen={true}
                 allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
             </div>
           </div>

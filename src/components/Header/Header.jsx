@@ -12,14 +12,16 @@ export default function Header({ imgBanner, activeLink }) {
       <div className="flex justify-between mb-2">
         <div className="flex items-center justify-center gap-4 max-sm:gap-2">
           <div>
-            <Image
-              className="w-14 h-14 max-md:h-10 max-md:w-10"
-              alt="logo tezonapa"
-              src={logo}
-            />
+            <Link href="/">
+              <Image
+                className="w-14 h-14 max-md:h-10 max-md:w-10"
+                alt="logo tezonapa"
+                src={logo}
+              />
+            </Link>
           </div>
           <p className="text-gray-500 max-md:hidden font-medium max-md:text-sm">
-            {/* {fecha.toLocaleDateString()} */}
+            {fecha.toLocaleDateString()}
           </p>
           <p className="max-md:hidden">|</p>
           <p>
