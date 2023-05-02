@@ -8,6 +8,7 @@ export default function Index() {
       title="Voleibol | Comude | H. Ayuntamiento Tezonapa"
       activeLink="areas-municipales">
       <NavComude menuLinks={comudeSubLinks} active="voleibol" />
+
     </Layout>
   )
 }

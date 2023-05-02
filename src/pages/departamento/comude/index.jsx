@@ -53,12 +53,12 @@ export default function Comude() {
         />
       </section>
 
-      <section className="px-10 mb-8 gap-8 flex justify-between max-md:flex-col max-md:gap-8">
+      <section className="px-10 max-md:px-4 mb-8 gap-8 flex justify-between max-md:flex-col max-md:gap-8">
         <div className="w-2/4 text-center max-md:w-full">
           <Title title="Misión" />
 
           <div className="grid place-items-center">
-            <p className="text-left mt-2 text-lg max-md:text-base">
+            <p className="text-left max-md:text-justify mt-2 text-lg max-md:text-base">
               Estimular, promover y apoyar la enseñanza del deporte para todos
               los habitantes del Municipio en espacios deportivos con
               infraestructura necesaria y personal calificado
@@ -76,7 +76,7 @@ export default function Comude() {
           <Title title="Visión" />
 
           <div className="grid place-items-center">
-            <p className="text-left mt-2 text-lg max-md:text-base">
+            <p className="text-left max-md:text-justify mt-2 text-lg max-md:text-base">
               Ser un referente de la Gestión Municipal del deporte; con un
               compromiso de ofrecer y garantizar a los ciudadanos servicios
               profesionales y especializados de activación física como Política

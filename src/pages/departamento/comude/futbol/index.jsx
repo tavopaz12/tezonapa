@@ -39,7 +39,7 @@ export default function Index() {
         <Hr />
 
         <Title title="Historia del fútbol" />
-        <p className="text-lg mt-5 max-md:text-base">
+        <p className="text-lg max-md:text-justify mt-5 max-md:text-base">
           El Futbol como hoy lo conocemos tiene su origen en las Islas
           Británicas. En las diferentes regiones, el deporte se jugaba con sus
           propias reglas y eso era un verdadero relajo. Fue hasta 1848 cuando

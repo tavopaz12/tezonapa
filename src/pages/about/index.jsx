@@ -9,7 +9,7 @@ import Hr from '@/components/UI/Hr'
 export default function Index() {
   return (
     <Layout activeLink="about">
-      <section id="valores" className="mb-8 px-10 mt-5">
+      <section id="valores" className="mb-8 px-10 max-md:px-4 mt-5">
         <Title title="Misión" />
 
         <div className="flex justify-center gap-8 w-full items-center max-md:flex-col">
@@ -51,7 +51,7 @@ export default function Index() {
         </div>
       </section>
 
-      <section className="px-10 mb-8">
+      <section className="px-10 max-md:px-4 mb-8">
         <Hr />
         <Title title="Historia" />
 
