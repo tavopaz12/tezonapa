@@ -21,7 +21,6 @@ export default function Home() {
             <iframe
               className="h-[25rem] max-md:h-[20rem] w-[80%] max-md:w-full border border-gray-300 p-1"
               src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fpermalink.php%3Fstory_fbid%3Dpfbid02ZDQBvM9iVNDcu4aLpuRhs5G686yVwsYMdZTkuCQyV56L9yPiENaQhU5T6QDQWcTFl%26id%3D100076983524020&show_text=true&width=500"
-              frameborder="0"
               allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
           </div>
         </section>
