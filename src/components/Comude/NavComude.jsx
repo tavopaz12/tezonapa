@@ -6,8 +6,8 @@ export default function NavComude({ menuLinks, active }) {
       <ol className="inline-flex items-center space-x-1 md:space-x-3 max-md:space-x-0">
         <li className="inline-flex items-center">
           <Link
-            href="comude"
-            className="inline-flex items-center text-base max-md:text-sm font-medium text-black hover:text-blue-600">
+            href="/departamento/comude"
+            className="inline-flex max-md:font-semibold items-center text-base max-md:text-sm font-medium text-black hover:text-blue-600">
             Comude
           </Link>
         </li>
@@ -28,7 +28,7 @@ export default function NavComude({ menuLinks, active }) {
               </svg>
               <Link
                 href={link.link}
-                className={`ml-1 max-md:text-sm text-base font-medium ${
+                className={`ml-1 max-md:font-semibold max-md:text-sm text-base font-medium ${
                   link.name === active ? 'text-blue-500' : 'text-black'
                 }  hover:text-blue-600`}>
                 {link.title}

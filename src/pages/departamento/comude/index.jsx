@@ -11,6 +11,8 @@ import NavComude from '@/components/Comude/NavComude'
 import Title from '@/components/UI/Title'
 import Image from 'next/image'
 
+import { comudeSubLinks } from 'config/comudeSubLinks'
+
 const images = [
   {
     src: futbol,
@@ -35,36 +37,12 @@ const images = [
   },
 ]
 
-const menuLinks = [
-  {
-    title: 'Fútbol',
-    link: 'comude/futbol',
-    name: 'futbol',
-  },
-  {
-    title: 'Beisbol',
-    link: 'comude/beisbol',
-    name: 'beisbol',
-  },
-  {
-    title: 'Voleibol',
-    link: 'comude/voleibol',
-    name: 'voleibol',
-  },
-  {
-    title: 'Básquetbol',
-    link: 'comude/basquetbol',
-    name: 'basquetbol',
-  },
-]
-
 export default function Comude() {
   return (
     <Layout
       activeLink="areas-municipales"
       title="Comude - H. Ayuntamiento, Tezonapa">
-
-      <NavComude menuLinks={menuLinks} />
+      <NavComude menuLinks={comudeSubLinks} />
 
       <section className="mb-8">
         <Carousel
@@ -76,7 +54,6 @@ export default function Comude() {
       </section>
 
       <section className="px-10 mb-8 gap-8 flex justify-between max-md:flex-col max-md:gap-8">
-
         <div className="w-2/4 text-center max-md:w-full">
           <Title title="Misión" />
 
@@ -87,6 +64,7 @@ export default function Comude() {
               infraestructura necesaria y personal calificado
             </p>
             <Image
+              loading="lazy"
               alt="vision"
               src={visoria}
               className="h-[300px] w-[300px] object-cover mt-4"
@@ -95,7 +73,7 @@ export default function Comude() {
         </div>
 
         <div className="w-2/4 text-center max-md:w-full">
-          <Title title="Misión" />
+          <Title title="Visión" />
 
           <div className="grid place-items-center">
             <p className="text-left mt-2 text-lg max-md:text-base">
@@ -108,6 +86,7 @@ export default function Comude() {
               allá del municipio.
             </p>
             <Image
+              loading="lazy"
               alt="vision"
               src={visoria1}
               className="h-[300px] w-[300px] object-cover mt-4"

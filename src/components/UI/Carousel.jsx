@@ -62,6 +62,7 @@ export default function Carousel({ images, autoPlay, showButtons, delay }) {
       <Image
         width={2000}
         height={2000}
+        loading='lazy'
         src={selectedImage.src}
         alt="Gentleman"
         className={`w-full object-cover h-[400px] max-md:h-[180px] opacity-0 duration-[1s] ${
@@ -100,7 +101,7 @@ export default function Carousel({ images, autoPlay, showButtons, delay }) {
         {images.map((img, index) => (
           <div
             onClick={() => selectImage(index)}
-            key={img.title}
+            key={img.src}
             className={`${
               index === selectedIndex ? 'bg-[#4cd384]' : 'bg-gray-500'
             }  px-5 rounded cursor-pointer h-[5px]`}></div>

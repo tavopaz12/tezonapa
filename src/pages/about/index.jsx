@@ -4,6 +4,7 @@ import Image from 'next/image'
 import mision from '@/assets/images/mision.jpg'
 import vision from '@/assets/images/vision.jpg'
 import cultivo from '@/assets/images/cultivos.jpg'
+import Hr from '@/components/UI/Hr'
 
 export default function Index() {
   return (
@@ -13,6 +14,7 @@ export default function Index() {
 
         <div className="flex justify-center gap-8 w-full items-center max-md:flex-col">
           <Image
+            loading="lazy"
             className="w-[250px] h-[250px] rounded-2xl max-md:mt-4 shadow-gray-500 shadow-lg"
             src={mision}
             alt="Mision"
@@ -44,15 +46,22 @@ export default function Index() {
             className="w-[250px] h-[250px] rounded-2xl shadow-gray-500 shadow-lg"
             src={vision}
             alt="Mision"
+            loading="lazy"
           />
         </div>
       </section>
 
       <section className="px-10 mb-8">
+        <Hr />
         <Title title="Historia" />
 
-        <div className='flex items-center justify-center gap-8 max-md:flex-col'>
-          <Image src={cultivo} alt="cultivos" className='h-[300px] w-[300px] object-cover rounded-lg shadow-gray-500 shadow-lg max-md:mt-4' />
+        <div className="flex items-center justify-center gap-8 max-md:flex-col">
+          <Image
+            src={cultivo}
+            alt="cultivos"
+            className="h-[300px] w-[300px] object-cover rounded-lg shadow-gray-500 shadow-lg max-md:mt-4"
+            loading="lazy"
+          />
           <p className="text-lg mt-5 text-justify w-full max-md:text-base max-md:w-full">
             El municipio de Tezonapa fue creado por la ley No. 93 en 1960,
             separándose de Zongolica y englobando varias congregaciones. El
