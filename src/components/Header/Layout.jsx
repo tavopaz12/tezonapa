@@ -2,6 +2,8 @@ import Head from 'next/head'
 import favicon from '@/assets/favicon.ico'
 import Header from './Header'
 import Footer from '../Footer/Footer'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faArrowTurnUp, faCaretUp } from '@fortawesome/free-solid-svg-icons'
 
 export default function Layout({
   title,
@@ -10,6 +12,9 @@ export default function Layout({
   imgBanner,
   activeLink,
 }) {
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' }) // Scroll suave al inicio de la página
+  }
   return (
     <>
       <Head>
@@ -23,7 +28,14 @@ export default function Layout({
 
       <main>{children}</main>
 
-      <Footer/>
+      <button
+      className="fixed bottom-10 right-10 bg-black z-50 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded-full"
+      onClick={scrollToTop}
+    >
+     <FontAwesomeIcon icon={faArrowTurnUp} className='h-4 w-4 font-bold'/>
+    </button>
+
+      <Footer />
     </>
   )
 }

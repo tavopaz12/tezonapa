@@ -64,7 +64,7 @@ export default function Comude() {
               infraestructura necesaria y personal calificado
             </p>
             <Image
-              loading="lazy"
+              priority
               alt="vision"
               src={visoria}
               className="h-[300px] w-[300px] object-cover mt-4"

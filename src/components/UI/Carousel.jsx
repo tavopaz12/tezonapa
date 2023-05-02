@@ -101,7 +101,7 @@ export default function Carousel({ images, autoPlay, showButtons, delay }) {
         {images.map((img, index) => (
           <div
             onClick={() => selectImage(index)}
-            key={img.src}
+            key={index}
             className={`${
               index === selectedIndex ? 'bg-[#4cd384]' : 'bg-gray-500'
             }  px-5 rounded cursor-pointer h-[5px]`}></div>

@@ -31,6 +31,7 @@ export default function Home() {
             <div className="w-[50%] max-md:w-full">
               <Image
                 alt="presidenta municipal"
+                priority
                 src={presidenta}
                 className="w-full h-[25rem] max-md:h-[10rem] object-cover"
               />
