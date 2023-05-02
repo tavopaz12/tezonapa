@@ -16,7 +16,7 @@ export default function Home() {
 
           <div className="w-2/4 max-md:w-full grid place-items-center">
             <h2 className="font-bold capitalize text-xl mb-4">
-              Última Publicación!!
+              Publicación Destacada!!
             </h2>
             <iframe
               className="h-[25rem] max-md:h-[20rem] w-[80%] max-md:w-full border border-gray-300 p-1"
