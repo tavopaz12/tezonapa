@@ -23,6 +23,7 @@
     "react-dom": "18.2.0",
     "swiper": "^9.2.4",
     "swiper-react": "^1.0.0",
+    "tailwind-scrollbar-hide": "^1.1.7",
     "tailwindcss": "3.3.2",
     "webp-loader": "^0.6.0"
   }

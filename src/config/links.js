@@ -41,7 +41,7 @@ export const links = [
       {
         title: 'organigrama',
         externo: true,
-        slug: 'http://www.tezonapa.gob.mx/ORGANIGRAMA%20GENERAL%20CON%20ESCUDOSAL%2021-06-2022.pdf',
+        slug: '/download?pdf=organigrama',
       },
       {
         title: 'normatividad',

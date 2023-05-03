@@ -5,7 +5,7 @@ import favicon from '@/assets/favicon.ico'
 import { useRouter } from 'next/router'
 
 export async function getServerSideProps({ query }) {
-  const filePath = path.join(process.cwd(), 'public', `${query.pdf}.pdf`)
+  const filePath = path.join(process.cwd(), 'public', 'pdf', `${query.pdf}.pdf`)
 
   if (!fs.existsSync(filePath)) {
     return {
@@ -15,6 +15,7 @@ export async function getServerSideProps({ query }) {
 
   const fileContent = fs.readFileSync(filePath)
   const base64Content = Buffer.from(fileContent).toString('base64')
+
   return {
     props: {
       fileContent: base64Content,
@@ -38,7 +39,7 @@ export default function DownloadPage({ fileContent }) {
         <meta charset="utf-8" />
         <link rel="shortcut icon" href={favicon.src} type="image/x-icon" />
       </Head>
-      <div className="scroll-hidden">
+      <div className="scrollbar-hide">
         <iframe src={pdfUrl} width="100%" height="800px" />
       </div>
     </>
