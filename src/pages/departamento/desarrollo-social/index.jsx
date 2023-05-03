@@ -1,10 +1,10 @@
 import Layout from '@/components/Header/Layout'
 import Carousel from '@/components/UI/Carousel'
 
-import desarrolloSocial1 from '@/assets/images/desarrollo_social/desarrollo_social1.jpg'
-import desarrolloSocial2 from '@/assets/images/desarrollo_social/desarrollo_social2.jpg'
-import desarrolloSocial3 from '@/assets/images/desarrollo_social/desarrollo_social3.jpg'
-import desarrolloSocial4 from '@/assets/images/desarrollo_social/desarrollo_social4.png'
+import desarrolloSocial1 from '@/assets/images/desarrollo_social/desarrollo_social1.webp'
+import desarrolloSocial2 from '@/assets/images/desarrollo_social/desarrollo_social2.webp'
+import desarrolloSocial3 from '@/assets/images/desarrollo_social/desarrollo_social3.webp'
+import desarrolloSocial4 from '@/assets/images/desarrollo_social/desarrollo_social4.webp'
 
 import Title from '@/components/UI/Title'
 import Hr from '@/components/UI/Hr'

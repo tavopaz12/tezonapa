@@ -2,7 +2,7 @@ import Image from 'next/image'
 import Nav from './Nav'
 import Link from 'next/link'
 import Dropdown from './Dropdown'
-import logo from '@/assets/images/logo.png'
+import logo from '@/assets/images/logo.webp'
 
 export default function Header({ imgBanner, activeLink }) {
   const fecha = new Date()

@@ -1,8 +1,8 @@
-import consultaCURP from '@/assets/images/consultaCURP.png'
-import consultaACTA from '@/assets/images/actaNacimiento.png'
-import consultaCFE from '@/assets/images/consultaRecibo.jpg'
-import consultaCedula from '@/assets/images/consultaCedula.jpg'
-import consultaInapam from '@/assets/images/inapam.jpg'
+import consultaCURP from '@/assets/images/consultaCURP.webp'
+import consultaACTA from '@/assets/images/actaNacimiento.webp'
+import consultaCFE from '@/assets/images/consultaRecibo.webp'
+import consultaCedula from '@/assets/images/consultaCedula.webp'
+import consultaInapam from '@/assets/images/inapam.webp'
 
 export const imagesCarouselHome = [
   {

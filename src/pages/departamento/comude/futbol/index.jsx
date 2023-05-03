@@ -9,10 +9,10 @@ import img from '@/assets/images/Comude/futtez.jpg'
 import Title from '@/components/UI/Title'
 import Gallery from '@/components/UI/Gallery'
 
-import fut1 from '@/assets/images/Comude/fut1-10.jpeg'
-import fut2 from '@/assets/images/Comude/fut1.jpg'
-import fut3 from '@/assets/images/Comude/fut-2.jpeg'
-import fut4 from '@/assets/images/Comude/fut-3.jpeg'
+import fut1 from '@/assets/images/Comude/fut1-10.webp'
+import fut2 from '@/assets/images/Comude/fut1.webp'
+import fut3 from '@/assets/images/Comude/fut-2.webp'
+import fut4 from '@/assets/images/Comude/fut-3.webp'
 import Hr from '@/components/UI/Hr'
 
 const images = [

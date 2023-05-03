@@ -1,11 +1,11 @@
 import Layout from '@/components/Header/Layout'
 import Carousel from '@/components/UI/Carousel'
 
-import futbol from '@/assets/images/Comude/futbol.jpg'
-import beisbol from '@/assets/images/Comude/beisbol.jpg'
-import volleyball from '@/assets/images/Comude/voll.jpg'
-import visoria from '@/assets/images/Comude/visoria.jpg'
-import visoria1 from '@/assets/images/Comude/visoria1.jpg'
+import futbol from '@/assets/images/Comude/futbol.webp'
+import beisbol from '@/assets/images/Comude/beisbol.webp'
+import volleyball from '@/assets/images/Comude/voll.webp'
+import visoria from '@/assets/images/Comude/visoria.webp'
+import visoria1 from '@/assets/images/Comude/visoria1.webp'
 
 import NavComude from '@/components/Comude/NavComude'
 import Title from '@/components/UI/Title'

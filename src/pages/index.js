@@ -1,9 +1,11 @@
 import Layout from '@/components/Header/Layout'
-import banner from '@/assets/images/banner.png'
+import banner from '@/assets/images/banner.webp'
 import Image from 'next/image'
 import Carousel from '@/components/Carousel/Carousel'
-import presidenta from '@/assets/images/claudia_colina.jpg'
+import presidenta from '@/assets/images/claudia_colina.webp'
 import { imagesCarouselHome } from 'config/carouselHome'
+
+import webp from '@/assets/images/Cascada-1.webp'
 
 export default function Home() {
   return (
@@ -11,7 +13,7 @@ export default function Home() {
       <article className="px-10 py-5 max-md:px-4">
         <section className="flex max-md:flex-col justify-between mb-8">
           <div className="w-2/4 max-md:w-full">
-            <p>Hola</p>
+            <Image className='h-full w-full object-cover' src={webp} alt="hola" />
           </div>
 
           <div className="w-2/4 max-md:w-full grid place-items-center">
