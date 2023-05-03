@@ -1,11 +1,11 @@
 import Layout from '@/components/Header/Layout'
-import banner from '@/assets/images/banner.webp'
+import banner from '/public/images/banner.webp'
 import Image from 'next/image'
 import Carousel from '@/components/Carousel/Carousel'
-import presidenta from '@/assets/images/claudia_colina.webp'
+import presidenta from '/public/images/claudia_colina.webp'
 import { imagesCarouselHome } from 'config/carouselHome'
 
-import webp from '@/assets/images/Cascada-1.webp'
+import webp from '/public/images/Cascada-1.webp'
 
 export default function Home() {
   return (
@@ -18,6 +18,18 @@ export default function Home() {
               src={webp}
               alt="hola"
             />
+            <a
+              href="https://www.facebook.com/sharer/sharer.php?u=https://tezonapa.vercel.app/departamento/comude"
+              target="_blank"
+              rel="noopener noreferrer">
+              <button>Compartir en Facebook</button>
+            </a>
+            <a
+              href="whatsapp://send?text=Texto%20de%20ejemplo%20para%20compartir:%20https://tezonapa.vercel.app/"
+              target="_blank"
+              rel="noopener noreferrer">
+              <button>Compartir en WhatsApp</button>
+            </a>
           </figure>
 
           <div className="w-2/4 max-md:w-full grid place-items-center">

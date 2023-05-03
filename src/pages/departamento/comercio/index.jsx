@@ -2,9 +2,9 @@ import Layout from '@/components/Header/Layout'
 
 import Card from '@/components/Comercio/Card'
 
-import solicitudAlta from '@/assets/images/comercio/solicitud_alta.webp'
-import solicitudBaja from '@/assets/images/comercio/solicitud_baja.webp'
-import solicitudRefrendo from '@/assets/images/comercio/padron.webp'
+import solicitudAlta from '/public/images/comercio/solicitud_alta.webp'
+import solicitudBaja from '/public/images/comercio/solicitud_baja.webp'
+import solicitudRefrendo from '/public/images/comercio/padron.webp'
 
 export default function Index() {
   return (

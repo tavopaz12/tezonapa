@@ -58,11 +58,12 @@ export default function Carousel({ images, autoPlay, showButtons, delay }) {
   }
 
   return (
-    <div className={`w-full px-10 max-md:px-4 h-[400px] max-md:h-[180px] relative`}>
+    <div
+      className={`w-full px-10 max-md:px-4 h-[400px] max-md:h-[180px] relative`}>
       <Image
         width={2000}
         height={2000}
-        loading='lazy'
+        loading="lazy"
         src={selectedImage.src}
         alt="Gentleman"
         className={`w-full object-cover h-[400px] max-md:h-[180px] opacity-0 duration-[1s] ${
@@ -76,14 +77,16 @@ export default function Carousel({ images, autoPlay, showButtons, delay }) {
           className={`absolute grid place-content-center opacity-0 p-4 left-[3.2%] max-md:left-[4.5%] w-[94%] max-md:w-[91.2%] h-full text-white top-0 bg-[rgba(0,0,0,0.5)] duration-[1s] ${
             loaded && 'opacity-[1] bottom-[9%]'
           }`}>
-          <h2 className="font-extrabold text-4xl max-md:text-lg overflow-hidden text-center">
+          <h2 className={`font-extrabold ${selectImage.desc ? 'text-4xl' : 'text-6xl h-[100px]'} max-md:text-lg overflow-hidden text-center`}>
             {selectedImage.title}
           </h2>
-          <div className="w-full flex justify-center">
-            <p className="text-lg max-md:text-sm max-md:truncate max-md:w-[15rem] mt-4 max-md:mt-1 font-semibold bg-[rgba(0,0,0,0.3)] p-2 text-center rounded w-2/4">
-              {selectedImage.desc}
-            </p>
-          </div>
+          {selectImage.desc && (
+            <div className="w-full flex justify-center">
+              <p className="text-lg max-md:text-sm max-md:truncate max-md:w-[15rem] mt-4 max-md:mt-1 font-semibold bg-[rgba(0,0,0,0.3)] p-2 text-center rounded w-2/4">
+                {selectedImage.desc}
+              </p>
+            </div>
+          )}
 
           {selectedImage.link && (
             <div className="flex justify-center mt-4">

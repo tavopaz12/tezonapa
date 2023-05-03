@@ -1,9 +1,9 @@
 import Layout from '@/components/Header/Layout'
 import Image from 'next/image'
 
-import mision from '@/assets/images/mision.webp'
-import vision from '@/assets/images/vision.webp'
-import cultivo from '@/assets/images/cultivos.webp'
+import mision from '/public/images/mision.webp'
+import vision from '/public/images/vision.webp'
+import cultivo from '/public/images/cultivos.webp'
 import Hr from '@/components/UI/Hr'
 
 export default function Index() {

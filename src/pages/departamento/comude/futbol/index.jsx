@@ -3,16 +3,16 @@ import Layout from '@/components/Header/Layout'
 import Carousel from '@/components/UI/Carousel'
 import { comudeSubLinks } from 'config/comudeSubLinks'
 
-import futbolFemenil from '@/assets/images/Comude/futbol_femenil.jpg'
-import img from '@/assets/images/Comude/futtez.jpg'
+import futbolFemenil from '/public/images/Comude/futbol_femenil.jpg'
+import img from '/public/images/Comude/futtez.jpg'
 
 import Title from '@/components/UI/Title'
 import Gallery from '@/components/UI/Gallery'
 
-import fut1 from '@/assets/images/Comude/fut1-10.webp'
-import fut2 from '@/assets/images/Comude/fut1.webp'
-import fut3 from '@/assets/images/Comude/fut-2.webp'
-import fut4 from '@/assets/images/Comude/fut-3.webp'
+import fut1 from '/public/images/Comude/fut1-10.webp'
+import fut2 from '/public/images/Comude/fut1.webp'
+import fut3 from '/public/images/Comude/fut-2.webp'
+import fut4 from '/public/images/Comude/fut-3.webp'
 import Hr from '@/components/UI/Hr'
 
 const images = [

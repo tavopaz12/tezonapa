@@ -4,11 +4,11 @@ import Gallery from '@/components/UI/Gallery'
 import Title from '@/components/UI/Title'
 import { comudeSubLinks } from 'config/comudeSubLinks'
 
-import basquet1 from '@/assets/images/Comude/basquet1.webp'
-import basquet2 from '@/assets/images/Comude/basquet2.webp'
-import basquet3 from '@/assets/images/Comude/basquet3.webp'
-import basquet4 from '@/assets/images/Comude/basquet4.webp'
-import basquet5 from '@/assets/images/Comude/basquet5.webp'
+import basquet1 from '/public/images/Comude/basquet1.webp'
+import basquet2 from '/public/images/Comude/basquet2.webp'
+import basquet3 from '/public/images/Comude/basquet3.webp'
+import basquet4 from '/public/images/Comude/basquet4.webp'
+import basquet5 from '/public/images/Comude/basquet5.webp'
 
 import Hr from '@/components/UI/Hr'
 

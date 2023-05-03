@@ -1,42 +1,50 @@
-import rotoplas from '@/assets/images/desarrollo_social/rotoplas/rotoplas.webp'
-import rotoplas1 from '@/assets/images/desarrollo_social/rotoplas/rotoplas1.webp'
-import rotoplas2 from '@/assets/images/desarrollo_social/rotoplas/rotoplas2.webp'
-import rotoplas3 from '@/assets/images/desarrollo_social/rotoplas/rotoplas3.webp'
-import rotoplas4 from '@/assets/images/desarrollo_social/rotoplas/rotoplas4.webp'
+import rotoplas from '/public/images/desarrollo_social/rotoplas/rotoplas.webp'
+import rotoplas1 from '/public/images/desarrollo_social/rotoplas/rotoplas1.webp'
+import rotoplas2 from '/public/images/desarrollo_social/rotoplas/rotoplas2.webp'
+import rotoplas3 from '/public/images/desarrollo_social/rotoplas/rotoplas3.webp'
+import rotoplas4 from '/public/images/desarrollo_social/rotoplas/rotoplas4.webp'
 
-import lamina from '@/assets/images/desarrollo_social/laminas/lamina.webp'
-import lamina1 from '@/assets/images/desarrollo_social/laminas/lamina1.webp'
-import lamina2 from '@/assets/images/desarrollo_social/laminas/lamina2.webp'
-import lamina3 from '@/assets/images/desarrollo_social/laminas/lamina3.webp'
-import lamina4 from '@/assets/images/desarrollo_social/laminas/lamina4.webp'
-import lamina5 from '@/assets/images/desarrollo_social/laminas/lamina5.webp'
-import lamina6 from '@/assets/images/desarrollo_social/laminas/lamina6.webp'
-import lamina7 from '@/assets/images/desarrollo_social/laminas/lamina7.webp'
-import lamina8 from '@/assets/images/desarrollo_social/laminas/lamina8.webp'
+import lamina from '/public/images/desarrollo_social/laminas/lamina.webp'
+import lamina1 from '/public/images/desarrollo_social/laminas/lamina1.webp'
+import lamina2 from '/public/images/desarrollo_social/laminas/lamina2.webp'
+import lamina3 from '/public/images/desarrollo_social/laminas/lamina3.webp'
+import lamina4 from '/public/images/desarrollo_social/laminas/lamina4.webp'
+import lamina5 from '/public/images/desarrollo_social/laminas/lamina5.webp'
+import lamina6 from '/public/images/desarrollo_social/laminas/lamina6.webp'
+import lamina7 from '/public/images/desarrollo_social/laminas/lamina7.webp'
+import lamina8 from '/public/images/desarrollo_social/laminas/lamina8.webp'
 
-import laguna from '@/assets/images/desarrollo_social/laguna_chica/laguna.webp'
-import laguna1 from '@/assets/images/desarrollo_social/laguna_chica/laguna1.webp'
-import laguna2 from '@/assets/images/desarrollo_social/laguna_chica/laguna2.webp'
-import laguna3 from '@/assets/images/desarrollo_social/laguna_chica/laguna3.webp'
-import laguna4 from '@/assets/images/desarrollo_social/laguna_chica/laguna4.webp'
-import laguna5 from '@/assets/images/desarrollo_social/laguna_chica/laguna5.webp'
-import laguna6 from '@/assets/images/desarrollo_social/laguna_chica/laguna6.webp'
-import laguna7 from '@/assets/images/desarrollo_social/laguna_chica/laguna7.webp'
-import laguna8 from '@/assets/images/desarrollo_social/laguna_chica/laguna8.webp'
+import laguna from '/public/images/desarrollo_social/laguna_chica/laguna.webp'
+import laguna1 from '/public/images/desarrollo_social/laguna_chica/laguna1.webp'
+import laguna2 from '/public/images/desarrollo_social/laguna_chica/laguna2.webp'
+import laguna3 from '/public/images/desarrollo_social/laguna_chica/laguna3.webp'
+import laguna4 from '/public/images/desarrollo_social/laguna_chica/laguna4.webp'
+import laguna5 from '/public/images/desarrollo_social/laguna_chica/laguna5.webp'
+import laguna6 from '/public/images/desarrollo_social/laguna_chica/laguna6.webp'
+import laguna7 from '/public/images/desarrollo_social/laguna_chica/laguna7.webp'
+import laguna8 from '/public/images/desarrollo_social/laguna_chica/laguna8.webp'
 
-import calleMatias from '@/assets/images/desarrollo_social/calle_matias/callematias.webp'
-import calleMatias1 from '@/assets/images/desarrollo_social/calle_matias/callematias1.webp'
-import calleMatias2 from '@/assets/images/desarrollo_social/calle_matias/callematias2.webp'
-import calleMatias3 from '@/assets/images/desarrollo_social/calle_matias/callematias3.webp'
-import calleMatias4 from '@/assets/images/desarrollo_social/calle_matias/callematias4.webp'
-import calleMatias5 from '@/assets/images/desarrollo_social/calle_matias/callematias5.webp'
-import calleMatias6 from '@/assets/images/desarrollo_social/calle_matias/callematias6.webp'
-import calleMatias7 from '@/assets/images/desarrollo_social/calle_matias/callematias7.webp'
-import calleMatias8 from '@/assets/images/desarrollo_social/calle_matias/callematias8.webp'
-import calleMatias9 from '@/assets/images/desarrollo_social/calle_matias/callematias9.webp'
-import calleMatias10 from '@/assets/images/desarrollo_social/calle_matias/callematias10.webp'
-import calleMatias11 from '@/assets/images/desarrollo_social/calle_matias/callematias11.webp'
-import calleMatias12 from '@/assets/images/desarrollo_social/calle_matias/callematias12.webp'
+import calleMatias from '/public/images/desarrollo_social/calle_matias/callematias.webp'
+import calleMatias1 from '/public/images/desarrollo_social/calle_matias/callematias1.webp'
+import calleMatias2 from '/public/images/desarrollo_social/calle_matias/callematias2.webp'
+import calleMatias3 from '/public/images/desarrollo_social/calle_matias/callematias3.webp'
+import calleMatias4 from '/public/images/desarrollo_social/calle_matias/callematias4.webp'
+import calleMatias5 from '/public/images/desarrollo_social/calle_matias/callematias5.webp'
+import calleMatias6 from '/public/images/desarrollo_social/calle_matias/callematias6.webp'
+import calleMatias7 from '/public/images/desarrollo_social/calle_matias/callematias7.webp'
+import calleMatias8 from '/public/images/desarrollo_social/calle_matias/callematias8.webp'
+
+import caxapa from '/public/images/desarrollo_social/caxapa/caxapa.webp'
+import caxapa1 from '/public/images/desarrollo_social/caxapa/caxapa1.webp'
+import caxapa2 from '/public/images/desarrollo_social/caxapa/caxapa2.webp'
+import caxapa3 from '/public/images/desarrollo_social/caxapa/caxapa3.webp'
+
+import guadalupeVictoria from '/public/images/desarrollo_social/guadalupe_victoria/guadalupe_victoria.webp'
+import guadalupeVictoria1 from '/public/images/desarrollo_social/guadalupe_victoria/guadalupe_victoria1.webp'
+import guadalupeVictoria2 from '/public/images/desarrollo_social/guadalupe_victoria/guadalupe_victoria2.webp'
+import guadalupeVictoria3 from '/public/images/desarrollo_social/guadalupe_victoria/guadalupe_victoria3.webp'
+import guadalupeVictoria4 from '/public/images/desarrollo_social/guadalupe_victoria/guadalupe_victoria4.webp'
+import guadalupeVictoria5 from '/public/images/desarrollo_social/guadalupe_victoria/guadalupe_victoria5.webp'
 
 export const articleRotoplas = [
   {
@@ -221,28 +229,74 @@ export const articleCalleMatias = [
     link: '',
     fecha: '01/AGO/2022',
   },
+]
+
+export const articleCaxapa = [
   {
-    img: calleMatias9,
+    img: caxapa,
+    link: '',
+    fecha: '04/JUNIO/2022',
     title:
       'Presidenta Municipal Claudia Rosales Colina, en compañía de su esposo Ernesto Lozano Tello, el Secretario Municipal, la Regidora de Educación y parte del equipo de trabajo',
-    link: '',
-    fecha: '04/JUNIO/2022',
   },
   {
-    img: calleMatias10,
+    img: caxapa1,
+    link: '',
+    fecha: '04/JUNIO/2022',
     title:
       'Arribaron a la comunidad de Caxapa perteneciente a nuestro municipio para dar el banderazo de inicio a la rehabilitación de pavimento de concreto hidráulico en la calle principal de esta localidad.',
+  },
+  {
+    img: caxapa2,
     link: '',
     fecha: '04/JUNIO/2022',
   },
   {
-    img: calleMatias11,
+    img: caxapa3,
     link: '',
     fecha: '04/JUNIO/2022',
   },
+]
+
+export const articleGuadalupeVictoria = [
   {
-    img: calleMatias12,
+    img: guadalupeVictoria,
+    title: 'Calle Guadalupe Victoria',
     link: '',
-    fecha: '04/JUNIO/2022',
+    fecha: '01/AGO/2022',
+  },
+  {
+    img: guadalupeVictoria1,
+    title:
+      'Se realizó el banderazo de inicio de obra que consta de la pavimentación de concreto hidráulico, servicios de drenaje, agua y cableado subterráneo perteneciente a este municipio.',
+    link: '',
+    fecha: '01/AGO/2022',
+  },
+  {
+    img: guadalupeVictoria2,
+    title:
+      'Como pueblos hermanos sabemos que nos divide una calle pero nos une el corazón, es por eso la importancia de reunirnos hoy para esta obra que será de gran impacto para los dos pueblos.',
+    link: '',
+    fecha: '01/AGO/2022',
+  },
+  {
+    img: guadalupeVictoria3,
+    title: 'inauguración de la calle Guadalupe Victoria',
+    link: '',
+    fecha: '01/AGO/2022',
+  },
+  {
+    img: guadalupeVictoria4,
+    title:
+      'Esta obra elaborada a través del Fondo para la Infraestructura Social Municipal, consiste en la rehabilitación de calle a base concreto hidráulico donde también incluye la rehabilitación de servicios básicos como agua potable y drenaje.',
+    link: '',
+    fecha: '01/AGO/2022',
+  },
+  {
+    img: guadalupeVictoria5,
+    title:
+      'Como pueblos hermanos sabemos que nos divide una calle pero nos une el corazón, es por eso la importancia de reunirnos hoy para esta obra que será de gran impacto para los dos pueblos.',
+    link: '',
+    fecha: '01/AGO/2022',
   },
 ]

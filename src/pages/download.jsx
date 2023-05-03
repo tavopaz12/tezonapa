@@ -39,8 +39,8 @@ export default function DownloadPage({ fileContent }) {
         <meta charSet="utf-8" />
         <link rel="shortcut icon" href={favicon.src} type="image/x-icon" />
       </Head>
-      <div className="scrollbar-hide">
-        <iframe src={pdfUrl} width="100%" height="800px" />
+      <div className="scrollbar-hide h-screen">
+        <iframe src={pdfUrl} width="100%" height="100%" />
       </div>
     </>
   )

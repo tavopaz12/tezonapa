@@ -1,10 +1,10 @@
 import Layout from '@/components/Header/Layout'
 import Carousel from '@/components/UI/Carousel'
 
-import desarrolloSocial1 from '@/assets/images/desarrollo_social/desarrollo_social1.webp'
-import desarrolloSocial2 from '@/assets/images/desarrollo_social/desarrollo_social2.webp'
-import desarrolloSocial3 from '@/assets/images/desarrollo_social/desarrollo_social3.webp'
-import desarrolloSocial4 from '@/assets/images/desarrollo_social/desarrollo_social4.webp'
+import desarrolloSocial1 from '/public/images/desarrollo_social/desarrollo_social1.webp'
+import desarrolloSocial2 from '/public/images/desarrollo_social/desarrollo_social2.webp'
+import desarrolloSocial3 from '/public/images/desarrollo_social/desarrollo_social3.webp'
+import desarrolloSocial4 from '/public/images/desarrollo_social/desarrollo_social4.webp'
 
 import Title from '@/components/UI/Title'
 import Hr from '@/components/UI/Hr'
@@ -13,6 +13,8 @@ import { useState } from 'react'
 import Content from '@/components/DesarrolloSocial/Content'
 import {
   articleCalleMatias,
+  articleCaxapa,
+  articleGuadalupeVictoria,
   articleLaguna,
   articleLaminas,
   articleRotoplas,
@@ -37,9 +39,11 @@ const steps = [
   },
   {
     title: 'Caxapa',
+    content: articleCaxapa
   },
   {
     title: 'Guadalupe Victoria',
+    content: articleGuadalupeVictoria
   },
 ]
 
@@ -67,13 +71,13 @@ export default function Index() {
           delay="8000"></Carousel>
       </section>
 
-      <section className="mt-8 mb-8 px-10">
+      <section className="mt-8 mb-8 px-10 max-md:px-4">
         <Hr />
       </section>
 
-      <section className="text-center mt-4 mb-4 px-10">
+      <section className="text-center mt-4 mb-4 px-10 max-md:px-4">
         <Title title="Sobre nosotros" />
-        <p className="text-left text-lg mt-4 mb-8">
+        <p className="text-left text-lg max-md:text-base max-md:text-justify mt-4 mb-8">
           Organización de la dirección de desarrollo social h. ayuntamiento de
           Tezonapa, Veracruz se elabora por ley orgánica del municipio libre del
           estado de Veracruz de Ignacio de la llave, enfocados en lo que es obra
@@ -83,7 +87,7 @@ export default function Index() {
         </p>
 
         <Title title="Misión" />
-        <p className="text-left text-lg mt-4">
+        <p className="text-left text-lg mt-4 max-md:text-base max-md:text-justify">
           Ofrecer a los ciudadanos del municipio la herramienta necesaria para
           superar pobreza y recuperar la grandeza del municipio, generando una
           sociedad en paz, justa y equitativa, pero sobre todo con rostro
@@ -91,14 +95,14 @@ export default function Index() {
         </p>
       </section>
 
-      <section className="text-center mb-4 px-10">
+      <section className="text-center mb-4 px-10 max-md:px-4">
         <Title title="Gestión 2022 -  2025" />
 
-        <div className="w-full rounded-xl bg-blue-700 flex gap-0 mt-4 ">
+        <div className="w-full max-md:overflow-x-auto scrollbar-hide rounded-xl bg-blue-700 flex gap-0 mt-4">
           {steps.map((step, index) => (
             <button
               onClick={() => handleStepSelect(index)}
-              className="w-full first:hover:rounded-l-xl last:hover:rounded-r-xl hover:bg-blue-800 last:border-none border-r-2 border-gray-200 text-white font-bold px-8 py-2"
+              className="w-full max-md:text-sm first:hover:rounded-l-xl last:hover:rounded-r-xl hover:bg-blue-800 last:border-none border-r-2 border-gray-200 text-white font-bold px-8 max-md:px-4 py-2 max-md:py-1"
               key={index}>
               {step.title}
             </button>

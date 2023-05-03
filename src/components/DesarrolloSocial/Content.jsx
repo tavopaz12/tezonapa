@@ -11,7 +11,7 @@ export default function Content({ content }) {
           <Image
             src={content.img}
             alt="rotoplas"
-            className="p-4"
+            className="p-4 max-md:px-2 max-md:h-[250px] object-cover"
             loading="lazy"
           />
           <p className="text-left pb-2 px-5 font-bold text-gray-500">

@@ -1,11 +1,11 @@
 import Image from 'next/image'
 
-import basquet1 from '@/assets/images/Comude/basquet1.jpg'
-import basquet2 from '@/assets/images/Comude/basquet2.jpg'
-import basquet3 from '@/assets/images/Comude/basquet3.jpg'
-import basquet4 from '@/assets/images/Comude/basquet4.jpg'
-import basquet5 from '@/assets/images/Comude/basquet5.jpg'
-import basquet6 from '@/assets/images/Comude/basquet6.jpg'
+import basquet1 from 'public/images/Comude/basquet1.jpg'
+import basquet2 from 'public/images/Comude/basquet2.jpg'
+import basquet3 from 'public/images/Comude/basquet3.jpg'
+import basquet4 from 'public/images/Comude/basquet4.jpg'
+import basquet5 from 'public/images/Comude/basquet5.jpg'
+import basquet6 from 'public/images/Comude/basquet6.jpg'
 
 export default function Slider() {
   const slides = [

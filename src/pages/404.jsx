@@ -1,6 +1,6 @@
 import Image from 'next/image'
 
-import bg from '@/assets/images/cabildo_municipio.jpg'
+import bg from '/public/images/cabildo_municipio.jpg'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 import Head from 'next/head'
