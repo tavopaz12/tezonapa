@@ -106,7 +106,7 @@ export default function Index() {
         <Hr/>
       </section>
 
-      <section className="px-10 mb-6 text-center">
+      <section className="px-10 max-md:px-4 mb-6 text-center">
         <Title title="Gestión 2022 - 2025" />
         <Gallery images={galleryImages} />
       </section>

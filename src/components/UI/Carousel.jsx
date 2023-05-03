@@ -77,7 +77,7 @@ export default function Carousel({ images, autoPlay, showButtons, delay }) {
           className={`absolute grid place-content-center opacity-0 p-4 left-[3.2%] max-md:left-[4.5%] w-[94%] max-md:w-[91.2%] h-full text-white top-0 bg-[rgba(0,0,0,0.5)] duration-[1s] ${
             loaded && 'opacity-[1] bottom-[9%]'
           }`}>
-          <h2 className={`font-extrabold ${selectImage.desc ? 'text-4xl' : 'text-6xl h-[100px]'} max-md:text-lg overflow-hidden text-center`}>
+          <h2 className={`font-extrabold ${selectImage.desc ? 'text-4xl' : 'text-6xl h-[100px] max-md:h-auto'} max-md:text-lg overflow-hidden text-center`}>
             {selectedImage.title}
           </h2>
           {selectImage.desc && (
@@ -100,14 +100,14 @@ export default function Carousel({ images, autoPlay, showButtons, delay }) {
         </div>
       )}
 
-      <div className="flex absolute bottom-0 pb-2 w-[94%] justify-center gap-4">
+      <div className="flex absolute bottom-0 pb-2 w-[94%] justify-center gap-4 max-md:gap-2">
         {images.map((img, index) => (
           <div
             onClick={() => selectImage(index)}
             key={index}
             className={`${
               index === selectedIndex ? 'bg-[#4cd384]' : 'bg-gray-500'
-            }  px-5 rounded cursor-pointer h-[5px]`}></div>
+            }  px-5 max-md:px-2 rounded cursor-pointer h-[5px]`}></div>
         ))}
       </div>
 
