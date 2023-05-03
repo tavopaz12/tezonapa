@@ -12,13 +12,13 @@ export default function Home() {
     <Layout imgBanner={banner} activeLink="home">
       <article className="px-10 py-5 max-md:px-4">
         <section className="flex max-md:flex-col justify-between mb-8">
-          <div className="w-2/4 max-md:w-full">
+          <figure className="w-2/4 max-md:w-full">
             <Image
               className="h-full w-full object-cover"
               src={webp}
               alt="hola"
             />
-          </div>
+          </figure>
 
           <div className="w-2/4 max-md:w-full grid place-items-center">
             <h2 className="font-bold capitalize text-xl mb-4">
@@ -27,10 +27,11 @@ export default function Home() {
             <iframe
               loading="lazy"
               className="h-[25rem] max-md:h-[20rem] w-[80%] max-md:w-full border border-gray-300 p-1"
-              src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fpermalink.php%3Fstory_fbid%3Dpfbid02ZDQBvM9iVNDcu4aLpuRhs5G686yVwsYMdZTkuCQyV56L9yPiENaQhU5T6QDQWcTFl%26id%3D100076983524020&show_text=true&width=500"
+              src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fpermalink.php%3Fstory_fbid%3Dpfbid031c6AkB9zMfvXNWfqZVHkjnbSBXXYyJSvAe8dfstnZt1o8MfvguVHNBRCdtnwvntyl%26id%3D100076983524020&show_text=true&width=500"
               allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
           </div>
         </section>
+
         <section id="servicio_comunidad">
           <hr className="border-t-4 border-solid border-[#2D974B] w-full my-5 max-md:mt-0" />
 
@@ -50,14 +51,14 @@ export default function Home() {
           </h2>
 
           <div className="flex max-md:block justify-between gap-8 max-md:mt-2 mt-8 mb-8 max-md:mb-2">
-            <div className="w-[50%] max-md:w-full">
+            <figure className="w-[50%] max-md:w-full">
               <Image
                 alt="presidenta municipal"
                 priority
                 src={presidenta}
                 className="w-full h-[25rem] max-md:h-[10rem] object-cover"
               />
-            </div>
+            </figure>
 
             <div className="w-[50%] grid justify-center max-md:w-full max-md:mt-5">
               <iframe

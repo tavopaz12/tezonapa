@@ -28,24 +28,22 @@ export default function Carousel({ images }) {
   })
 
   return (
-    <>
-      <div className="overflow-hidden md:max-w-[auto] max-md:w-[100%] mt-8 max-md:my-2">
-        <div
-          style={{
-            transition: 'ease 1000ms',
-            transform: `translate3d(${-index * (images.length + 8)}%, 0, 0)`,
-          }}
-          className="whitespace-nowrap max-md:transform-none max-md:inline-flex max-md:gap-[0rem]">
-          {images.map((img) => (
-            <Card
-              link={img.link}
-              key={img.title}
-              imgSrc={img.src}
-              title={img.title}
-            />
-          ))}
-        </div>
+    <div className="overflow-hidden md:max-w-[auto] max-md:w-[100%] mt-8 max-md:my-2">
+      <div
+        style={{
+          transition: 'ease 1000ms',
+          transform: `translate3d(${-index * (images.length + 8)}%, 0, 0)`,
+        }}
+        className="whitespace-nowrap max-md:transform-none max-md:inline-flex max-md:gap-[0rem]">
+        {images.map((img) => (
+          <Card
+            link={img.link}
+            key={img.title}
+            imgSrc={img.src}
+            title={img.title}
+          />
+        ))}
       </div>
-    </>
+    </div>
   )
 }

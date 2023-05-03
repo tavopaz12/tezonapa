@@ -9,18 +9,31 @@ import desarrolloSocial4 from '@/assets/images/desarrollo_social/desarrollo_soci
 import Title from '@/components/UI/Title'
 import Hr from '@/components/UI/Hr'
 
+import { useState } from 'react'
+import Content from '@/components/DesarrolloSocial/Content'
+import {
+  articleCalleMatias,
+  articleLaguna,
+  articleLaminas,
+  articleRotoplas,
+} from 'config/desarrolloSocial'
+
 const steps = [
   {
     title: 'Rotoplas',
+    content: articleRotoplas,
   },
   {
     title: 'Laminas',
+    content: articleLaminas,
   },
   {
     title: 'Laguna Chica',
+    content: articleLaguna,
   },
   {
     title: 'Calle Matias',
+    content: articleCalleMatias,
   },
   {
     title: 'Caxapa',
@@ -31,6 +44,12 @@ const steps = [
 ]
 
 export default function Index() {
+  const [currentStep, setCurrentStep] = useState(0)
+
+  const handleStepSelect = (step) => {
+    setCurrentStep(step)
+  }
+
   return (
     <Layout
       activeLink="areas-municipales"
@@ -78,31 +97,16 @@ export default function Index() {
         <div className="w-full rounded-xl bg-blue-700 flex gap-0 mt-4 ">
           {steps.map((step, index) => (
             <button
-              className="w-full last:border-none border-r-2 border-gray-200 text-white font-bold px-8 py-2"
+              onClick={() => handleStepSelect(index)}
+              className="w-full first:hover:rounded-l-xl last:hover:rounded-r-xl hover:bg-blue-800 last:border-none border-r-2 border-gray-200 text-white font-bold px-8 py-2"
               key={index}>
               {step.title}
             </button>
           ))}
         </div>
-
-        <div class="grid grid-cols-4 gap-0 mt-4">
-          <div class="bg-red-500 col-span-2 row-span-2">
-            <p>Hola</p>
-          </div>
-          <div class="bg-green-500 col-start-3 col-end-4 row-start-1 row-end-2">
-            1
-          </div>
-          <div class="bg-blue-500 col-start-4 col-end-5 row-start-1 row-end-2">
-            2
-          </div>
-          <div class="bg-purple-500 col-start-3 col-end-5 row-start-2 row-end-3">
-            3
-          </div>
-          <div class="bg-yellow-500 col-start-4 col-end-5 row-start-2 row-end-3">
-            4
-          </div>
-        </div>
       </section>
+
+      <Content content={steps[currentStep]?.content} />
     </Layout>
   )
 }

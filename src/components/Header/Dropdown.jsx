@@ -53,7 +53,7 @@ export default function Dropdown({ title }) {
             {directorio.map((area) => (
               <li key={area.name}>
                 <p className="block px-4 py-2">
-                  <span className="font-semibold max-md:text-sm">{area.name}</span>:{' '}
+                  <span className="font-semibold max-md:text-sm">{area.name}</span>:
                   <span className="font-bold max-md:text-sm">{area.tel}</span>
                 </p>
               </li>

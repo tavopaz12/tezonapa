@@ -20,7 +20,7 @@ export default function Layout({
       <Head>
         <title>{title}</title>
         <meta name="description" content={description} />
-        <meta charset="utf-8" />
+        <meta charSet="utf-8" />
         <link rel="shortcut icon" href={favicon.src} type="image/x-icon" />
       </Head>
 

@@ -18,7 +18,7 @@ export default function NotFound() {
           name="description"
           content="Página web oficial del Ayuntamiento de Tezonapa, con información sobre servicios, noticias y eventos relevantes. Trabajamos para brindar atención eficiente y transparente a todos los ciudadanos."
         />
-        <meta charset="utf-8" />
+        <meta charSet="utf-8" />
         <link rel="shortcut icon" href={favicon.src} type="image/x-icon" />
       </Head>
       <section class="bg-white ">
