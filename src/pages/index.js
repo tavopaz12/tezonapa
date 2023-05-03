@@ -24,6 +24,11 @@ export default function Home() {
             <h2 className="font-bold capitalize text-xl mb-4">
               Publicación Destacada!!
             </h2>
+            <iframe
+              loading="lazy"
+              className="h-[25rem] max-md:h-[20rem] w-[80%] max-md:w-full border border-gray-300 p-1"
+              src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fpermalink.php%3Fstory_fbid%3Dpfbid02ZDQBvM9iVNDcu4aLpuRhs5G686yVwsYMdZTkuCQyV56L9yPiENaQhU5T6QDQWcTFl%26id%3D100076983524020&show_text=true&width=500"
+              allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
           </div>
         </section>
         <section id="servicio_comunidad">
@@ -54,7 +59,15 @@ export default function Home() {
               />
             </div>
 
-            <div className="w-[50%] grid justify-center max-md:w-full max-md:mt-5"></div>
+            <div className="w-[50%] grid justify-center max-md:w-full max-md:mt-5">
+              <iframe
+                loading="lazy"
+                aria-label="Facebook"
+                className="h-full w-[500px] max-md:w-full max-md:h-[20rem]"
+                src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fprofile.php%3Fid%3D100076983524020&tabs=timeline&width=500&small_header=false&adapt_container_width=false&hide_cover=false&show_facepile=true&appId"
+                allowFullScreen={true}
+                allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
+            </div>
           </div>
         </section>
       </article>
