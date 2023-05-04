@@ -119,13 +119,13 @@ export default function Index() {
         />
       </section>
 
-      <section className="mt-8 mb-8 px-10 max-md:px-4">
+      <section className="mt-8 mb-8 px-10 max-md:px-4 max-md:mb-4">
         <Hr />
       </section>
 
-      <section className="px-10 text-center mb-6">
+      <section className="px-10 text-center mb-6 max-md:px-4">
         <Title title="Bibliotecas" />
-        <p className="text-left text-xl font-bold mt-2">
+        <p className="text-left text-xl font-bold mt-2 max-md:text-base max-md:text-justify">
           Las bibliotecas desempeñan una labor esencial en el fomento de la
           alfabetización y el aprendizaje, el establecimiento de las bases para
           el desarrollo y la custodia del patrimonio cultural y científico
@@ -133,7 +133,7 @@ export default function Index() {
         </p>
         <div className="text-left mt-4">
           <button
-            className="bg-blue-700 text-white font-bold px-4 py-2 rounded-2xl"
+            className="bg-blue-700 text-white font-bold px-4 py-2 rounded-2xl max-md:text-sm max-md:rounded"
             onClick={() => setShowModal(!showModal)}>
             Ver Horarios
           </button>

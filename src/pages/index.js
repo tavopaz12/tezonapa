@@ -28,10 +28,15 @@ export default function Home() {
               ExpoFeria Tezonapa se llevarán a cabo con total normalidad.
             </p>
             <Image
-              className="h-auto mt-4 w-full object-cover"
+              className="mt-4 mb-4 max-h-[500px] w-full object-cover"
               alt="principal"
               src={suspension}
             />
+            <Link href="/">
+              <button className="bg-gray-700 w-full rounded-2xl px-4 py-1 text-lg text-white font-bold">
+                Ver mas...
+              </button>
+            </Link>
           </div>
 
           <div className="w-2/4 max-md:w-full h-auto flex flex-col justify-between p-4 gap-4">
