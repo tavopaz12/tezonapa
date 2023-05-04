@@ -42,7 +42,7 @@ export default function Gallery({ images }) {
           <button
             className={`cursor-pointer ${
               currentIndex === 0 ? 'text-[rgba(0,0,0,0.5)]' : ''
-            } rounded-[50%] bg-[rgba(0,0,0,0.6)] p-2 max-md:bg-transparent ml-4 max-md:ml-2`}
+            } rounded-[50%] bg-[rgba(0,0,0,0.6)] p-2 max-md:bg-transparent mr-4 max-md:mr-2`}
             onClick={() => setCurrentIndex(currentIndex + 1)}
             disabled={currentIndex === images.length - 1}>
             <FontAwesomeIcon

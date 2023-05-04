@@ -5,42 +5,69 @@ import Carousel from '@/components/Carousel/Carousel'
 import presidenta from '/public/images/claudia_colina.webp'
 import { imagesCarouselHome } from 'config/carouselHome'
 
-import webp from '/public/images/Cascada-1.webp'
+import suspension from '/public/images/sala-prensa/suspension.webp'
+import obra1 from '/public/images/sala-prensa/obra1.webp'
+
+import Link from 'next/link'
 
 export default function Home() {
   return (
     <Layout imgBanner={banner} activeLink="home">
       <article className="px-10 py-5 max-md:px-4">
-        <section className="flex max-md:flex-col justify-between mb-8">
-          <figure className="w-2/4 max-md:w-full">
+        <section className="flex max-md:flex-col justify-between mb-8 gap-6">
+          <div className="w-2/4 max-md:w-full bg-gray-200 rounded-2xl p-4">
+            <Link href="/">
+              <h3 className="text-2xl font-bold text-justify text-gray-700">
+                ¡SUSPENSIÓN DE LABORES!
+              </h3>
+            </Link>
+            <p className="mt-2 mb-2 text-gray-500">
+              Tezonapa, Ver., (04 de mayo del 2023). - Se suspenden actividades
+              y labores por parte del H. Ayuntamiento Constitucional de
+              Tezonapa, Ver. para el día de mañana. Las actividades de la
+              ExpoFeria Tezonapa se llevarán a cabo con total normalidad.
+            </p>
             <Image
-              className="h-full w-full object-cover"
-              src={webp}
-              alt="hola"
+              className="h-auto mt-4 w-full object-cover"
+              alt="principal"
+              src={suspension}
             />
-            <a
-              href="https://www.facebook.com/sharer/sharer.php?u=https://tezonapa.vercel.app/departamento/comude"
-              target="_blank"
-              rel="noopener noreferrer">
-              <button>Compartir en Facebook</button>
-            </a>
-            <a
-              href="whatsapp://send?text=Texto%20de%20ejemplo%20para%20compartir:%20https://tezonapa.vercel.app/"
-              target="_blank"
-              rel="noopener noreferrer">
-              <button>Compartir en WhatsApp</button>
-            </a>
-          </figure>
+          </div>
 
-          <div className="w-2/4 max-md:w-full grid place-items-center">
-            <h2 className="font-bold capitalize text-xl mb-4">
-              Publicación Destacada!!
-            </h2>
-            <iframe
-              loading="lazy"
-              className="h-[25rem] max-md:h-[20rem] w-[80%] max-md:w-full border border-gray-300 p-1"
-              src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fpermalink.php%3Fstory_fbid%3Dpfbid031c6AkB9zMfvXNWfqZVHkjnbSBXXYyJSvAe8dfstnZt1o8MfvguVHNBRCdtnwvntyl%26id%3D100076983524020&show_text=true&width=500"
-              allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
+          <div className="w-2/4 max-md:w-full h-auto flex flex-col justify-between p-4 gap-4">
+            <div className="flex items-center gap-4 bg-gray-200 p-2 rounded-2xl">
+              <Image
+                className="h-44 w-44 object-cover rounded-2xl"
+                alt="principal"
+                src={obra1}
+              />
+              <h3 className="text-lg font-bold text-gray-700 leading-6">
+                Inicia oficialmente el programa de obras públicas 2023 en la
+                comunidad de Col. Agrícola.
+              </h3>
+            </div>
+            <div className="flex items-center gap-4 bg-gray-200 p-2 rounded-2xl">
+              <Image
+                className="h-44 w-44 object-cover rounded-2xl"
+                alt="principal"
+                src={obra1}
+              />
+              <h3 className="text-lg font-bold text-gray-700 leading-6">
+                Inicia oficialmente el programa de obras públicas 2023 en la
+                comunidad de Col. Agrícola.
+              </h3>
+            </div>
+            <div className="flex items-center gap-4 bg-gray-200 p-2 rounded-2xl">
+              <Image
+                className="h-44 w-44 object-cover rounded-2xl"
+                alt="principal"
+                src={obra1}
+              />
+              <h3 className="text-lg font-bold text-gray-700 leading-6">
+                Inicia oficialmente el programa de obras públicas 2023 en la
+                comunidad de Col. Agrícola.
+              </h3>
+            </div>
           </div>
         </section>
 

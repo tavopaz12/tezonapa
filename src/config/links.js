@@ -28,7 +28,7 @@ export const links = [
       { title: 'comercio', slug: '/departamento/comercio' },
       { title: 'desarrollo social', slug: '/departamento/desarrollo-social' },
       { title: 'fomento agropecuario', slug: '/departamento/fomento-agropecuario' },
-      { title: 'eduación', slug: '/departamento/educaion' },
+      { title: 'eduación', slug: '/departamento/educacion' },
     ],
     externo: false,
   },
@@ -54,6 +54,14 @@ export const links = [
         slug: 'http://tezonapa.gob.mx/transparencia/fracciones/especificas/Gac2022-194%20Martes%2017%20TOMO%20I%20Ext.pdf',
       },
     ],
+    externo: false,
+  },
+  {
+    title: 'Sala de prensa',
+    slug: '/sala-prensa',
+    link: 'prensa',
+    subLinks: false,
+    listLinks: [],
     externo: false,
   },
   {

@@ -3,7 +3,7 @@ import Link from 'next/link'
 
 export default function Content({ content }) {
   return (
-    <section className="px-10 mb-4 flex gap-4 justify-between flex-wrap">
+    <section className="px-10 mb-4 flex gap-4 flex-wrap justify-around">
       {content?.map((content, index) => (
         <div
           key={index}
