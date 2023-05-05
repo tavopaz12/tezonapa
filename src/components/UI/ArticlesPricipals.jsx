@@ -28,7 +28,7 @@ export default function ArticlesPricipals({ articles }) {
           alt="principal"
           src={articles[0]?.img}
         />
-        <Link href={`/${separateTitle(articles[0]?.title)}`}>
+        <Link href={`sala-prensa/${separateTitle(articles[0]?.title)}`}>
           <button className="bg-gray-700 w-full rounded-2xl px-4 max-md:py-1 py-1 text-lg max-md:text-base text-white font-bold">
             Ver mas...
           </button>
