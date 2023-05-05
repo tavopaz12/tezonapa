@@ -59,7 +59,7 @@ export const links = [
   {
     title: 'Sala de prensa',
     slug: '/sala-prensa',
-    link: 'prensa',
+    link: 'sala-prensa',
     subLinks: false,
     listLinks: [],
     externo: false,

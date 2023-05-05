@@ -7,7 +7,7 @@ export default function ArticlesPricipals({ articles }) {
   const artcilesRecents = articles.slice(1, 4)
 
   const separateTitle = (title) => {
-    const texto = title.normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+    const texto = title.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^\w\s]/gi, "")
     return texto.toLowerCase().split(' ').join('-')
   }
 
@@ -30,7 +30,7 @@ export default function ArticlesPricipals({ articles }) {
         />
         <Link href={`sala-prensa/${separateTitle(articles[0]?.title)}`}>
           <button className="bg-gray-700 w-full rounded-2xl px-4 max-md:py-1 py-1 text-lg max-md:text-base text-white font-bold">
-            Ver mas...
+            Leer más...
           </button>
         </Link>
       </div>
