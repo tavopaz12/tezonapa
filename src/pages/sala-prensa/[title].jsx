@@ -65,7 +65,7 @@ export default function Article() {
 
           <div className="flex gap-8 w-full">
             <a
-              href={`https://www.facebook.com/sharer/sharer.php?u=${currentUrl}`}
+              href={`https://www.facebook.com/sharer/sharer.php?u=${window.location.href}`}
               target="_blank"
               className="bg-[#3c589a] rounded-lg px-6 flex items-center gap-4 py-1"
               rel="noopener noreferrer">
@@ -73,7 +73,7 @@ export default function Article() {
               <span className="text-white font-bold">Facebook</span>
             </a>
             <a
-              href={`whatsapp://send?text=Ver: ${text}:%20${currentUrl}`}
+              href={`whatsapp://send?text=Ver: ${text}:%20${window.location.href}`}
               target="_blank"
               className="bg-[#55EB4C] rounded-lg px-6 flex items-center gap-4 py-1"
               rel="noopener noreferrer">
@@ -81,7 +81,7 @@ export default function Article() {
               <span className="text-white font-bold">WhatsApp</span>
             </a>
             <a
-              href={`https://twitter.com/intent/tweet?url=${currentUrl}&text=${text}`}
+              href={`https://twitter.com/intent/tweet?url=${window.location.href}&text=${text}`}
               target="_blank"
               className="bg-[#55ACEE] rounded-lg px-6 flex items-center gap-4 py-1"
               rel="noopener noreferrer">
