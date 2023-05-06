@@ -6,8 +6,17 @@ import { useRouter } from 'next/router'
 import img from '/public/images/sala-prensa/obra1.webp'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCalendar, faPlus, faUser } from '@fortawesome/free-solid-svg-icons'
+import { useEffect, useState } from 'react'
 
 export default function Article() {
+  const [currentUrl, setCurrentUrl] = useState('')
+
+  useEffect(() => {
+    if (process.browser) {
+      setCurrentUrl(window.location.href)
+    }
+  }, [])
+
   const router = useRouter()
   const { title } = router.query
 
@@ -56,7 +65,7 @@ export default function Article() {
 
           <div className="flex gap-8 w-full">
             <a
-              href="https://www.facebook.com/sharer/sharer.php?u=https%3A//example.com"
+              href={`https://www.facebook.com/sharer/sharer.php?u=${currentUrl}`}
               target="_blank"
               className="bg-[#3c589a] rounded-lg px-6 flex items-center gap-4 py-1"
               rel="noopener noreferrer">
@@ -64,7 +73,7 @@ export default function Article() {
               <span className="text-white font-bold">Facebook</span>
             </a>
             <a
-              href="https://www.facebook.com/sharer/sharer.php?u=https%3A//example.com"
+              href={`whatsapp://send?text=Ver: ${text}:%20${currentUrl}`}
               target="_blank"
               className="bg-[#55EB4C] rounded-lg px-6 flex items-center gap-4 py-1"
               rel="noopener noreferrer">
@@ -72,7 +81,7 @@ export default function Article() {
               <span className="text-white font-bold">WhatsApp</span>
             </a>
             <a
-              href="https://www.facebook.com/sharer/sharer.php?u=https%3A//example.com"
+              href={`https://twitter.com/intent/tweet?url=${currentUrl}&text=${text}`}
               target="_blank"
               className="bg-[#55ACEE] rounded-lg px-6 flex items-center gap-4 py-1"
               rel="noopener noreferrer">
