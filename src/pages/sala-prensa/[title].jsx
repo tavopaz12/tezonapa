@@ -30,7 +30,7 @@ export default function Article() {
   const parrafos = texto?.split('.').filter((p) => p !== '')
 
   return (
-    <Layout title={`${text} - H. Ayuntamiento, Tezonapa`}>
+    <Layout title={`${title} - H. Ayuntamiento, Tezonapa`}>
       <section className="px-10 h-[300px] mb-8 relative">
         <Image
           alt="hola"
