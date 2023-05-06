@@ -14,7 +14,7 @@ export default function CardSalaPrensa({ image, title }) {
       </figure>
       <div className="w-2/4">
         <h2 className="text-gray-600 font-bold text-lg max-md:text-base">{title}</h2>
-        <button className="absolute shadow bg-black p-2 rounded-[50%] right-0 bottom-0 m-4 max-md:m-2">
+        <button className="absolute shadow bg-[black] p-2 rounded-[50%] right-0 bottom-0 m-4 max-md:m-2">
           <FontAwesomeIcon className="h-4 w-4 text-white" icon={faPlus} />
         </button>
       </div>
