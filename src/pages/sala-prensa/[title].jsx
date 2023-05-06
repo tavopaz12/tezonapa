@@ -39,7 +39,7 @@ export default function Article() {
         />
         <div className="absolute top-0 grid place-items-center bg-[rgba(0,0,0,0.5)] w-[94%] h-[100%]">
           <h1 className="text-white w-3/4 text-center capitalize text-4xl font-bold">
-            {text}
+            Prueba
           </h1>
         </div>
       </section>

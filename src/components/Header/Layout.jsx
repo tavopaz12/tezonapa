@@ -43,7 +43,7 @@ export default function Layout({
 
 Layout.defaultProps = {
   title: 'H. Ayuntamiento | Tezonapa, Veracruz',
-  ogImage: favicon,
+  ogImage: favicon.src,
   description:
     'Página web oficial del Ayuntamiento de Tezonapa, con información sobre servicios, noticias y eventos relevantes. Trabajamos para brindar atención eficiente y transparente a todos los ciudadanos.',
 }
