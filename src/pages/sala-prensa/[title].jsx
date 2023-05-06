@@ -1,5 +1,4 @@
 import Layout from '@/components/Header/Layout'
-import Title from '@/components/UI/Title'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 
@@ -30,7 +29,7 @@ export default function Article() {
   const parrafos = texto?.split('.').filter((p) => p !== '')
 
   return (
-    <Layout title={`${text} - H. Ayuntamiento, Tezonapa`}>
+    <Layout title={`${text} - H. Ayuntamiento, Tezonapa`} ogImage={img}>
       <section className="px-10 h-[300px] mb-8 relative">
         <Image
           alt="hola"
