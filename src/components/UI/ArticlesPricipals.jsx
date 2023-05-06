@@ -15,9 +15,9 @@ export default function ArticlesPricipals({ articles }) {
     <section className="flex max-md:flex-col justify-between mb-8 gap-6">
       <div className="w-2/4 max-md:w-full bg-gray-200 h-max rounded-2xl p-4">
         <Link href={`sala-prensa/${separateTitle(articles[0]?.title)}`}>
-          <h3 className="text-2xl font-bold text-justify text-gray-700 max-md:text-center max-md:text-xl">
+          <h2 className="text-2xl font-bold text-justify text-gray-700 max-md:text-center max-md:text-xl">
             {articles[0]?.title}
-          </h3>
+          </h2>
         </Link>
         <p className="mt-2 mb-2 text-gray-500 max-md:text-justify">
           {articles[0]?.content}
@@ -47,9 +47,9 @@ export default function ArticlesPricipals({ articles }) {
               src={article.img}
             />
             <Link href={`sala-prensa/${separateTitle(article.title)}`}>
-              <h3 className="text-lg max-md:text-sm max-md:text-justify font-bold text-gray-700 leading-6 max-md:mb-7">
+              <h2 className="text-lg max-md:text-sm max-md:text-justify font-bold text-gray-700 leading-6 max-md:mb-7">
                 {article.title}
-              </h3>
+              </h2>
             </Link>
             <Link href={`sala-prensa/${separateTitle(article.title)}`}>
               <button className="absolute shadow bg-black p-2 rounded-[50%] right-0 bottom-0 m-4 max-md:m-2">

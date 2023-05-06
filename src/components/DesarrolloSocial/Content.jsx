@@ -18,9 +18,9 @@ export default function Content({ content }) {
             {content.fecha}
           </p>
           <div class="px-5 pb-5">
-            <h5 class="text-lg first-letter:uppercase lowercase font-semibold tracking-tight text-gray-900">
+            <p class="text-lg first-letter:uppercase lowercase font-semibold tracking-tight text-gray-900">
               {content.title}
-            </h5>
+            </p>
           </div>
           <div className="flex justify-center items-center pb-2 px-5 text-gray-500">
             {content.link && (
