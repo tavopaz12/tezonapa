@@ -1,4 +1,4 @@
-import Layout from '@/components/Header/Layout'
+import Layout from '@/components/Home/Layout'
 import Image from 'next/image'
 import img from '/public/images/Cascada-1.webp'
 import Link from 'next/link'

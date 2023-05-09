@@ -1,4 +1,4 @@
-import Layout from '@/components/Header/Layout'
+import Layout from '@/components/Home/Layout'
 import banner from '/public/images/banner.webp'
 import Image from 'next/image'
 import Carousel from '@/components/Carousel/Carousel'

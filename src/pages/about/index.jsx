@@ -1,4 +1,4 @@
-import Layout from '@/components/Header/Layout'
+import Layout from '@/components/Home/Layout'
 import Image from 'next/image'
 
 import mision from '/public/images/mision.webp'

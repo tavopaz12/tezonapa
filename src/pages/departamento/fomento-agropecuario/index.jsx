@@ -1,4 +1,4 @@
-import Layout from '@/components/Header/Layout'
+import Layout from '@/components/Home/Layout'
 import Carousel from '@/components/UI/Carousel'
 
 import fomento from '/public/images/fomento_agropecuario/fomento_agro.webp'

@@ -1,5 +1,5 @@
 import NavComude from '@/components/Comude/NavComude'
-import Layout from '@/components/Header/Layout'
+import Layout from '@/components/Home/Layout'
 import Carousel from '@/components/UI/Carousel'
 import { comudeSubLinks } from 'config/comudeSubLinks'
 

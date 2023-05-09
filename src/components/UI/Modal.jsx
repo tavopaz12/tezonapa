@@ -1,5 +1,3 @@
-import { useEffect } from 'react'
-
 export default function Modal({ title, onClose, children }) {
   const handleClickOutModal = (evt) => {
     if (evt.target === evt.currentTarget) {
@@ -13,9 +11,9 @@ export default function Modal({ title, onClose, children }) {
       id="crypto-modal"
       tabIndex="-1"
       aria-hidden="true"
-      className="fixed grid place-items-center top-0 left-0 right-0 z-50 w-full p-4 md:inset-0 h-[calc(100%-1rem)] max-h-full">
-      <div className="relative w-full max-w-md max-h-full">
-        <div className="relative bg-white rounded-lg border border-gray-600 shadow">
+      className="fixed grid bg-[rgba(0,0,0,0.2)] place-items-center top-0 left-0 right-0 z-50 w-full p-4 md:inset-0 h-screen max-h-full">
+      <div className="relative w-[50%] max-h-full max-md:w-[80%]">
+        <div className="relative bg-white rounded-lg border border-gray-400 shadow-xl">
           <button
             onClick={onClose}
             type="button"

@@ -1,5 +1,5 @@
 import NavComude from '@/components/Comude/NavComude'
-import Layout from '@/components/Header/Layout'
+import Layout from '@/components/Home/Layout'
 import Title from '@/components/UI/Title'
 import { comudeSubLinks } from 'config/comudeSubLinks'
 import Image from 'next/image'

@@ -1,4 +1,4 @@
-import Layout from '@/components/Header/Layout'
+import Layout from '@/components/Home/Layout'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 
@@ -6,6 +6,7 @@ import img from '/public/images/sala-prensa/obra1.webp'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCalendar, faPlus, faUser } from '@fortawesome/free-solid-svg-icons'
 import { useEffect, useState } from 'react'
+import Link from 'next/link'
 
 export default function Article() {
   const router = useRouter()
@@ -21,7 +22,10 @@ export default function Article() {
   const parrafos = texto?.split('.').filter((p) => p !== '')
 
   return (
-    <Layout title={`${text} - H. Ayuntamiento, Tezonapa`} ogImage={img}>
+    <Layout
+      title={`${text} - H. Ayuntamiento, Tezonapa`}
+      ogImage={img}
+      activeLink="sala-prensa">
       <section className="px-10 h-[300px] max-md:h-[200px] mb-8 relative max-md:px-4">
         <Image
           alt="hola"
@@ -113,9 +117,11 @@ export default function Article() {
             </button>
           </div>
 
-          <button className="bg-[#374151] px-4 w-full rounded-lg text-white font-bold py-1">
-            Ver más...
-          </button>
+          <Link href="/sala-prensa">
+            <button className="bg-[#374151] px-4 w-full rounded-lg text-white font-bold py-1">
+              Ver más...
+            </button>
+          </Link>
         </aside>
       </article>
     </Layout>
