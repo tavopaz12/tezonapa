@@ -12,13 +12,10 @@ export default NextAuth({
       name: 'credentials',
 
       async authorize(credentials) {
-        const client = await MongoClient.connect(
-          'mongodb+srv://ayuntamiento:Y9Szpy8jyNPJN1ro@tezonapa.sgco6dh.mongodb.net/ayuntamiento?retryWrites=true&w=majority',
-          {
-            useNewUrlParser: true,
-            useUnifiedTopology: true,
-          },
-        )
+        const client = await MongoClient.connect(process.env.MONGO_URI, {
+          useNewUrlParser: true,
+          useUnifiedTopology: true,
+        })
 
         const users = await client.db().collection('users')
 
