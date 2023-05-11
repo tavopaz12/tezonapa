@@ -10,10 +10,13 @@ async function handler(req, res) {
       return
     }
 
-    const client = await MongoClient.connect(process.env.MONGO_URI, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    })
+    const client = await MongoClient.connect(
+      'mongodb+srv://ayuntamiento:Y9Szpy8jyNPJN1ro@tezonapa.sgco6dh.mongodb.net/ayuntamiento?retryWrites=true&w=majority',
+      {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+      },
+    )
 
     const db = client.db()
     const checkExisting = await db.collection('users').findOne({ email: email })
