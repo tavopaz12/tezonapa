@@ -1,37 +1,30 @@
 import Head from 'next/head'
 import favicon from '@/assets/favicon.ico'
-
-import { signIn } from 'next-auth/react'
 import { useState } from 'react'
-import Notification from '@/components/Admin/Notification'
-import { useRouter } from 'next/router'
 
 export default function Index() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [data, setData] = useState(null)
-  const router = useRouter()
 
-  const delay = 5000
-
-  const handleSubmit = async (e) => {
+  const onFormSubmit = async (e) => {
     e.preventDefault()
-
-    const result = await signIn('credentials', {
-      redirect: false,
-      email,
-      password,
-    })
-
-    setData(result)
-
-    if (!result.error) {
-      router.replace('/admin/dashboard')
+    if (!email || !email.includes('@') || !password) {
+      alert('Invalid details')
+      return
     }
-
-    setTimeout(() => {
-      setData(null)
-    }, delay)
+    const res = await fetch('/api/auth/signup', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        email: email,
+        password: password,
+      }),
+    })
+    const data = await res.json()
+    setData(data)
   }
 
   return (
@@ -46,15 +39,6 @@ export default function Index() {
         <link rel="shortcut icon" href={favicon.src} type="image/x-icon" />
       </Head>
 
-      {data?.status === 401 && (
-        <Notification
-          timeout={delay}
-          error
-          title="Inicio de sesión incorrecto"
-          message={data.error}
-        />
-      )}
-
       <section className="bg-[#2A2D34] h-screen">
         <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
           <h1
@@ -65,9 +49,9 @@ export default function Index() {
           <div className="w-full rounded-lg shadow-xl border md:mt-0 sm:max-w-md xl:p-0 bg-gray-800 border-gray-700">
             <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
               <h2 className="text-xl text-center font-bold leading-tight tracking-tight md:text-2xl text-white">
-                Iniciar sesión
+                Agregar nuevo admin
               </h2>
-              <form className="space-y-4 md:space-y-6" action="#">
+              <form className="space-y-4 md:space-y-6" onSubmit={onFormSubmit}>
                 <div>
                   <label
                     htmlFor="email"
@@ -101,7 +85,7 @@ export default function Index() {
                   />
                 </div>
                 <button
-                  onClick={handleSubmit}
+                  type="submit"
                   className="w-full text-white bg-blue-600 hover:bg-blue-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
                   Ingresar
                 </button>

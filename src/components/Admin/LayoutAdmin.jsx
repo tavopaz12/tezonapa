@@ -1,8 +1,17 @@
 import Head from 'next/head'
 import favicon from '@/assets/favicon.ico'
 import HeaderAdmin from './HeaderAdmin'
+import { useSession } from 'next-auth/react'
+import { useRouter } from 'next/router'
 
 export default function LayoutAdmin({ title, description, ogImage, children }) {
+  const { data: session, status } = useSession()
+  const router = useRouter()
+
+  if (status === 'unauthenticated') {
+    router.replace('/admin')
+  }
+
   return (
     <>
       <Head>

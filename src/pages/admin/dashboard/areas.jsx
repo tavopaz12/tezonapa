@@ -11,6 +11,8 @@ import FormCreateArea from '@/components/Admin/FormCreateArea'
 import FormEditModal from '@/components/Admin/FormEditModal'
 import Notification from '@/components/Admin/Notification'
 
+import banner from '/public/images/banner.webp'
+
 export default function Areas() {
   const [showModalCreate, setShowModalCreate] = useState(false)
 
@@ -28,7 +30,7 @@ export default function Areas() {
             </button>
           </div>
           <table className="w-full text-sm text-left text-gray-500">
-            <thead className="text-xs text-gray-700 uppercase bg-gray-50 ">
+            <thead className="text-xs text-center text-gray-700 uppercase bg-gray-50 ">
               <tr>
                 <th scope="col" className="px-6 py-3">
                   ID
@@ -51,10 +53,10 @@ export default function Areas() {
               </tr>
             </thead>
             <tbody>
-              <ListArea />
-              <ListArea />
-              <ListArea />
-              <ListArea />
+              <ListArea banner={banner} />
+              <ListArea banner={banner} />
+              <ListArea banner={banner} />
+              <ListArea banner={banner} />
             </tbody>
           </table>
         </div>
@@ -81,7 +83,7 @@ function ListArea({ id, banner, nombreArea, director, logo }) {
         <th
           scope="row"
           className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-          Apple MacBook Pro 17
+          54109e9a
         </th>
         <th className="px-6 py-4">
           {logo ? (
@@ -98,9 +100,11 @@ function ListArea({ id, banner, nombreArea, director, logo }) {
             </div>
           )}
         </th>
-        <td className="px-6 py-4">Laptop</td>
-        <td className="px-6 py-4">$2999</td>
-        <td className="px-6 py-4">$2999</td>
+        <td className="px-6 py-4">Fomento agropecuario</td>
+        <td className="px-6 py-4">Jose Octavio Paz Juarez</td>
+        <td className="px-6 py-4">
+          <Image alt="hola" src={banner} className='w-96 h-14 object-cover'/>
+        </td>
 
         <td className="px-6 py-6 flex flex-col items-center justify-center">
           <button
