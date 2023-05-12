@@ -10,23 +10,32 @@ export default function Index() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [data, setData] = useState(null)
+  const [loadind, setLoading] = useState(false)
+
   const router = useRouter()
 
   const delay = 5000
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+    setLoading(true)
 
-    const result = await signIn('credentials', {
-      redirect: false,
-      email,
-      password,
-    })
+    try {
+      const result = await signIn('credentials', {
+        redirect: false,
+        email,
+        password,
+      })
 
-    setData(result)
+      setData(result)
 
-    if (!result.error) {
-      router.replace('/admin/dashboard')
+      if (!result.error) {
+        router.replace('/admin/dashboard')
+      }
+
+      setLoading(false)
+    } catch (error) {
+      setData(error)
     }
 
     setTimeout(() => {
@@ -102,8 +111,9 @@ export default function Index() {
                 </div>
                 <button
                   onClick={handleSubmit}
-                  className="w-full text-white bg-blue-600 hover:bg-blue-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
-                  Ingresar
+                  type='submit'
+                  className={`w-full text-white ${loadind ? 'bg-gray-600 pointer-events-none' : 'bg-blue-600 hover:bg-blue-700'} font-medium rounded-lg text-sm px-5 py-2.5 text-center`}>
+                  {loadind ? 'Iniciando sesión' : 'Ingresar'}
                 </button>
               </form>
             </div>

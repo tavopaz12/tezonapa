@@ -1,59 +1,54 @@
 import { useState } from 'react'
 import Head from 'next/head'
 import Image from 'next/image'
+import { uploadImage } from 'services/uploadCloudinary'
 
 export default function Home() {
   const [imageSrc, setImageSrc] = useState()
   const [uploadData, setUploadData] = useState()
+  const [images, setImages] = useState([])
+  const [files, setFiles] = useState(null)
 
-  async function handleOnChange(e) {
-    const file = e.target.files[0]
-    const formData = new FormData()
-    formData.append('file', file)
-    formData.append('upload_preset', process.env.CLOUDINARY_PRESET)
+  const handleImageChange = (e) => {
+    const files = e.target.files
+    setFiles(files)
 
-    const data = await fetch(process.env.CLOUDINARY_URL, {
-      method: 'POST',
-      body: formData,
-    })
-      .then((r) => r.json())
-      .then((data) => {
-        if (data.secure_url !== '') {
-          const uploadedFileUrl = data.secure_url
-          console.log(uploadedFileUrl)
-        }
-      })
-      .catch((err) => console.error(err))
+    const newUrlImages = []
+
+    for (const file of files) {
+      const url = URL.createObjectURL(file)
+      newUrlImages.push({ url, file })
+    }
+
+    setImages([...images, ...newUrlImages])
+  }
+
+  const uploadImages = async (formData) => {
+    formData.append('upload_preset', 'crdrsp9k')
+    const urls = []
+
+    for (let i = 0; i < files.length; i++) {
+      const file = files[i]
+      formData.append('file', file)
+
+      const data = await uploadImage(formData)
+
+      if (data.secure_url !== '') {
+        urls.push(data.secure_url)
+      }
+    }
+
+    return urls
   }
 
   async function handleOnSubmit(event) {
     event.preventDefault()
 
-    const form = event.currentTarget
-    const fileInput = Array.from(form.elements).find(
-      ({ name }) => name === 'file',
-    )
-
     const formData = new FormData()
 
-    for (const file of fileInput.files) {
-      formData.append('file', file)
-    }
+    const res = await uploadImages(formData)
 
-    formData.append('upload_preset', 'dxftfhixe')
-
-    const data = await fetch(
-      'https://api.cloudinary.com/v1_1/dxftfhixe/image/upload',
-      {
-        method: 'POST',
-        body: formData,
-      },
-    ).then((r) => r.json())
-
-    console.log(data)
-
-    setImageSrc(data.secure_url)
-    setUploadData(data)
+    console.log(res)
   }
 
   return (
@@ -71,15 +66,18 @@ export default function Home() {
 
         <form method="post" onSubmit={handleOnSubmit}>
           <p>
-            <input type="file" name="file" onChange={handleOnChange} />
+            <input type="file" multiple onChange={handleImageChange} />
           </p>
 
-          <Image
-            src="https://res.cloudinary.com/dxftfhixe/image/upload/v1683830507/hqf0fsay1xpjbtcu1kta.png"
-            alt="hola"
-            width={100}
-            height={100}
-          />
+          {images.map((file, index) => (
+            <Image
+              key={index}
+              src={file.url}
+              alt="hola"
+              width={100}
+              height={100}
+            />
+          ))}
 
           {imageSrc && !uploadData && (
             <p>
@@ -92,6 +90,8 @@ export default function Home() {
               <pre>{JSON.stringify(uploadData, null, 2)}</pre>
             </code>
           )}
+
+          <button>Subir imagen</button>
         </form>
       </main>
 

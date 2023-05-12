@@ -6,6 +6,10 @@
       "@/components/*": ["components/*"],
       "@/api/*": ["pages/api/*"],
       "@/assets/*": ["assets/*"],
+      "@/models/*": ["models/*"],
+      "@/controllers/*": ["controllers/*"],
+      "@/services/*": ["services/*"],
+      "@/db/*": ["db/*"]
     }
   }
 }
