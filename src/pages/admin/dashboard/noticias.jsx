@@ -18,6 +18,8 @@ import FormEditNotice from '@/components/Admin/FormEditNotice'
 import InputSearch from '@/components/UI/InputSearch'
 import { getArticles } from '@/services/article/getArticles'
 import { getAreas } from '@/services/area/getAreas'
+import { useRouter } from 'next/router'
+import { deleteArticle } from '@/services/article/deleteArticle'
 
 export default function Noticias({ areas, articles }) {
   const [showEditModal, setShowEditModal] = useState(false)
@@ -38,7 +40,7 @@ export default function Noticias({ areas, articles }) {
 
         <div className="flex max-md:flex-col mt-8 flex-wrap gap-2 justify-between">
           {articles.articles.map((article, index) => (
-            <CardNotice key={index} />
+            <CardNotice key={index} data={article} />
           ))}
         </div>
       </section>
@@ -54,26 +56,50 @@ export default function Noticias({ areas, articles }) {
   )
 }
 
-function CardNotice() {
+function CardNotice({ data }) {
   const [showOptions, setShowOptions] = useState(false)
   const [showEdit, setShowEdit] = useState(false)
   const [showDelete, setShowDelete] = useState(false)
+  const router = useRouter()
+
+  const fecha = new Date(data?.createdAt)
+  const options = {
+    year: 'numeric',
+    month: 'numeric',
+    day: 'numeric',
+  }
+  const formatDate = new Intl.DateTimeFormat('es-MX', options).format(fecha)
+
+  const handleClickDelete = async (evt) => {
+    evt.preventDefault()
+
+    try {
+      const res = await deleteArticle(data._id)
+      router.push('/admin/dashboard/noticias')
+
+      setShowDelete(false)
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   return (
     <div className="bg-gray-100 relative shadow p-3 rounded-lg">
       <Image
         className="h-[250px] w-[300px] max-md:w-full object-cover"
         alt="hola"
-        src={imgPrueba}
+        src={data?.banner}
+        width={1000}
+        height={1000}
+        priority
       />
 
       <div className="flex justify-between">
-        <p className="mt-1 text-base text-gray-600">Area: Principal</p>
-        <p className="mt-1 text-base text-gray-600">12 - 06 - 2004</p>
+        <p className="mt-1 text-base text-gray-600">Area: {data?.area.name}</p>
+        <p className="mt-1 text-base text-gray-600">{formatDate}</p>
       </div>
       <h2 className="text-gray-700 leading-5 mt-2 text-justify w-[300px] max-md:w-full text-lg font-bold">
-        Inicia Oficialmente El Programa De Obras Publicas 2023 En La Comunidad
-        De Col Agricola
+        {data.title}
       </h2>
       <button
         onClick={() => setShowOptions(!showOptions)}
@@ -83,6 +109,7 @@ function CardNotice() {
 
       {showOptions && (
         <DropDown
+          slug={data?.slug}
           handleClickRead={() => setShowOptions(!showOptions)}
           handleClickEdit={() => {
             setShowEdit(!showEdit)
@@ -96,13 +123,14 @@ function CardNotice() {
       )}
 
       {showEdit && (
-        <Modal title="Editar noticia" onClose={() => setShowEdit(!showEdit)}>
-          <FormEditNotice />
+        <Modal title={data?.title} onClose={() => setShowEdit(!showEdit)}>
+          <FormEditNotice data={data} />
         </Modal>
       )}
 
       {showDelete && (
         <DeleteConfirmationModal
+          handleClickConfirmate={handleClickDelete}
           toogleOpen={() => setShowDelete(!showDelete)}
         />
       )}
@@ -110,7 +138,12 @@ function CardNotice() {
   )
 }
 
-function DropDown({ handleClickRead, handleClickEdit, handleClickDelete }) {
+function DropDown({
+  handleClickRead,
+  handleClickEdit,
+  handleClickDelete,
+  slug,
+}) {
   return (
     <div className="z-10 absolute bottom-0 mb-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-32">
       <ul
@@ -119,7 +152,7 @@ function DropDown({ handleClickRead, handleClickEdit, handleClickDelete }) {
         <li>
           <Link
             onClick={handleClickRead}
-            href="/sala-prensa"
+            href={`/sala-prensa/${slug}`}
             target="_blank"
             className="flex justify gap-3 items-center w-full px-4 py-2 hover:bg-gray-100">
             <FontAwesomeIcon className="h-4 w-4 text-blue-500" icon={faEye} />

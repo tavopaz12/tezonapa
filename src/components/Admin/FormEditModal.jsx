@@ -26,7 +26,7 @@ export default function FormEditArea({
   const [res, setRes] = useState('')
   const [loading, setLoading] = useState(false)
   const router = useRouter()
-
+ 
   const delay = 5000
 
   const handleSelectLogo = (newLogo) => {

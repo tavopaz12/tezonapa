@@ -16,6 +16,7 @@ export default function Article() {
     ?.split('-')
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
     .join(' ')
+
   const texto =
     'Con la finalidad de seguir impulsando el desarrollo de Tezonapa, el día de ayer dio inicio oficialmente el programa de obras públicas 2023 en la comunidad de Col Agrícola. Nuestra Presidenta Municipal Claudia Rosales Colina, arribó a dicha comunidad para que en compañía de ciudadanos Tezonapeños realizaran el banderazo de inicio de obra referente a una apertura de camino que abarca 1,200 metros. Con esta apertura, se beneficia directamente a los habitantes de las comunidades de Morelos, Francisco Villa II Fracción y Col Agrícola. #UnidosAvanzamos 💚'
 

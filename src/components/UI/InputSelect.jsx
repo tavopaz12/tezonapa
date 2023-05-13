@@ -31,7 +31,7 @@ export default function InputSelect({
           {defaultSelect}
         </option>
         {options?.map((option, index) => (
-          <option key={index} value={option.toLowerCase()}>
+          <option key={index} value={option}>
             {option}
           </option>
         ))}

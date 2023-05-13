@@ -23,7 +23,7 @@ export default function TextArea({
 
       <textarea
         onChange={handleValueInput}
-        defaultValue={value}
+        value={value}
         id={name}
         rows={rows}
         required={required && true}
