@@ -3,13 +3,16 @@ export default function InputSelect({
   helperText,
   defaultSelect,
   options,
+  handleValueInput,
+  value,
+  required,
 }) {
   return (
     <>
       {title && (
         <label
-          for="countries"
-          class="block mb-2 text-sm font-bold text-gray-900">
+          htmlFor="countries"
+          className="block mb-2 text-sm font-bold text-gray-900">
           {title}
         </label>
       )}
@@ -19,9 +22,12 @@ export default function InputSelect({
         </p>
       )}
       <select
+        required={required && true}
+        value={value}
+        onChange={handleValueInput}
         id="countries"
-        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg outline-none block w-full p-2.5">
-        <option selected disabled>
+        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg outline-none block w-full p-2.5">
+        <option defaultValue disabled>
           {defaultSelect}
         </option>
         {options?.map((option, index) => (

@@ -39,6 +39,7 @@ export default function InputFile({
           id="example5"
           type="file"
           className="sr-only"
+          multiple={multiple && true}
           required={required && true}
         />
       </label>

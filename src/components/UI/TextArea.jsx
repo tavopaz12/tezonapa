@@ -5,6 +5,8 @@ export default function TextArea({
   required,
   rows,
   helperText,
+  handleValueInput,
+  value,
 }) {
   return (
     <>
@@ -20,6 +22,8 @@ export default function TextArea({
       )}
 
       <textarea
+        onChange={handleValueInput}
+        defaultValue={value}
         id={name}
         rows={rows}
         required={required && true}

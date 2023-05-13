@@ -20,7 +20,7 @@ export default function FormCreateArea() {
   const router = useRouter()
 
   const delay = 5000
-
+ 
   const handleSelectLogo = (newLogo) => {
     setLogo(newLogo)
   }
@@ -75,10 +75,6 @@ export default function FormCreateArea() {
       setLoading(false)
     }
   }
-
-  console.log(loading)
-  console.log(res)
-
   return (
     <>
       {res.status === 201 && (

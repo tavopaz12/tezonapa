@@ -7,7 +7,6 @@ import {
   faEdit,
   faEye,
   faPlus,
-  faSearch,
   faTrash,
 } from '@fortawesome/free-solid-svg-icons'
 import { useState } from 'react'
@@ -17,8 +16,10 @@ import DeleteConfirmationModal from '@/components/Admin/DeleteConfirmationModal'
 import Link from 'next/link'
 import FormEditNotice from '@/components/Admin/FormEditNotice'
 import InputSearch from '@/components/UI/InputSearch'
+import { getArticles } from '@/services/article/getArticles'
+import { getAreas } from '@/services/area/getAreas'
 
-export default function Noticias() {
+export default function Noticias({ areas, articles }) {
   const [showEditModal, setShowEditModal] = useState(false)
 
   return (
@@ -36,12 +37,9 @@ export default function Noticias() {
         </header>
 
         <div className="flex max-md:flex-col mt-8 flex-wrap gap-2 justify-between">
-          <CardNotice />
-          <CardNotice />
-          <CardNotice />
-          <CardNotice />
-          <CardNotice />
-          <CardNotice />
+          {articles.articles.map((article, index) => (
+            <CardNotice key={index} />
+          ))}
         </div>
       </section>
 
@@ -49,7 +47,7 @@ export default function Noticias() {
         <Modal
           title="Agregar Nueva Noticia"
           onClose={() => setShowEditModal(!showEditModal)}>
-          <FormCreateNotice />
+          <FormCreateNotice areas={areas} />
         </Modal>
       )}
     </LayoutAdmin>
@@ -147,4 +145,16 @@ function DropDown({ handleClickRead, handleClickEdit, handleClickDelete }) {
       </ul>
     </div>
   )
+}
+
+export async function getServerSideProps() {
+  const articles = await getArticles()
+  const areas = await getAreas()
+
+  return {
+    props: {
+      articles,
+      areas,
+    },
+  }
 }

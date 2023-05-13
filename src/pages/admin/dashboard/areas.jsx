@@ -7,14 +7,11 @@ import Modal from '@/components/UI/Modal'
 
 import DeleteConfirmationModal from '@/components/Admin/DeleteConfirmationModal'
 import FormCreateArea from '@/components/Admin/FormCreateArea'
-import FormEditModal from '@/components/Admin/FormEditModal'
-import Notification from '@/components/Admin/Notification'
 
 import bannerDefault from '/public/images/banner-default.png'
 import { getAreas } from '@/services/area/getAreas'
-import connectMongo from '@/db/conn'
-import { deleteArea } from '@/controllers/area.controller'
 import { useRouter } from 'next/router'
+import FormEditArea from '@/components/Admin/FormEditModal'
 
 export default function Areas({ areas }) {
   const [showModalCreate, setShowModalCreate] = useState(false)
@@ -187,9 +184,15 @@ function ListArea({ id, banner, nombreArea, director, logo }) {
 
           {showEditModal && (
             <Modal
-              title="Editar Area"
+              title={`Editar Area: ${nombreArea}`}
               onClose={() => setShowEditModal(!showEditModal)}>
-              <FormEditModal />
+              <FormEditArea
+                id={id}
+                nombreArea={nombreArea}
+                nameDirector={director}
+                urlLogo={logo}
+                urlBanner={banner}
+              />
             </Modal>
           )}
 
