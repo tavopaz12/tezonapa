@@ -1,17 +1,67 @@
-import { faUpload } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Image from 'next/image'
 
-import logo from '/public/default.png'
+import logoDefault from '/public/default.png'
+import bannerDefault from '/public/images/default-banner.jpg'
 import InputText from '../UI/InputText'
 import InputFile from '../UI/InputFile'
+import { useState } from 'react'
+import { uploadImage } from '@/services/uploadCloudinary'
+import { createNewArea } from '@/services/postArea'
 
 export default function FormCreateArea() {
+  const [nameArea, setNameArea] = useState('')
+  const [director, setDirector] = useState('')
+  const [logo, setLogo] = useState('')
+  const [banner, setBaneer] = useState('')
+
+  const handleSelectLogo = (newLogo) => {
+    setLogo(newLogo)
+  }
+
+  const handleSelectBanner = (newBanner) => {
+    setBaneer(newBanner)
+  }
+
+  const createArea = async (evt) => {
+    evt.preventDefault()
+
+    try {
+      const formData = new FormData()
+      formData.append('upload_preset', 'crdrsp9k')
+      let logoUrl
+      let bannerUrl
+
+      if (logo) {
+        formData.append('file', logo.file)
+        logoUrl = await uploadImage(formData)
+      }
+
+      if (banner) {
+        formData.append('file', banner.file)
+        bannerUrl = await uploadImage(formData)
+      }
+
+      const newArea = {
+        name: nameArea,
+        banner: bannerUrl.secure_url,
+        logo: logoUrl.secure_url,
+        director: director,
+      }
+
+      const data = await createNewArea(newArea)
+
+      console.log(data)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   return (
-    <form action="#" className="mt-8">
+    <form onSubmit={createArea} className="mt-8">
       <div className="grid gap-4 mb-4 sm:grid-cols-2">
         <div>
           <InputText
+            handleValueInput={(evt) => setNameArea(evt.target.value)}
             title="Nombre del area"
             placeholder="Ingresa el nombre del area"
             name="nameArea"
@@ -21,6 +71,7 @@ export default function FormCreateArea() {
 
         <div>
           <InputText
+            handleValueInput={(evt) => setDirector(evt.target.value)}
             title="Nombre del director"
             placeholder="Ingresa el nombre del director"
             name="nameDirector"
@@ -35,20 +86,37 @@ export default function FormCreateArea() {
 
           <div className="flex gap-2 items-center justify-center">
             <Image
+              priority
               className="w-14 h-14 rounded-full object-cover"
-              src={logo}
-              alt="Rounded avatar"
+              src={logo.url || logoDefault}
+              width={100}
+              height={100}
+              alt={logo.file?.name || 'Logo de area'}
             />
-            <InputFile required/>
+            <InputFile handleValueFile={handleSelectLogo} name="logo" />
           </div>
         </div>
 
         <div className="sm:col-span-2">
-          <InputFile title="Seleccionar Banner" required />
+          <InputFile
+            title="Seleccionar Banner"
+            handleValueFile={handleSelectBanner}
+            name="banner"
+          />
+        </div>
+        <div className="sm:col-span-2">
+          <Image
+            priority
+            className="w-full h-[150px] object-cover"
+            src={banner.url || bannerDefault}
+            alt={banner.file?.name || 'Banner de area'}
+            width={100}
+            height={100}
+          />
         </div>
       </div>
 
-      <div className="flex justify-end">
+      <div className="flex justify-end mb-6">
         <button
           type="submit"
           className="text-white text-center mt-2 inline-flex justify-center items-center bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-4 py-2">

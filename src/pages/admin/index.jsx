@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import favicon from '@/assets/favicon.ico'
 
-import { signIn } from 'next-auth/react'
+import { signIn, useSession } from 'next-auth/react'
 import { useState } from 'react'
 import Notification from '@/components/Admin/Notification'
 import { useRouter } from 'next/router'
@@ -11,8 +11,14 @@ export default function Index() {
   const [password, setPassword] = useState('')
   const [data, setData] = useState(null)
   const [loadind, setLoading] = useState(false)
-
+  const { data: session, status } = useSession()
   const router = useRouter()
+
+  console.log(status)
+
+  if (status === 'authenticated') {
+    router.replace('/admin/dashboard')
+  }
 
   const delay = 5000
 
@@ -111,8 +117,12 @@ export default function Index() {
                 </div>
                 <button
                   onClick={handleSubmit}
-                  type='submit'
-                  className={`w-full text-white ${loadind ? 'bg-gray-600 pointer-events-none' : 'bg-blue-600 hover:bg-blue-700'} font-medium rounded-lg text-sm px-5 py-2.5 text-center`}>
+                  type="submit"
+                  className={`w-full text-white ${
+                    loadind
+                      ? 'bg-gray-600 pointer-events-none'
+                      : 'bg-blue-600 hover:bg-blue-700'
+                  } font-medium rounded-lg text-sm px-5 py-2.5 text-center`}>
                   {loadind ? 'Iniciando sesión' : 'Ingresar'}
                 </button>
               </form>

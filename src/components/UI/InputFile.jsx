@@ -1,7 +1,19 @@
 import { faUpload } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { selectImage } from 'config/selectImage'
+import { selectImages } from 'config/selectImages'
 
-export default function InputFile({ title, required, handleValueFile, helperText }) {
+export default function InputFile({
+  title,
+  required,
+  handleValueFile,
+  helperText,
+  multiple,
+  name,
+}) {
+  const handleSelectImages = selectImages(handleValueFile)
+  const handleSelectImage = selectImage(handleValueFile)
+
   return (
     <>
       <label className="mb-2 block text-sm font-bold text-gray-700">
@@ -22,7 +34,8 @@ export default function InputFile({ title, required, handleValueFile, helperText
           </p>
         </div>
         <input
-          onChange={handleValueFile}
+          name={name}
+          onChange={multiple ? handleSelectImages : handleSelectImage}
           id="example5"
           type="file"
           className="sr-only"

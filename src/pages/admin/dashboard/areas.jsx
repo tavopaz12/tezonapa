@@ -5,15 +5,15 @@ import Image from 'next/image'
 import { useState } from 'react'
 import Modal from '@/components/UI/Modal'
 
-import img from '/public/images/Cascada-1.webp'
 import DeleteConfirmationModal from '@/components/Admin/DeleteConfirmationModal'
 import FormCreateArea from '@/components/Admin/FormCreateArea'
 import FormEditModal from '@/components/Admin/FormEditModal'
 import Notification from '@/components/Admin/Notification'
 
-import banner from '/public/images/banner.webp'
+import bannerDefault from '/public/images/banner-default.png'
+import { getAreas } from '@/services/getAreas'
 
-export default function Areas() {
+export default function Areas({ areas }) {
   const [showModalCreate, setShowModalCreate] = useState(false)
 
   return (
@@ -33,9 +33,6 @@ export default function Areas() {
             <thead className="text-xs text-center text-gray-700 uppercase bg-gray-50 ">
               <tr>
                 <th scope="col" className="px-6 py-3">
-                  ID
-                </th>
-                <th scope="col" className="px-6 py-3">
                   Logo
                 </th>
                 <th scope="col" className="px-6 py-3">
@@ -53,10 +50,16 @@ export default function Areas() {
               </tr>
             </thead>
             <tbody>
-              <ListArea banner={banner} />
-              <ListArea banner={banner} />
-              <ListArea banner={banner} />
-              <ListArea banner={banner} />
+              {areas.map((area) => (
+                <ListArea
+                  key={area._id}
+                  id={area._id}
+                  banner={area.banner}
+                  nombreArea={area.name}
+                  director={area.director}
+                  logo={area.logo}
+                />
+              ))}
             </tbody>
           </table>
         </div>
@@ -80,30 +83,35 @@ function ListArea({ id, banner, nombreArea, director, logo }) {
   return (
     <>
       <tr className="bg-white border-b relative">
-        <th
-          scope="row"
-          className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-          54109e9a
-        </th>
         <th className="px-6 py-4">
           {logo ? (
             <Image
               className="w-10 h-10 rounded-full"
-              src={img}
-              alt="Jese image"
+              src={logo}
+              alt={`Logo de ${nombreArea}`}
+              priority
+              width={100}
+              height={100}
             />
           ) : (
             <div className="relative inline-flex items-center justify-center w-10 h-10 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600">
               <span className="font-medium text-gray-600 dark:text-gray-300">
-                JL
+                {nombreArea.substring(0, 2).toUpperCase()}
               </span>
             </div>
           )}
         </th>
-        <td className="px-6 py-4">Fomento agropecuario</td>
-        <td className="px-6 py-4">Jose Octavio Paz Juarez</td>
+        <td className="px-6 py-4 font-bold">{nombreArea}</td>
+        <td className="px-6 py-4 font-bold">{director}</td>
         <td className="px-6 py-4">
-          <Image alt="hola" src={banner} className='w-96 h-14 object-cover'/>
+          <Image
+            alt={`Banner de ${nombreArea}`}
+            src={banner || bannerDefault}
+            priority
+            className="w-96 h-14 object-cover"
+            width={1000}
+            height={500}
+          />
         </td>
 
         <td className="px-6 py-6 flex flex-col items-center justify-center">
@@ -173,4 +181,14 @@ function ListArea({ id, banner, nombreArea, director, logo }) {
       )}
     </>
   )
+}
+
+export async function getServerSideProps() {
+  const areas = await getAreas()
+
+  return {
+    props: {
+      areas,
+    },
+  }
 }
