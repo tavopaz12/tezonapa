@@ -1,10 +1,10 @@
-export default function DeleteConfirmationModal({ toogleOpen }) {
+export default function DeleteConfirmationModal({ toogleOpen, handleClickConfirmate }) {
   return (
     <div
       id="deleteModal"
       tabIndex="-1"
       aria-hidden="true"
-      className="overflow-y-auto bg-[rgba(0,0,0,0.1)] flex overflow-x-hidden fixed top-[50%] right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-modal md:h-full">
+      className="overflow-y-auto bg-[rgba(0,0,0,0.1)] flex overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full inset-0 h-modal h-screen">
       <div className="relative p-4 w-full max-w-md h-full md:h-auto">
         <div className="relative p-4 text-center bg-white rounded-lg shadow sm:p-5">
           <button
@@ -32,9 +32,9 @@ export default function DeleteConfirmationModal({ toogleOpen }) {
             viewBox="0 0 20 20"
             xmlns="http://www.w3.org/2000/svg">
             <path
-              fill-rule="evenodd"
+              fillRule="evenodd"
               d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
-              clip-rule="evenodd"></path>
+              clipRule="evenodd"></path>
           </svg>
           <p className="mb-4 text-gray-500">
             ¿Estas seguro de eliminar este item?
@@ -49,6 +49,7 @@ export default function DeleteConfirmationModal({ toogleOpen }) {
             </button>
             <button
               type="submit"
+              onClick={handleClickConfirmate}
               className="py-2 px-3 text-sm font-medium text-center text-white bg-red-600 rounded-lg hover:bg-red-700">
               Si, estoy seguro
             </button>

@@ -1,4 +1,4 @@
-import Events from '@/models/event.model'
+import Event from '@/models/event.model'
 import Area from '@/models/area.model'
 
 // get : api/events
@@ -20,7 +20,7 @@ export async function getEvents(req, res) {
       areaFilter = { area: matchingArea._id }
     }
 
-    const events = await Events.find(areaFilter)
+    const events = await Event.find(areaFilter)
       .populate('area')
       .sort(sortCriteria)
 
@@ -37,7 +37,7 @@ export async function getEvent(req, res) {
   try {
     const { eventId } = req.query
 
-    const event = await Events.findById(eventId)
+    const event = await Event.findById(eventId)
 
     if (!event) {
       throw new Error('Evento no encontrado')
@@ -63,7 +63,7 @@ export async function postEvent(req, res) {
     if (!area) return res.status(404).json({ error: 'Evento no encontrado' })
 
     // Crear un nuevo artículo con el ID del área relacionada
-    const newEvent = await Events.create({ ...formData, area: area._id })
+    const newEvent = await Event.create({ ...formData, area: area._id })
 
     // Actualizar el área correspondiente para incluir el ID del nuevo artículo
     area.events.push(newEvent._id)
@@ -83,7 +83,7 @@ export async function patchEvent(req, res) {
     const formData = req.body
 
     if (eventId && formData) {
-      const event = await Events.findOneAndUpdate({ _id: eventId }, formData, {
+      const event = await Event.findOneAndUpdate({ _id: eventId }, formData, {
         new: true,
       })
 
@@ -112,7 +112,7 @@ export async function deleteEvent(req, res) {
 
     let event
     try {
-      event = await Events.findByIdAndDelete(eventId)
+      event = await Event.findByIdAndDelete(eventId)
     } catch (error) {
       return res.status(404).json({ error: 'ID invalido' })
     }

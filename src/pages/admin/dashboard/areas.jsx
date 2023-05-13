@@ -11,7 +11,10 @@ import FormEditModal from '@/components/Admin/FormEditModal'
 import Notification from '@/components/Admin/Notification'
 
 import bannerDefault from '/public/images/banner-default.png'
-import { getAreas } from '@/services/getAreas'
+import { getAreas } from '@/services/area/getAreas'
+import connectMongo from '@/db/conn'
+import { deleteArea } from '@/controllers/area.controller'
+import { useRouter } from 'next/router'
 
 export default function Areas({ areas }) {
   const [showModalCreate, setShowModalCreate] = useState(false)
@@ -79,6 +82,24 @@ function ListArea({ id, banner, nombreArea, director, logo }) {
   const [showOptions, setShowOptions] = useState(false)
   const [showModalConfirmation, setShowModalConfirmation] = useState(false)
   const [showEditModal, setShowEditModal] = useState(false)
+  const router = useRouter()
+
+  const handleClickDelete = async (evt) => {
+    evt.preventDefault()
+
+    try {
+      const res = await fetch(`/api/areas/${id}`, {
+        method: 'DELETE',
+      })
+
+      const data = await res.json()
+      router.push('/admin/dashboard/areas')
+
+      setShowModalConfirmation(false)
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   return (
     <>
@@ -163,22 +184,25 @@ function ListArea({ id, banner, nombreArea, director, logo }) {
               </div>
             </div>
           )}
+
+          {showEditModal && (
+            <Modal
+              title="Editar Area"
+              onClose={() => setShowEditModal(!showEditModal)}>
+              <FormEditModal />
+            </Modal>
+          )}
+
+          {showModalConfirmation && (
+            <DeleteConfirmationModal
+              handleClickConfirmate={handleClickDelete}
+              toogleOpen={() =>
+                setShowModalConfirmation(!showModalConfirmation)
+              }
+            />
+          )}
         </td>
       </tr>
-
-      {showEditModal && (
-        <Modal
-          title="Editar Area"
-          onClose={() => setShowEditModal(!showEditModal)}>
-          <FormEditModal />
-        </Modal>
-      )}
-
-      {showModalConfirmation && (
-        <DeleteConfirmationModal
-          toogleOpen={() => setShowModalConfirmation(!showModalConfirmation)}
-        />
-      )}
     </>
   )
 }

@@ -1,14 +1,20 @@
-import mongoose, { Schema, models, model } from 'mongoose'
+import mongoose from 'mongoose'
 
-const AreaSchema = new Schema({
-  name: { type: String, required: true },
-  banner: String,
-  logo: String,
-  director: { type: String, required: true },
-  articles: [{ type: mongoose.Types.ObjectId, ref: 'Article' }],
-  events: [{ type: mongoose.Types.ObjectId, ref: 'Event' }],
-})
+let Area
 
-const Area = models.Area || model('Area', AreaSchema)
+try {
+  Area = mongoose.model('Area')
+} catch (error) {
+  const AreaSchema = new mongoose.Schema({
+    name: String,
+    banner: String,
+    logo: String,
+    director: String,
+    articles: [{ type: mongoose.Types.ObjectId, ref: 'Article' }],
+    events: [{ type: mongoose.Types.ObjectId, ref: 'Event' }],
+  })
+
+  Area = mongoose.model('Area', AreaSchema)
+}
 
 export default Area

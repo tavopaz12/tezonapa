@@ -1,20 +1,26 @@
-import mongoose, { Schema, models, model } from 'mongoose'
+import mongoose from 'mongoose'
 
-const EventSchema = new Schema(
-  {
-    title: { type: String, required: true },
-    image: { type: String, required: true },
-    content: { type: String, required: true },
-    show: Boolean,
-    area: { type: mongoose.Types.ObjectId, ref: 'Area' },
-    createdAt: {
-      type: Date,
-      default: Date.now,
+let Event
+
+try {
+  Event = mongoose.model('Event')
+} catch (error) {
+  const EventSchema = new mongoose.Schema(
+    {
+      title: String,
+      image: String,
+      content: String,
+      show: Boolean,
+      area: { type: mongoose.Types.ObjectId, ref: 'Area' },
+      createdAt: {
+        type: Date,
+        default: Date.now,
+      },
     },
-  },
-  { timestamps: true },
-)
+    { timestamps: true },
+  )
 
-const Events = models.Event || model('Event', EventSchema)
+  Event = mongoose.model('Event', EventSchema)
+}
 
-export default Events
+export default Event

@@ -25,7 +25,7 @@ export default function Notification({
   }
 
   return (
-    <div className="absolute top-0 right-0 m-4 w-1/4 rounded-xl border border-secondary-50 bg-white p-4 text-sm shadow-lg z-50">
+    <div className="fixed top-0 right-0 m-4 w-1/4 rounded-xl border border-secondary-50 bg-white p-4 text-sm shadow-lg z-50">
       {toogleClose && (
         <button
           onClick={toogleClose}

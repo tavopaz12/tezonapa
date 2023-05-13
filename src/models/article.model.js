@@ -1,21 +1,27 @@
-import mongoose, { Schema, models, model } from 'mongoose'
+import mongoose from 'mongoose'
 
-const ArticleSchema = new Schema(
-  {
-    title: { type: String, required: true },
-    banner: { type: String, required: true },
-    content: { type: String, required: true },
-    images: [{ type: String}],
-    slug: { type: String, required: true },
-    area: { type: mongoose.Types.ObjectId, ref: 'Area' },
-    createdAt: {
-      type: Date,
-      default: Date.now,
+let Article
+
+try {
+  Article = mongoose.model('Article')
+} catch (error) {
+  const ArticleSchema = new mongoose.Schema(
+    {
+      title: String,
+      banner: String,
+      content: String,
+      images: [String],
+      slug: String,
+      area: { type: mongoose.Types.ObjectId, ref: 'Area' },
+      createdAt: {
+        type: Date,
+        default: Date.now,
+      },
     },
-  },
-  { timestamps: true },
-)
+    { timestamps: true },
+  )
 
-const Article = models.Article || model('Article', ArticleSchema)
+  Article = mongoose.model('Article', ArticleSchema)
+}
 
 export default Article

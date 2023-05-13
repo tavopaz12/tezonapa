@@ -4,7 +4,8 @@ export default function InputText({
   placeholder,
   required,
   handleValueInput,
-  helperText
+  helperText,
+  value
 }) {
   return (
     <>
@@ -19,6 +20,7 @@ export default function InputText({
         </p>
       )}
       <input
+        value={value}
         onChange={handleValueInput}
         type="text"
         name={name}
