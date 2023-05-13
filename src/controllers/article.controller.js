@@ -5,7 +5,7 @@ import Area from '@/models/area.model'
 // api/articles?page=numPage&title=nameTitle&area=nameArea
 export async function getArticles(req, res) {
   try {
-    const perPage = 3
+    const perPage = 10
     const page = parseInt(req.query.page) || 1
     const title = req.query.title || ''
     const area = req.query.area || ''

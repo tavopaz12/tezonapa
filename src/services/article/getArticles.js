@@ -1,6 +1,8 @@
-export const getArticles = async () => {
+export const getArticles = async (page, title) => {
   try {
-    const res = await fetch('https://tezonapa.vercel.app/api/articles')
+    const res = await fetch(
+      `https://tezonapa.vercel.app/api/articles?page=${page}?title=${title}`,
+    )
 
     if (!res.ok) {
       throw new Error('Something went wrong with the request')
