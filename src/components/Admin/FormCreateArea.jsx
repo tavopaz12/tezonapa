@@ -20,7 +20,7 @@ export default function FormCreateArea() {
   const router = useRouter()
 
   const delay = 5000
- 
+
   const handleSelectLogo = (newLogo) => {
     setLogo(newLogo)
   }
@@ -68,9 +68,8 @@ export default function FormCreateArea() {
       setLoading(false)
       clearInputs()
 
-      router.push('/admin/dashboard/areas')
+      router.push(router.asPath)
     } catch (error) {
-      console.log(error)
       setRes({ success: false, status: 404 })
       setLoading(false)
     }

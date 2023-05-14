@@ -90,11 +90,11 @@ function ListArea({ id, banner, nombreArea, director, logo }) {
       })
 
       const data = await res.json()
-      router.push('/admin/dashboard/areas')
+      router.push(router.asPath)
 
       setShowModalConfirmation(false)
     } catch (error) {
-      console.log(error)
+      console.log('...logging error to our system...')
     }
   }
 

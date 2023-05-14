@@ -8,7 +8,7 @@ import {
   faPlus,
   faTrash,
 } from '@fortawesome/free-solid-svg-icons'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Modal from '@/components/UI/Modal'
 import FormCreateNotice from '@/components/Admin/FormCreateNotice'
 import DeleteConfirmationModal from '@/components/Admin/DeleteConfirmationModal'
@@ -22,45 +22,35 @@ import { deleteArticle } from '@/services/article/deleteArticle'
 
 export default function Noticias({ areas, articles }) {
   const [showEditModal, setShowEditModal] = useState(false)
-  const [dataArticles, setDataArticles] = useState(articles)
   const [currentPage, setCurrentPage] = useState(1)
   const [query, setQuery] = useState('')
+  const router = useRouter()
 
-  const onSearch = async (evt) => {
+  const onSearch = (evt) => {
     evt.preventDefault()
-    setQuery(evt.target.value)
-    try {
-      const res = await fetch(`/api/articles?title=${evt.target.value}`)
+    setCurrentPage(1)
 
-      if (!res.ok) {
-        throw new Error('Something went wrong with the request')
-      }
-
-      const articles = await res.json()
-
-      setDataArticles(articles)
-    } catch (error) {
-      console.log(error)
-    }
+    router.push(`?page=1${query && `&title=${query}`}`)
   }
 
-  const nextPage = async (evt) => {
+  const handlePageChange = (newPage) => {
+    setCurrentPage(newPage)
+    router.push(`?page=${newPage}${query && `&title=${query}`}`)
+  }
+
+  const nextPage = (evt) => {
     evt.preventDefault()
 
     if (currentPage < articles?.pages) {
-      router.push(
-        `/api/articles?page=${currentPage + 1}&title=${query && query}`,
-      )
+      handlePageChange(currentPage + 1)
     }
   }
 
-  const prevPage = async (evt) => {
+  const prevPage = (evt) => {
     evt.preventDefault()
 
     if (currentPage > 1) {
-      router.push(
-        `/api/articles?page=${currentPage - 1}&title=${query && query}`,
-      )
+      handlePageChange(currentPage - 1)
     }
   }
 
@@ -68,7 +58,7 @@ export default function Noticias({ areas, articles }) {
     <LayoutAdmin title="Noticias - Dashboard | H. Ayuntamiento Tezonapa, Ver">
       <section className="bg-gray-200 w-full p-4">
         <InputSearch
-          handleInputValue={onSearch}
+          handleInputValue={(evt) => setQuery(evt.target.value)}
           handleSearch={onSearch}
           placeholder="Buscar alguna noticia..."
         />
@@ -82,13 +72,13 @@ export default function Noticias({ areas, articles }) {
           </button>
         </header>
 
-        <div className="grid mt-12 place-content-center font-bold">
-          {dataArticles.articles <= 0 && (
+        {articles.articles <= 0 && (
+          <div className="grid mt-12 place-content-center font-bold">
             <h2 className="text-3xl capitalize">Sin resultados</h2>
-          )}
-        </div>
+          </div>
+        )}
 
-        <div className="flex max-md:flex-col mt-8 flex-wrap gap-2 justify-between">
+        <div className="flex max-md:flex-col mt-8 flex-wrap gap-2 justify-start">
           {articles.articles.map((article, index) => (
             <CardNotice key={index} data={article} />
           ))}
@@ -98,18 +88,18 @@ export default function Noticias({ areas, articles }) {
           <span className="text-sm text-gray-700">
             Pagina
             <span className="font-semibold mx-1 text-gray-900">
-              {dataArticles.articles <= 0 ? '0' : currentPage}
+              {articles.articles <= 0 ? '0' : currentPage}
             </span>
             de
             <span className="font-semibold mx-1 text-gray-900">
-              {dataArticles?.pages}
+              {articles?.pages}
             </span>
             paginas totales
           </span>
           <div className="inline-flex mt-2 xs:mt-0">
             <button
               onClick={prevPage}
-              className="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-gray-800 rounded-l hover:bg-gray-900">
+              className="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-800 rounded-l hover:bg-blue-900">
               <svg
                 aria-hidden="true"
                 className="w-5 h-5 mr-2"
@@ -121,12 +111,12 @@ export default function Noticias({ areas, articles }) {
                   d="M7.707 14.707a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l2.293 2.293a1 1 0 010 1.414z"
                   clipRule="evenodd"></path>
               </svg>
-              Prev
+              Anterior
             </button>
             <button
               onClick={nextPage}
-              className="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-gray-800 border-0 border-l border-gray-700 rounded-r hover:bg-gray-900">
-              Next
+              className="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-800 border-0 border-l border-gray-700 rounded-r hover:bg-blue-900">
+              Siguiente
               <svg
                 aria-hidden="true"
                 className="w-5 h-5 ml-2"
@@ -160,6 +150,7 @@ function CardNotice({ data }) {
   const [showDelete, setShowDelete] = useState(false)
   const router = useRouter()
 
+
   const fecha = new Date(data?.createdAt)
   const options = {
     year: 'numeric',
@@ -173,11 +164,11 @@ function CardNotice({ data }) {
 
     try {
       const res = await deleteArticle(data._id)
-      router.push('/admin/dashboard/noticias')
+      router.push(router.asPath)
 
       setShowDelete(false)
     } catch (error) {
-      console.log(error)
+      console.log('...logging error to our system...')
     }
   }
 

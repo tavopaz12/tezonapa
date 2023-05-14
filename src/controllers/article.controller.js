@@ -5,7 +5,7 @@ import Area from '@/models/area.model'
 // api/articles?page=numPage&title=nameTitle&area=nameArea
 export async function getArticles(req, res) {
   try {
-    const perPage = 3
+    const perPage = 10
     const page = parseInt(req.query.page) || 1
     const title = req.query.title || ''
     const area = req.query.area || ''
@@ -47,7 +47,6 @@ export async function getArticles(req, res) {
       articles: articles,
     })
   } catch (error) {
-    console.log(error)
     return res.status(404).json({ error: error.message })
   }
 }
@@ -94,7 +93,6 @@ export async function postArticle(req, res) {
 
     return res.status(201).json(newArticle)
   } catch (error) {
-    console.log(error)
     return res.status(404).json({ error })
   }
 }

@@ -14,7 +14,6 @@ export default function Index() {
   const { data: session, status } = useSession()
   const router = useRouter()
 
-  console.log(status)
 
   if (status === 'authenticated') {
     router.replace('/admin/dashboard')

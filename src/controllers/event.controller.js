@@ -27,7 +27,6 @@ export async function getEvents(req, res) {
     if (!events) return res.status(404).json({ error: 'Datos no encontrados' })
     res.status(200).json(events)
   } catch (error) {
-    console.log(error)
     res.status(404).json({ error: 'Error mientras se obtenias los datos' })
   }
 }
@@ -71,7 +70,6 @@ export async function postEvent(req, res) {
 
     return res.status(201).json(newEvent)
   } catch (error) {
-    console.log(error)
     return res.status(404).json({ error: error.message })
   }
 }

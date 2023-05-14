@@ -1,5 +1,4 @@
 export const updateArticle = async (id, changes) => {
-  console.log(id)
   try {
     const res = await fetch(`/api/articles/${id}`, {
       method: 'PATCH',

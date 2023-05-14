@@ -26,7 +26,7 @@ export default function FormEditArea({
   const [res, setRes] = useState('')
   const [loading, setLoading] = useState(false)
   const router = useRouter()
- 
+
   const delay = 5000
 
   const handleSelectLogo = (newLogo) => {
@@ -76,9 +76,8 @@ export default function FormEditArea({
       setRes({ success: true, status: 201 })
       setLoading(false)
 
-      router.push('/admin/dashboard/areas')
+      router.push(router.asPath)
     } catch (error) {
-      console.log(error)
       setRes({ success: false, status: 404 })
       setLoading(false)
     }

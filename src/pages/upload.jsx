@@ -48,7 +48,6 @@ export default function Home() {
 
     const res = await uploadImages(formData)
 
-    console.log(res)
   }
 
   return (

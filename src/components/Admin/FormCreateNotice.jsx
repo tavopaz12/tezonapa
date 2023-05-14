@@ -87,7 +87,7 @@ export default function FormCreateNotice({ areas }) {
       setLoading(false)
       clearInputs()
 
-      router.push('/admin/dashboard/noticias')
+      router.push(router.asPath)
     } catch (error) {
       setRes({ success: false, status: 404 })
       setLoading(false)
@@ -120,6 +120,7 @@ export default function FormCreateNotice({ areas }) {
         <div className="grid gap-4 mb-4 sm:grid-cols-2">
           <div className="sm:col-span-2">
             <InputText
+              required
               value={title}
               handleValueInput={(evt) => setTitle(evt.target.value)}
               title="Titulo / Encabezado"
@@ -130,6 +131,7 @@ export default function FormCreateNotice({ areas }) {
 
           <div>
             <InputSelect
+              required
               value={areaName}
               handleValueInput={(evt) => setAreaName(evt.target.value)}
               title="Selecionar Area"
@@ -140,6 +142,7 @@ export default function FormCreateNotice({ areas }) {
 
           <div>
             <InputFile
+              required
               title="Seleccionar imagen principal"
               handleValueFile={handleSelectImgPrincipal}
             />
@@ -159,6 +162,7 @@ export default function FormCreateNotice({ areas }) {
           )}
           <div className="sm:col-span-2">
             <TextArea
+              required
               handleValueInput={(evt) => setContent(evt.target.value)}
               value={content}
               title="Contenido"
@@ -173,6 +177,7 @@ export default function FormCreateNotice({ areas }) {
             <InputFile
               title="Seleccionar imagenes"
               multiple
+              required
               handleValueFile={handleSelectImages}
             />
           </div>

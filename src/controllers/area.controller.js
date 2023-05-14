@@ -43,7 +43,6 @@ export async function postArea(req, res) {
     const newArea = await Areas.create(formData)
     return res.status(201).json(newArea)
   } catch (error) {
-    console.log(error)
     return res.status(404).json({ error })
   }
 }

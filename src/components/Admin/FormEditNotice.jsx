@@ -14,6 +14,8 @@ import Image from 'next/image'
 import { uploadImage } from '@/services/uploadCloudinary'
 import { updateArticle } from '@/services/article/patchArticle'
 import { data } from 'autoprefixer'
+import { useRouter } from 'next/router'
+import { separateTitle } from 'config/separateText'
 
 export default function FormEditNotice({ data }) {
   const [title, setTitle] = useState('' || data?.title)
@@ -22,6 +24,7 @@ export default function FormEditNotice({ data }) {
   const [imgPrincipal, setImgPrincipal] = useState('')
   const [images, setImages] = useState([])
   const [dataImages, setDataImages] = useState(data?.images)
+  const router = useRouter()
 
   const [loading, setLoading] = useState(false)
 
@@ -71,9 +74,11 @@ export default function FormEditNotice({ data }) {
       }
 
       const allImages = [...dataImages, ...newImagesUrls]
+      const slug = separateTitle(title)
 
       const changes = {
         title,
+        slug,
         banner: newImgPrincipalUrl
           ? newImgPrincipalUrl.secure_url
           : data.banner,
@@ -84,10 +89,9 @@ export default function FormEditNotice({ data }) {
 
       const result = await updateArticle(data?._id, changes)
 
-      console.log(result)
       setLoading(false)
+      router.push(router.asPath)
     } catch (error) {
-      console.log(error)
       setLoading(false)
     }
   }
@@ -186,7 +190,11 @@ export default function FormEditNotice({ data }) {
       <div className="flex justify-end">
         <button
           type="submit"
-          className="text-white text-center mt-2 w-2/4 flex justify-center items-center gap-2 bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5">
+          className={`text-white text-center mt-2 w-2/4 flex justify-center items-center gap-2 ${
+            loading
+              ? 'bg-gray-700 pointer-events-none'
+              : 'bg-blue-700 hover:bg-blue-800'
+          } font-medium rounded-lg text-sm px-5 py-2.5`}>
           <FontAwesomeIcon icon={faSave} className="w-4 h-4" />
           {loading ? 'Guardando cambios' : 'Guardar cambios'}{' '}
         </button>
