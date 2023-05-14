@@ -23,11 +23,8 @@ import { deleteArticle } from '@/services/article/deleteArticle'
 export default function Noticias({ areas, articles }) {
   const [showEditModal, setShowEditModal] = useState(false)
   const [dataArticles, setDataArticles] = useState(articles)
-  const [currentPage, setCurrentPage] = useState(articles?.currentPage)
+  const [currentPage, setCurrentPage] = useState(1)
   const [query, setQuery] = useState('')
-  const router = useRouter()
-
-  console.log(dataArticles)
 
   const onSearch = async (evt) => {
     evt.preventDefault()
@@ -50,24 +47,10 @@ export default function Noticias({ areas, articles }) {
   const nextPage = async (evt) => {
     evt.preventDefault()
 
-    if (currentPage < dataArticles?.pages) {
-      setCurrentPage(currentPage + 1)
-
-      try {
-        const res = await fetch(
-          `/api/articles?page=${currentPage + 1}&title=${query && query}`,
-        )
-
-        if (!res.ok) {
-          throw new Error('Something went wrong with the request')
-        }
-
-        const articles = await res.json()
-
-        setDataArticles(articles)
-      } catch (error) {
-        console.log(error)
-      }
+    if (currentPage < articles?.pages) {
+      router.push(
+        `/api/articles?page=${currentPage + 1}&title=${query && query}`,
+      )
     }
   }
 
@@ -75,22 +58,9 @@ export default function Noticias({ areas, articles }) {
     evt.preventDefault()
 
     if (currentPage > 1) {
-      setCurrentPage(currentPage - 1)
-      try {
-        const res = await fetch(
-          `/api/articles?page=${currentPage - 1}&title=${query && query}`,
-        )
-
-        if (!res.ok) {
-          throw new Error('Something went wrong with the request')
-        }
-
-        const articles = await res.json()
-
-        setDataArticles(articles)
-      } catch (error) {
-        console.log(error)
-      }
+      router.push(
+        `/api/articles?page=${currentPage - 1}&title=${query && query}`,
+      )
     }
   }
 
@@ -112,8 +82,14 @@ export default function Noticias({ areas, articles }) {
           </button>
         </header>
 
+        <div className="grid mt-12 place-content-center font-bold">
+          {dataArticles.articles <= 0 && (
+            <h2 className="text-3xl capitalize">Sin resultados</h2>
+          )}
+        </div>
+
         <div className="flex max-md:flex-col mt-8 flex-wrap gap-2 justify-between">
-          {dataArticles.articles.map((article, index) => (
+          {articles.articles.map((article, index) => (
             <CardNotice key={index} data={article} />
           ))}
         </div>
@@ -122,7 +98,7 @@ export default function Noticias({ areas, articles }) {
           <span className="text-sm text-gray-700">
             Pagina
             <span className="font-semibold mx-1 text-gray-900">
-              {currentPage}
+              {dataArticles.articles <= 0 ? '0' : currentPage}
             </span>
             de
             <span className="font-semibold mx-1 text-gray-900">
