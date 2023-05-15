@@ -3,7 +3,7 @@ import favicon from '@/assets/favicon.ico'
 import Header from '../Header/Header'
 import Footer from '../Footer/Footer'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faArrowTurnUp, faCaretUp } from '@fortawesome/free-solid-svg-icons'
+import { faArrowTurnUp } from '@fortawesome/free-solid-svg-icons'
 
 export default function Layout({
   title,
@@ -15,7 +15,7 @@ export default function Layout({
 }) {
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' }) // Scroll suave al inicio de la página
-  } 
+  }
   return (
     <>
       <Head>
@@ -23,7 +23,7 @@ export default function Layout({
         <meta name="description" content={description} />
         <meta charSet="utf-8" />
         <link rel="shortcut icon" href={favicon.src} type="image/x-icon" />
-        <meta property="og:image" content={ogImage.src} />
+        <meta property="og:image" content={ogImage} />
       </Head>
 
       <Header imgBanner={imgBanner} activeLink={activeLink} />
@@ -43,7 +43,6 @@ export default function Layout({
 
 Layout.defaultProps = {
   title: 'H. Ayuntamiento | Tezonapa, Veracruz',
-  ogImage: favicon.src,
   description:
     'Página web oficial del Ayuntamiento de Tezonapa, con información sobre servicios, noticias y eventos relevantes. Trabajamos para brindar atención eficiente y transparente a todos los ciudadanos.',
 }
