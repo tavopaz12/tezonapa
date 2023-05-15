@@ -23,7 +23,7 @@ export default function Layout({
         <meta name="description" content={description} />
         <meta charSet="utf-8" />
         <link rel="shortcut icon" href={favicon.src} type="image/x-icon" />
-        <meta property="og:image" content={ogImage} />
+        <meta property="og:image" content={ogImage || favicon.src} />
       </Head>
 
       <Header imgBanner={imgBanner} activeLink={activeLink} />
