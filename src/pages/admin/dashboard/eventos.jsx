@@ -25,7 +25,6 @@ export default function Eventos({ events, areas }) {
     router.push(`?area=${query}`)
   }
 
-  console.log(events)
 
   return (
     <LayoutAdmin title="Eventos - Dashboard | H. Ayuntamiento Tezonapa, Ver">
