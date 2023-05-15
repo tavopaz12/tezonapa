@@ -15,6 +15,7 @@ import { deleteEvent } from '@/services/event/deleteEvent'
 import { useRouter } from 'next/router'
 
 export default function Eventos({ events, areas }) {
+  console.log(events)
   const [showModalCreate, setShowCreateModal] = useState(false)
   const [query, setQuery] = useState('')
   const router = useRouter()
@@ -22,9 +23,8 @@ export default function Eventos({ events, areas }) {
   const onSearch = (evt) => {
     evt.preventDefault()
 
-    router.push(`?area=${query}`)
+    router.push(`${query && `?area=${query}`}`)
   }
-
 
   return (
     <LayoutAdmin title="Eventos - Dashboard | H. Ayuntamiento Tezonapa, Ver">
@@ -44,11 +44,17 @@ export default function Eventos({ events, areas }) {
           </button>
         </header>
 
-        <div className="flex mt-8 gap-6 flex-wrap justify-between">
-          {events.map((event, index) => (
-            <CardEvent data={event} key={index} />
-          ))}
-        </div>
+        {events.error || events.length === 0 ? (
+          <div className="flex mt-8 gap-6 flex-wrap justify-center text-3xl font-bold">
+            <h2>Sin Resultados</h2>
+          </div>
+        ) : (
+          <div className="flex mt-8 gap-6 flex-wrap justify-between">
+            {events.map((event, index) => (
+              <CardEvent data={event} key={index} />
+            ))}
+          </div>
+        )}
       </section>
 
       {showModalCreate && (
@@ -91,9 +97,12 @@ function CardEvent({ data }) {
           priority
         />
 
-        <div>
+        <div className="h-max">
           <p className="mb-2 text-lg font-bold text-gray-700">{data.title} </p>
-          <p className="text-base text-gray-600">{data.content}</p>
+          <p className="text-base text-gray-600 text-justify">{data.content}</p>
+          <p className={`font-semibold my-1 text-base text-gray-500`}>
+            Area: {data.area.name}
+          </p>
 
           <p
             className={`font-bold my-2 ${
@@ -139,6 +148,12 @@ export async function getServerSideProps(context) {
 
   const events = await getEvents(area)
   const areas = await getAreas()
+
+  if (!events) {
+    return {
+      notFound: true,
+    }
+  }
 
   return {
     props: {

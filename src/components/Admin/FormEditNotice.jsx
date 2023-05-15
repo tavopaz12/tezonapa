@@ -14,6 +14,7 @@ import { uploadImage } from '@/services/uploadCloudinary'
 import { updateArticle } from '@/services/article/patchArticle'
 import { useRouter } from 'next/router'
 import { separateTitle } from 'config/separateText'
+import Notification from './Notification'
 
 export default function FormEditNotice({ data }) {
   const [title, setTitle] = useState('' || data?.title)
@@ -21,7 +22,9 @@ export default function FormEditNotice({ data }) {
   const [imgPrincipal, setImgPrincipal] = useState('')
   const [images, setImages] = useState([])
   const [dataImages, setDataImages] = useState(data?.images)
+  const [res, setRes] = useState('')
   const router = useRouter()
+  const delay = 5000
 
   const [loading, setLoading] = useState(false)
 
@@ -90,119 +93,142 @@ export default function FormEditNotice({ data }) {
       }
 
       const result = await updateArticle(data?._id, changes)
-
+      setRes({ success: true, status: 201 })
       setLoading(false)
       router.push(router.asPath)
     } catch (error) {
+      setRes({ success: false, status: 404 })
       setLoading(false)
     }
+
+    setTimeout(() => {
+      setRes(null)
+    }, delay)
   }
 
   return (
-    <form onSubmit={handleSaveChanges} className="my-6">
-      <div className="grid gap-4 mb-4 sm:grid-cols-2">
-        <div className="sm:col-span-2">
-          <InputText
-            value={title}
-            handleValueInput={(evt) => setTitle(evt.target.value)}
-            title="Titulo / Encabezado"
-            name="title"
-            placeholder="Ingrese el titulo de la noticia"
-          />
-        </div>
-
-        <div className="sm:col-span-2">
-          <InputFile
-            title="Seleccionar imagen principal"
-            handleValueFile={handleSelectImgPrincipal}
-          />
-        </div>
-
-        <div className="sm:col-span-2">
-          <Image
-            className="w-full h-[200px] object-cover"
-            priority
-            width={1000}
-            height={1000}
-            alt={title}
-            src={imgPrincipal.url || data?.banner}
-          />
-        </div>
-
-        <div className="sm:col-span-2">
-          <TextArea
-            value={content}
-            handleValueInput={(evt) => setContent(evt.target.value)}
-            title="Contenido"
-            name="content"
-            rows={8}
-            placeholder="Ingresa el contenido"
-            helperText="Cada punto final, sera tomado en cuenta como un parrafo"
-          />
-        </div>
-
-        <div className="sm:col-span-2">
-          <InputFile
-            title="Seleccionar imagenes"
-            multiple
-            handleValueFile={handleSelectImages}
-          />
-        </div>
-      </div>
-
-      {dataImages && (
-        <div className="sm:col-span-2 flex gap-2 flex-wrap">
-          {dataImages.map((image, index) => (
-            <div key={index} className="relative">
-              <Image
-                className="h-[200px] w-[200px] object-cover"
-                alt={title}
-                src={image}
-                width={500}
-                height={500}
-                priority
-              />
-              <FontAwesomeIcon
-                onClick={() => handleRemoveImages(image)}
-                className="h-5 w-5 text-white cursor-pointer bg-red-700 top-0 right-0 absolute"
-                icon={faXmark}
-              />
-            </div>
-          ))}
-          {images.map((image, index) => (
-            <div key={index} className="relative">
-              <Image
-                className="h-[200px] w-[200px] object-cover"
-                alt={title}
-                src={image.url}
-                width={500}
-                height={500}
-                priority
-              />
-              <FontAwesomeIcon
-                onClick={() => handleRemoveNewImages(image)}
-                className="h-5 w-5 text-white cursor-pointer bg-red-700 top-0 right-0 absolute"
-                icon={faXmark}
-              />
-            </div>
-          ))}
-        </div>
+    <>
+      {res?.status === 201 && (
+        <Notification
+          success
+          title="Articulo Actualizado"
+          message="El articulo ha sido actualizado exitosamente"
+          timeout={delay}
+        />
       )}
+      {res?.status === 404 && (
+        <Notification
+          error
+          title="Error al actualizar el articulo"
+          message="No se pudo actualizar el articulo correctamente"
+          timeout={delay}
+        />
+      )}
+      <form onSubmit={handleSaveChanges} className="my-6">
+        <div className="grid gap-4 mb-4 sm:grid-cols-2">
+          <div className="sm:col-span-2">
+            <InputText
+              value={title}
+              handleValueInput={(evt) => setTitle(evt.target.value)}
+              title="Titulo / Encabezado"
+              name="title"
+              placeholder="Ingrese el titulo de la noticia"
+            />
+          </div>
 
-      <div className="flex justify-end">
-        <button
-          type="submit"
-          className={`text-white text-center mt-2 w-2/4 flex justify-center items-center gap-2 ${
-            !validateInputTrim() && 'bg-gray-700 pointer-events-none'
-          } ${
-            loading
-              ? 'bg-gray-700 pointer-events-none'
-              : 'bg-blue-700 hover:bg-blue-800'
-          } font-medium rounded-lg text-sm px-5 py-2.5`}>
-          <FontAwesomeIcon icon={faSave} className="w-4 h-4" />
-          {loading ? 'Guardando cambios' : 'Guardar cambios'}{' '}
-        </button>
-      </div>
-    </form>
+          <div className="sm:col-span-2">
+            <InputFile
+              title="Seleccionar imagen principal"
+              handleValueFile={handleSelectImgPrincipal}
+            />
+          </div>
+
+          <div className="sm:col-span-2">
+            <Image
+              className="w-full h-[200px] object-cover"
+              priority
+              width={1000}
+              height={1000}
+              alt={title}
+              src={imgPrincipal.url || data?.banner}
+            />
+          </div>
+
+          <div className="sm:col-span-2">
+            <TextArea
+              value={content}
+              handleValueInput={(evt) => setContent(evt.target.value)}
+              title="Contenido"
+              name="content"
+              rows={8}
+              placeholder="Ingresa el contenido"
+              helperText="Cada punto final, sera tomado en cuenta como un parrafo"
+            />
+          </div>
+
+          <div className="sm:col-span-2">
+            <InputFile
+              title="Seleccionar imagenes"
+              multiple
+              handleValueFile={handleSelectImages}
+            />
+          </div>
+        </div>
+
+        {dataImages && (
+          <div className="sm:col-span-2 flex gap-2 flex-wrap">
+            {dataImages.map((image, index) => (
+              <div key={index} className="relative">
+                <Image
+                  className="h-[200px] w-[200px] object-cover"
+                  alt={title}
+                  src={image}
+                  width={500}
+                  height={500}
+                  priority
+                />
+                <FontAwesomeIcon
+                  onClick={() => handleRemoveImages(image)}
+                  className="h-5 w-5 text-white cursor-pointer bg-red-700 top-0 right-0 absolute"
+                  icon={faXmark}
+                />
+              </div>
+            ))}
+            {images.map((image, index) => (
+              <div key={index} className="relative">
+                <Image
+                  className="h-[200px] w-[200px] object-cover"
+                  alt={title}
+                  src={image.url}
+                  width={500}
+                  height={500}
+                  priority
+                />
+                <FontAwesomeIcon
+                  onClick={() => handleRemoveNewImages(image)}
+                  className="h-5 w-5 text-white cursor-pointer bg-red-700 top-0 right-0 absolute"
+                  icon={faXmark}
+                />
+              </div>
+            ))}
+          </div>
+        )}
+
+        <div className="flex justify-end">
+          <button
+            type="submit"
+            className={`text-white text-center mt-2 w-2/4 flex justify-center items-center gap-2 ${
+              !validateInputTrim() && 'bg-gray-700 pointer-events-none'
+            } ${
+              loading
+                ? 'bg-gray-700 pointer-events-none'
+                : 'bg-blue-700 hover:bg-blue-800'
+            } font-medium rounded-lg text-sm px-5 py-2.5`}>
+            <FontAwesomeIcon icon={faSave} className="w-4 h-4" />
+            {loading ? 'Guardando cambios' : 'Guardar cambios'}{' '}
+          </button>
+        </div>
+      </form>
+    </>
   )
 }

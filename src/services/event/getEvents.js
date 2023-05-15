@@ -1,7 +1,9 @@
-export const getEvents = async (nameArea = '') => {
+export const getEvents = async (nameArea) => {
   try {
     const res = await fetch(
-      `https://tezonapa.vercel.app/api/events?area=${nameArea}`,
+      `https://tezonapa.vercel.app/api/events${
+        nameArea ? `?area=${nameArea}` : ''
+      }`,
     )
     console.log(res)
 

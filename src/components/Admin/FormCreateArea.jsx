@@ -77,10 +77,14 @@ export default function FormCreateArea() {
       setRes({ success: false, status: 404 })
       setLoading(false)
     }
+
+    setTimeout(() => {
+      setRes(null)
+    }, delay)
   }
   return (
     <>
-      {res.status === 201 && (
+      {res?.status === 201 && (
         <Notification
           success
           title="Area creada"
@@ -88,7 +92,7 @@ export default function FormCreateArea() {
           timeout={delay}
         />
       )}
-      {res.status === 404 && (
+      {res?.status === 404 && (
         <Notification
           error
           title="Error al crear el area"

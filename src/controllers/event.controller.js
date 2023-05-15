@@ -119,6 +119,11 @@ export async function deleteEvent(req, res) {
       return res.status(404).json({ error: 'Evento no encontrado' })
     }
 
+    const area = await Area.findOneAndUpdate(
+      { events: eventId },
+      { $pull: { events: eventId } },
+    )
+
     res.status(200).json(`Evento con id ${eventId} eliminado`)
   } catch (error) {
     return res.status(404).json({ error: error.message })

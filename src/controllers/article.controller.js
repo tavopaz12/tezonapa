@@ -138,6 +138,11 @@ export async function deleteArticle(req, res) {
       return res.status(404).json({ error: 'Articulo no encontrado' })
     }
 
+    const area = await Area.findOneAndUpdate(
+      { articles: articleId },
+      { $pull: { articles: articleId } },
+    )
+
     res.status(200).json(`Articulo con id ${articleId} eliminado`)
   } catch (error) {
     return res.status(404).json({ error: error.message })

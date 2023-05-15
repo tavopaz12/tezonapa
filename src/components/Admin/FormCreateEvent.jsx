@@ -73,11 +73,15 @@ export default function FormCreateEvent({ areas }) {
       setLoading(false)
       setRes({ success: false, status: 404 })
     }
+
+    setTimeout(() => {
+      setRes(null)
+    }, delay)
   }
 
   return (
     <>
-      {res.status === 201 && (
+      {res?.status === 201 && (
         <Notification
           success
           title="Evento creado"
@@ -85,7 +89,7 @@ export default function FormCreateEvent({ areas }) {
           timeout={delay}
         />
       )}
-      {res.status === 404 && (
+      {res?.status === 404 && (
         <Notification
           error
           title="Error al crear el evento"
