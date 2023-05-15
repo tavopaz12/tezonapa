@@ -24,7 +24,6 @@ export async function getEvents(req, res) {
       .populate('area')
       .sort(sortCriteria)
 
-    if (!events) return res.status(404).json({ error: 'Datos no encontrados' })
     res.status(201).json(events)
   } catch (error) {
     res.status(404).json({ error: 'Error mientras se obtenias los datos' })
