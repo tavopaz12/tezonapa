@@ -20,7 +20,7 @@ export async function getArticles(req, res) {
         (a) => a.name.toLowerCase() === area.toLowerCase(),
       )
       if (!matchingArea) {
-        return res.status(404).json({ error: 'Área no encontrada' })
+        return res.status(200).json({ error: 'Área no encontrada' })
       }
       areaFilter = { area: matchingArea._id }
     }

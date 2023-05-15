@@ -5,10 +5,6 @@ export const getEvents = async (nameArea = '') => {
     )
     console.log(res)
 
-    if (!res.ok) {
-      throw new Error('Something went wrong with the request')
-    }
-
     const areas = res.json()
 
     return areas

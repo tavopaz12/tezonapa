@@ -14,6 +14,9 @@ export async function getEvents(req, res) {
       const matchingArea = areas.find(
         (a) => a.name.toLowerCase() === area.toLowerCase(),
       )
+      if (!matchingArea) {
+        return res.status(200).json({ error: 'Área no encontrada' })
+      }
       areaFilter = { area: matchingArea._id }
     }
 
