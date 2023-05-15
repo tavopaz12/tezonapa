@@ -8,37 +8,29 @@ import { faCalendar, faPlus, faUser } from '@fortawesome/free-solid-svg-icons'
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { getArticleBySlug } from '@/services/article/getArticleBySlug'
-import { text } from '@fortawesome/fontawesome-svg-core'
+import { getArticles } from '@/services/article/getArticles'
+import { formatDateWithTime } from 'config/formDateWithTime'
 
-export default function Article() {
-  const router = useRouter()
-  const { title } = router.query
-
-  const text = title
-    ?.split('-')
-    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(' ')
-
-  const texto =
-    'Con la finalidad de seguir impulsando el desarrollo de Tezonapa, el día de ayer dio inicio oficialmente el programa de obras públicas 2023 en la comunidad de Col Agrícola. Nuestra Presidenta Municipal Claudia Rosales Colina, arribó a dicha comunidad para que en compañía de ciudadanos Tezonapeños realizaran el banderazo de inicio de obra referente a una apertura de camino que abarca 1,200 metros. Con esta apertura, se beneficia directamente a los habitantes de las comunidades de Morelos, Francisco Villa II Fracción y Col Agrícola. #UnidosAvanzamos 💚'
-
-  const parrafos = texto?.split('.').filter((p) => p !== '')
+export default function Article({ article, articles }) {
+  const parrafos = article.content?.split('.').filter((p) => p !== '')
 
   return (
     <Layout
-      title={`${text} - H. Ayuntamiento, Tezonapa`}
-      ogImage={img}
+      title={`${article.title} - H. Ayuntamiento, Tezonapa`}
+      ogImage={article.banner}
       activeLink="sala-prensa">
       <section className="px-10 h-[300px] max-md:h-[200px] mb-8 relative max-md:px-4">
         <Image
-          alt="hola"
-          src={img}
-          className="object-cover h-[300px] max-md:h-[200px]"
+          alt={article.title}
+          width={1000}
+          height={500}
+          src={article.banner}
+          className="object-cover h-[300px] w-full max-md:h-[200px]"
           priority
         />
         <div className="absolute top-0 grid place-items-center bg-[rgba(0,0,0,0.5)] w-[94%] max-md:w-[92%] h-[100%]">
           <h1 className="text-white w-3/4 text-center capitalize text-4xl font-bold">
-            {text}
+            {article.title}
           </h1>
         </div>
       </section>
@@ -51,7 +43,7 @@ export default function Article() {
               icon={faCalendar}
             />
             <span className="max-md:text-sm">
-              4 de mayo de 2023 - 4:05 p. m.
+              {formatDateWithTime(article.createdAt)}
             </span>
           </div>
           <p className="mb-4 text-justify max-md:text-base">
@@ -66,7 +58,7 @@ export default function Article() {
           <p className="font-bold mb-2 max-md:text-base">Compartir en:</p>
 
           <div className="flex items-center gap-4 w-full">
-            <IconsShare text={text} />
+            <IconsShare text={article.title} />
           </div>
         </section>
 
@@ -74,51 +66,32 @@ export default function Article() {
           <h2 className="text-2xl max-md:text-xl text-center font-bold">
             Artículos recientes
           </h2>
-          <div className="flex relative bg-gray-200 p-2 rounded-md gap-4 my-4 justify-between">
-            <Image
-              src={img}
-              alt="hola"
-              className="w-2/4 object-cover max-md:h-[100px] h-[150px]"
-            />
-            <p className="w-2/4 text-base max-md:text-sm font-semibold">
-              Vence el 10 de mayo plazo para participar en el desfile del 21 de
-              mayo
-            </p>
-            <button className="absolute shadow bg-black p-[0.4rem] rounded-[50%] right-0 bottom-0 m-3 max-md:m-2">
-              <FontAwesomeIcon
-                className="h-4 w-4 max-md:h-3 max-md:w-3 text-white"
-                icon={faPlus}
+          {articles.articles.slice(0, 4).map((article, index) => (
+            <div
+              key={index}
+              className="flex relative bg-gray-200 p-2 rounded-md gap-4 my-4 justify-between">
+              <Image
+                src={article.banner}
+                width={500}
+                height={500}
+                alt="hola"
+                className="w-2/4 object-cover max-md:h-[100px] h-[150px]"
               />
-            </button>
-          </div>
-          <div className="flex relative bg-gray-200 p-2 rounded-md gap-4 my-4 justify-between">
-            <Image
-              src={img}
-              alt="hola"
-              className="w-2/4 object-cover h-[150px]"
-            />
-            <p className="w-2/4 text-base font-semibold">
-              Vence el 10 de mayo plazo para participar en el desfile del 21 de
-              mayo
-            </p>
-            <button className="absolute shadow bg-black p-[0.4rem] rounded-[50%] right-0 bottom-0 m-3 max-md:m-2">
-              <FontAwesomeIcon className="h-4 w-4 text-white" icon={faPlus} />
-            </button>
-          </div>
-          <div className="flex relative bg-gray-200 p-2 rounded-md gap-4 my-4 justify-between">
-            <Image
-              src={img}
-              alt="hola"
-              className="w-2/4 object-cover h-[150px]"
-            />
-            <p className="w-2/4 text-base font-semibold">
-              Vence el 10 de mayo plazo para participar en el desfile del 21 de
-              mayo
-            </p>
-            <button className="absolute shadow bg-black p-[0.4rem] rounded-[50%] right-0 bottom-0 m-3 max-md:m-2">
-              <FontAwesomeIcon className="h-4 w-4 text-white" icon={faPlus} />
-            </button>
-          </div>
+              <p className="w-2/4 text-base max-md:text-sm font-semibold">
+                <Link href={`/sala-prensa/${article.slug}`}>
+                  {article.title}
+                </Link>
+              </p>
+              <Link href={`/sala-prensa/${article.slug}`}>
+                <button className="absolute shadow bg-black p-[0.4rem] rounded-[50%] right-0 bottom-0 m-3 max-md:m-2">
+                  <FontAwesomeIcon
+                    className="h-4 w-4 max-md:h-3 max-md:w-3 text-white"
+                    icon={faPlus}
+                  />
+                </button>
+              </Link>
+            </div>
+          ))}
 
           <Link href="/sala-prensa">
             <button className="bg-[#374151] px-4 w-full rounded-lg text-white font-bold py-1">
@@ -191,12 +164,18 @@ export async function getServerSideProps(context) {
   const { title } = context.query
 
   const article = await getArticleBySlug(title)
+  const articles = await getArticles()
 
-  console.log(article)
+  if (article.error) {
+    return {
+      notFound: true,
+    }
+  }
 
   return {
     props: {
-      article
+      article,
+      articles,
     },
   }
 }

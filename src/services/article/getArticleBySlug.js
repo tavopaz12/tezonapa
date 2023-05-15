@@ -5,10 +5,6 @@ export const getArticleBySlug = async (slug) => {
       `https://tezonapa.vercel.app/api/articles/slug/${slug}`,
     )
 
-    if (!res.ok) {
-      throw new Error('Something went wrong with the request')
-    }
-
     const articles = res.json()
 
     return articles
