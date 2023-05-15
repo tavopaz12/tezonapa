@@ -14,9 +14,6 @@ export async function getEvents(req, res) {
       const matchingArea = areas.find(
         (a) => a.name.toLowerCase() === area.toLowerCase(),
       )
-      if (!matchingArea) {
-        return res.status(404).json({ error: 'Área no encontrada' })
-      }
       areaFilter = { area: matchingArea._id }
     }
 
@@ -24,6 +21,7 @@ export async function getEvents(req, res) {
       .populate('area')
       .sort(sortCriteria)
 
+    if (!events) return res.status(404).json({ error: 'Datos no encontrados' })
     res.status(201).json(events)
   } catch (error) {
     res.status(404).json({ error: 'Error mientras se obtenias los datos' })
