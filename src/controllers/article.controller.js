@@ -71,6 +71,23 @@ export async function getArticle(req, res) {
   }
 }
 
+// get : api/artciles/slug
+export async function getArticleBySlug(req, res) {
+  const { slug } = req.query;
+
+  try {
+    const article = await Article.findOne({ slug });
+
+    if (!article) {
+      return res.status(404).json({ error: 'Artículo no encontrado' });
+    }
+
+    return res.status(200).json(article);
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
+  }
+}
+
 // post : api/articles
 export async function postArticle(req, res) {
   try {

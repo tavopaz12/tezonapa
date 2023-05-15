@@ -7,6 +7,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCalendar, faPlus, faUser } from '@fortawesome/free-solid-svg-icons'
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
+import { getArticleBySlug } from '@/services/article/getArticleBySlug'
+import { text } from '@fortawesome/fontawesome-svg-core'
 
 export default function Article() {
   const router = useRouter()
@@ -183,4 +185,18 @@ function IconsShare({ text }) {
       </a>
     </>
   )
+}
+
+export async function getServerSideProps(context) {
+  const { title } = context.query
+
+  const article = await getArticleBySlug(title)
+
+  console.log(article)
+
+  return {
+    props: {
+      article
+    },
+  }
 }

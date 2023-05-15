@@ -19,6 +19,7 @@ import { getArticles } from '@/services/article/getArticles'
 import { getAreas } from '@/services/area/getAreas'
 import { useRouter } from 'next/router'
 import { deleteArticle } from '@/services/article/deleteArticle'
+import { formatDate } from 'config/formDate'
 
 export default function Noticias({ areas, articles }) {
   const [showEditModal, setShowEditModal] = useState(false)
@@ -92,7 +93,7 @@ export default function Noticias({ areas, articles }) {
             </span>
             de
             <span className="font-semibold mx-1 text-gray-900">
-              {articles?.pages}
+              {articles.articles <= 0 ? '0' : articles?.pages}
             </span>
             paginas totales
           </span>
@@ -150,15 +151,6 @@ function CardNotice({ data }) {
   const [showDelete, setShowDelete] = useState(false)
   const router = useRouter()
 
-
-  const fecha = new Date(data?.createdAt)
-  const options = {
-    year: 'numeric',
-    month: 'numeric',
-    day: 'numeric',
-  }
-  const formatDate = new Intl.DateTimeFormat('es-MX', options).format(fecha)
-
   const handleClickDelete = async (evt) => {
     evt.preventDefault()
 
@@ -185,7 +177,9 @@ function CardNotice({ data }) {
 
       <div className="flex justify-between">
         <p className="mt-1 text-base text-gray-600">Area: {data?.area.name}</p>
-        <p className="mt-1 text-base text-gray-600">{formatDate}</p>
+        <p className="mt-1 text-base text-gray-600">
+          {formatDate(data?.createdAt)}
+        </p>
       </div>
       <h2 className="text-gray-700 leading-5 mt-2 text-justify w-[300px] max-md:w-full text-lg font-bold">
         {data.title}

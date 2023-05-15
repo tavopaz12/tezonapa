@@ -1,9 +1,8 @@
-export const getArticles = async (page, title, areaName) => {
+export const getArticleBySlug = async (slug) => {
+  console.log(slug)
   try {
     const res = await fetch(
-      `https://tezonapa.vercel.app/api/articles?page=${page}${
-        title && `&title=${title}`
-      }${areaName && `&area=${areaName}`}`,
+      `https://tezonapa.vercel.app/api/articles/slug/${slug}`,
     )
 
     if (!res.ok) {

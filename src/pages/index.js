@@ -6,13 +6,17 @@ import presidenta from '/public/images/claudia_colina.webp'
 import { imagesCarouselHome } from 'config/carouselHome'
 import ArticlesPricipals from '@/components/UI/ArticlesPricipals'
 import { notices } from 'config/notices'
+import { getArticles } from '@/services/article/getArticles'
+import { getEvents } from '@/services/event/getEvents'
+import EventsPrincipals from '@/components/UI/EventsPrincipal'
+import Title from '@/components/UI/Title'
 
-export default function Home() {
+export default function Home({ articles, events }) {
   return (
     <Layout imgBanner={banner} activeLink="home">
       <article className="px-10 py-5 max-md:px-4">
         <section>
-          <ArticlesPricipals articles={notices} />
+          <ArticlesPricipals data={articles} events={events} />
         </section>
 
         <section id="servicio_comunidad">
@@ -57,4 +61,18 @@ export default function Home() {
       </article>
     </Layout>
   )
+}
+
+export async function getServerSideProps(context) {
+  const { page, title } = context.query
+
+  const articles = await getArticles(page, title, 'principal')
+  const events = await getEvents('principal')
+
+  return {
+    props: {
+      articles,
+      events,
+    },
+  }
 }
