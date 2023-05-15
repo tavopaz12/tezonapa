@@ -8,18 +8,15 @@ import {
 import InputText from '../UI/InputText'
 import InputFile from '../UI/InputFile'
 import TextArea from '../UI/TextArea'
-import InputSelect from '../UI/InputSelect'
 import { useState } from 'react'
 import Image from 'next/image'
 import { uploadImage } from '@/services/uploadCloudinary'
 import { updateArticle } from '@/services/article/patchArticle'
-import { data } from 'autoprefixer'
 import { useRouter } from 'next/router'
 import { separateTitle } from 'config/separateText'
 
 export default function FormEditNotice({ data }) {
   const [title, setTitle] = useState('' || data?.title)
-  const [nameArea, setNameArea] = useState('' || data?.area.name)
   const [content, setContent] = useState('' || data?.content)
   const [imgPrincipal, setImgPrincipal] = useState('')
   const [images, setImages] = useState([])
@@ -34,6 +31,12 @@ export default function FormEditNotice({ data }) {
 
   const handleSelectImages = (newImages) => {
     setImages([...images, ...newImages])
+  }
+
+  const validateInputTrim = () => {
+    return Boolean(
+      (title && content && dataImages.length !== 0) || images.length !== 0,
+    )
   }
 
   const handleRemoveNewImages = (fileToRemove) => {
@@ -83,7 +86,6 @@ export default function FormEditNotice({ data }) {
           ? newImgPrincipalUrl.secure_url
           : data.banner,
         content,
-        areaName: nameArea,
         images: allImages,
       }
 
@@ -191,6 +193,8 @@ export default function FormEditNotice({ data }) {
         <button
           type="submit"
           className={`text-white text-center mt-2 w-2/4 flex justify-center items-center gap-2 ${
+            !validateInputTrim() && 'bg-gray-700 pointer-events-none'
+          } ${
             loading
               ? 'bg-gray-700 pointer-events-none'
               : 'bg-blue-700 hover:bg-blue-800'

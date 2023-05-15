@@ -21,6 +21,10 @@ export default function FormCreateArea() {
 
   const delay = 5000
 
+  const validateInputTrim = () => {
+    return Boolean(nameArea && director)
+  }
+
   const handleSelectLogo = (newLogo) => {
     setLogo(newLogo)
   }
@@ -157,6 +161,8 @@ export default function FormCreateArea() {
           <button
             type="submit"
             className={`text-white text-center mt-2 inline-flex justify-center items-center ${
+              !validateInputTrim() && 'bg-gray-700 pointer-events-none'
+            } ${
               loading
                 ? 'bg-gray-700 pointer-events-none'
                 : 'bg-blue-700 hover:bg-blue-800'

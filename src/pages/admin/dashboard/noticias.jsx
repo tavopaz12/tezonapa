@@ -115,7 +115,7 @@ export default function Noticias({ areas, articles }) {
             </button>
             <button
               onClick={nextPage}
-              className="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-800 border-0 border-l border-gray-700 rounded-r hover:bg-blue-900">
+              className="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-800 rounded-r hover:bg-blue-900">
               Siguiente
               <svg
                 aria-hidden="true"

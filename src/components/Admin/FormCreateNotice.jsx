@@ -21,6 +21,10 @@ export default function FormCreateNotice({ areas }) {
   const [loading, setLoading] = useState(false)
   const [res, setRes] = useState('')
 
+  const validateInputTrim = () => {
+    return Boolean(title && content && imgPrincipal && images.length !== 0)
+  }
+
   const router = useRouter()
 
   const delay = 5000
@@ -43,6 +47,7 @@ export default function FormCreateNotice({ areas }) {
 
   const handleCreateArticle = async (evt) => {
     evt.preventDefault()
+
     setLoading(true)
 
     try {
@@ -210,6 +215,8 @@ export default function FormCreateNotice({ areas }) {
           <button
             type="submit"
             className={`text-white text-center mt-2 w-2/4 flex justify-center items-center gap-2 ${
+              !validateInputTrim() && 'bg-gray-700 pointer-events-none'
+            } ${
               loading
                 ? 'bg-gray-700 pointer-events-none'
                 : 'bg-blue-700 hover:bg-blue-800'

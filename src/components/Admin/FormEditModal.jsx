@@ -37,11 +37,8 @@ export default function FormEditArea({
     setBaneer(newBanner)
   }
 
-  const clearInputs = () => {
-    setBaneer('')
-    setLogo('')
-    setNameArea('')
-    setDirector('')
+  const validateInputTrim = () => {
+    return Boolean(nameArea && director)
   }
 
   const handleUpdateArea = async (evt) => {
@@ -170,6 +167,8 @@ export default function FormEditArea({
           <button
             type="submit"
             className={`text-white text-center mt-2 inline-flex justify-center items-center gap-2 ${
+              !validateInputTrim() && 'bg-gray-700 pointer-events-none'
+            } ${
               loading
                 ? 'bg-gray-700 pointer-events-none'
                 : 'bg-blue-700 hover:bg-blue-800'
