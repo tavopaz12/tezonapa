@@ -12,6 +12,7 @@ try {
     director: String,
     articles: [{ type: mongoose.Types.ObjectId, ref: 'Article' }],
     events: [{ type: mongoose.Types.ObjectId, ref: 'Event' }],
+    citas: [{ type: mongoose.Types.ObjectId, ref: 'Cita' }],
   })
 
   Area = mongoose.model('Area', AreaSchema)

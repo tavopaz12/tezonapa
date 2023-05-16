@@ -1,11 +1,13 @@
 import Areas from '@/models/area.model'
 import Events from '@/models/event.model'
 import Articles from '@/models/article.model'
+import Citas from '@/models/cita.model'
+
 
 // get : api/areas
 export async function getAreas(req, res) {
   try {
-    const areas = await Areas.find().populate('articles').populate('events')
+    const areas = await Areas.find().populate('articles').populate('events').populate('citas')
 
     if (!areas) return res.status(404).json({ error: 'Datos no encontradas' })
     res.status(200).json(areas)

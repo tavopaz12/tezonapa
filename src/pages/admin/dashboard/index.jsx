@@ -4,6 +4,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Image from 'next/image'
 
 import img from '/public/images/Cascada-1.webp'
+import { getArticles } from '@/services/article/getArticles'
+import { getAreas } from '@/services/area/getAreas'
+import { getEvents } from '@/services/event/getEvents'
+import {
+  faBuilding,
+  faCalendar,
+  faNewspaper,
+} from '@fortawesome/free-solid-svg-icons'
 
 const statsDatos = [
   {
@@ -23,42 +31,29 @@ const statsDatos = [
     total: 25,
   },
 ]
-const getAreas = [
-  {
-    id: 1,
-    nombre_area: 'Fomento agropecuario',
-    director: 'Jaimito lopez lopez',
-  },
-  {
-    id: 2,
-    nombre_area: 'Comude',
-    director: 'Jaimito',
-  },
-  {
-    id: 3,
-    nombre_area: 'Comude',
-    director: 'Jaimito',
-  },
-  {
-    id: 4,
-    nombre_area: 'Comude',
-    director: 'Jaimito',
-  },
-]
 
-export default function Index() {
+export default function Index({ articles, areas, events }) {
+  console.log(articles.count)
   return (
     <LayoutAdmin>
       <section className="flex gap-4 justify-between">
-        {statsDatos.map((stat, index) => (
-          <div id="container" key={index}>
-            <div className="w-auto p-4 grid place-items-center shadow-lg text-gray-500 bg-gray-200 rounded-lg">
-              <FontAwesomeIcon icon={faUser} className="h-8 w-8" />
-              <p className="mt-4 text-2xl font-bold">{stat.total}</p>
-              <p className="text-lg font-bold">{stat.name} en total</p>
-            </div>
-          </div>
-        ))}
+        <div className="p-4 w-1/4 grid place-items-center shadow-lg text-gray-500 bg-gray-200 rounded-lg">
+          <FontAwesomeIcon icon={faNewspaper} className="h-8 w-8" />
+          <p className="mt-4 text-2xl font-bold">Articulos</p>
+          <p className="text-lg font-bold">{articles.count} en total</p>
+        </div>
+
+        <div className="p-4 w-1/4 grid place-items-center shadow-lg text-gray-500 bg-gray-200 rounded-lg">
+          <FontAwesomeIcon icon={faBuilding} className="h-8 w-8" />
+          <p className="mt-4 text-2xl font-bold">Areas</p>
+          <p className="text-lg font-bold">{areas.length} en total</p>
+        </div>
+
+        <div className="p-4 w-1/4 grid place-items-center shadow-lg text-gray-500 bg-gray-200 rounded-lg">
+          <FontAwesomeIcon icon={faCalendar} className="h-8 w-8" />
+          <p className="mt-4 text-2xl font-bold">Eventos</p>
+          <p className="text-lg font-bold">{events.length} en total</p>
+        </div>
       </section>
 
       <section className="flex justify-between gap-6 mt-8">
@@ -70,9 +65,6 @@ export default function Index() {
               <thead className="text-xs text-gray-700 uppercase bg-gray-50">
                 <tr>
                   <th scope="col" className="px-6 py-3">
-                    Id
-                  </th>
-                  <th scope="col" className="px-6 py-3">
                     Nombre del area
                   </th>
                   <th scope="col" className="px-6 py-3">
@@ -81,15 +73,10 @@ export default function Index() {
                 </tr>
               </thead>
 
-              {getAreas.map((area) => (
-                <tbody key={area.id}>
+              {areas.map((area) => (
+                <tbody key={area._id}>
                   <tr className="bg-white border-b">
-                    <th
-                      scope="row"
-                      className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                      {area.id}
-                    </th>
-                    <td className="px-6 py-4">{area.nombre_area}</td>
+                    <td className="px-6 py-4 text-gray-500 font-bold">{area.name}</td>
                     <td className="px-6 py-4">{area.director}</td>
                   </tr>
                 </tbody>
@@ -103,17 +90,30 @@ export default function Index() {
             Ultimo articulo publicado
           </h1>
           <div className="mt-6">
-            <Image alt="hola" src={img} />
-            <h2 className='text-center font-bold text-xl my-4'>Titulo</h2>
-            <p className='text-justify'>
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Error
-              fugiat quis quaerat dolorem, distinctio, vel consectetur ipsa
-              delectus, nesciunt sint soluta provident explicabo amet quasi
-              harum commodi corporis in odio.
+            <Image alt="hola" width={500} height={500} priority src={articles.articles[0].banner} />
+            <h2 className="text-center font-bold text-xl my-4">{articles.articles[0].title}</h2>
+            <p className="text-justify line-clamp-6">
+              {articles.articles[0].content}
             </p>
           </div>
         </div>
       </section>
     </LayoutAdmin>
   )
+}
+
+export async function getServerSideProps(context) {
+  const { page, title } = context.query
+
+  const articles = await getArticles(page, title)
+  const areas = await getAreas()
+  const events = await getEvents()
+
+  return {
+    props: {
+      articles,
+      areas,
+      events,
+    },
+  }
 }
