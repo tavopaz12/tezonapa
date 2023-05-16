@@ -5,19 +5,22 @@ import Carousel from '@/components/Carousel/Carousel'
 import presidenta from '/public/images/claudia_colina.webp'
 import { imagesCarouselHome } from 'config/carouselHome'
 import ArticlesPricipals from '@/components/UI/ArticlesPricipals'
-import { notices } from 'config/notices'
 import { getArticles } from '@/services/article/getArticles'
 import { getEvents } from '@/services/event/getEvents'
-import EventsPrincipals from '@/components/UI/EventsPrincipal'
-import Title from '@/components/UI/Title'
 
 export default function Home({ articles, events }) {
   return (
     <Layout imgBanner={banner} activeLink="home">
       <article className="px-10 py-5 max-md:px-4">
-        <section>
-          <ArticlesPricipals data={articles} events={events} />
-        </section>
+        {articles.error ? null : (
+          <>
+            {articles.articles.length > 0 && (
+              <section>
+                <ArticlesPricipals data={articles} events={events} />
+              </section>
+            )}
+          </>
+        )}
 
         <section id="servicio_comunidad">
           <hr className="border-t-4 border-solid border-[#2D974B] w-full my-5 max-md:mt-0" />

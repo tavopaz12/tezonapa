@@ -4,7 +4,13 @@ import { useRouter } from 'next/router'
 
 import img from '/public/images/sala-prensa/obra1.webp'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCalendar, faPlus, faUser } from '@fortawesome/free-solid-svg-icons'
+import {
+  faAngleLeft,
+  faAngleRight,
+  faCalendar,
+  faPlus,
+  faUser,
+} from '@fortawesome/free-solid-svg-icons'
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { getArticleBySlug } from '@/services/article/getArticleBySlug'
@@ -13,12 +19,65 @@ import { formatDateWithTime } from 'config/formDateWithTime'
 
 export default function Article({ article, articles }) {
   const parrafos = article.content?.split('.').filter((p) => p !== '')
+  const [selectedImage, setSelectedImage] = useState(null)
+  const [show, setShow] = useState(false)
+
+  const nextImage = () => {
+    if (selectedImage < article.images.length - 1) {
+      setSelectedImage(selectedImage + 1)
+    }
+  }
+
+  const prevImage = () => {
+    if (selectedImage > 0) {
+      setSelectedImage(selectedImage - 1)
+    }
+  }
+
+  const outClickModal = (evt) => {
+    if (evt.target === evt.currentTarget) {
+      setShow(!show)
+    }
+  }
 
   return (
     <Layout
       title={`${article.title} - H. Ayuntamiento, Tezonapa`}
       ogImage={article.banner}
       activeLink="sala-prensa">
+      {show && (
+        <div
+          onClick={outClickModal}
+          className="fixed z-50 bg-[rgba(0,0,0,0.2)] top-0 left-0 w-full h-screen flex items-center justify-center">
+          <div className="bg-white max-md:w-[80%] relative p-4 border border-gray-300 shadow-lg rounded-lg">
+            <Image
+              width={1000}
+              height={1000}
+              src={article.images[selectedImage]}
+              alt="Selected image"
+              className="w-full h-[500px] max-md:h-[300px] object-cover"
+            />
+            <FontAwesomeIcon
+              onClick={prevImage}
+              icon={faAngleLeft}
+              className="h-8 w-8 bg-black cursor-pointer absolute top-[50%] text-white"
+            />
+            <FontAwesomeIcon
+              onClick={nextImage}
+              icon={faAngleRight}
+              className="h-8 w-8 right-4 bg-black cursor-pointer absolute top-[50%] text-white"
+            />
+
+            <button
+              onClick={() => {
+                setSelectedImage(null), setShow(!show)
+              }}
+              className="mt-4 w-full bg-gray-500 font-bold text-white py-2 px-4 rounded-md">
+              Cerrar
+            </button>
+          </div>
+        </div>
+      )}
       <section className="px-10 h-[300px] max-md:h-[200px] mb-8 relative max-md:px-4">
         <Image
           alt={article.title}
@@ -54,11 +113,25 @@ export default function Article({ article, articles }) {
               {parrafo}.
             </p>
           ))}
-
           <p className="font-bold mb-2 max-md:text-base">Compartir en:</p>
-
           <div className="flex items-center gap-4 w-full">
             <IconsShare text={article.title} />
+          </div>
+          <div className="grid grid-cols-3 gap-4 mt-8">
+            {article.images.map((image, index) => (
+              <Image
+                key={index}
+                src={image}
+                alt="Images"
+                width={500}
+                onClick={() => {
+                  setSelectedImage(index)
+                  setShow(!show)
+                }}
+                height={200}
+                className="w-full h-full object-cover rounded-lg"
+              />
+            ))}
           </div>
         </section>
 
@@ -66,7 +139,7 @@ export default function Article({ article, articles }) {
           <h2 className="text-2xl max-md:text-xl text-center font-bold">
             Artículos recientes
           </h2>
-          {articles.articles.slice(0, 4).map((article, index) => (
+          {articles.articles.slice(0, 3).map((article, index) => (
             <div
               key={index}
               className="flex relative bg-gray-200 p-2 rounded-md gap-4 my-4 justify-between">

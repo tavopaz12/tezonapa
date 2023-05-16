@@ -14,13 +14,26 @@ import voley5 from '/public/images/Comude/volley5.webp'
 
 import Gallery from '@/components/UI/Gallery'
 import Hr from '@/components/UI/Hr'
+import ArticlesPricipals from '@/components/UI/ArticlesPricipals'
+import { getArticles } from '@/services/article/getArticles'
+import { getEvents } from '@/services/event/getEvents'
 
-export default function Index() {
+export default function Index({ articles, events }) {
   return (
     <Layout
       title="Voleibol | Comude | H. Ayuntamiento Tezonapa"
       activeLink="areas-municipales">
       <NavComude menuLinks={comudeSubLinks} active="voleibol" />
+
+      {articles.error ? null : (
+        <>
+          {articles.articles.length > 0 && (
+            <section className="mt-8 mb-8 px-10 max-md:px-4">
+              <ArticlesPricipals data={articles} events={events} />
+            </section>
+          )}
+        </>
+      )}
 
       <section className="px-10 mb-6 max-md:px-4 text-center">
         <Title title="Historia" />
@@ -55,7 +68,7 @@ export default function Index() {
         </div>
       </section>
 
-      <section className='px-10 max-md:px-4 mt-8'>
+      <section className="px-10 max-md:px-4 mt-8">
         <Hr />
       </section>
 
@@ -65,4 +78,18 @@ export default function Index() {
       </section>
     </Layout>
   )
+}
+
+export async function getServerSideProps(context) {
+  const { page, title } = context.query
+
+  const articles = await getArticles(page, title, 'Comude - Voleibol')
+  const events = await getEvents('Comude - Voleibol')
+
+  return {
+    props: {
+      articles,
+      events,
+    },
+  }
 }

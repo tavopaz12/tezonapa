@@ -30,6 +30,9 @@ import Image from 'next/image'
 import Gallery from '@/components/UI/Gallery'
 import Modal from '@/components/UI/Modal'
 import { useState } from 'react'
+import ArticlesPricipals from '@/components/UI/ArticlesPricipals'
+import { getArticles } from '@/services/article/getArticles'
+import { getEvents } from '@/services/event/getEvents'
 
 const images = [
   {
@@ -45,7 +48,7 @@ const images = [
   },
 ]
 
-export default function Index() {
+export default function Index({ articles, events }) {
   const [showModal, setShowModal] = useState(false)
 
   return (
@@ -55,6 +58,16 @@ export default function Index() {
       <section className="mb-4">
         <Carousel images={images} autoPlay showButtons delay="5000" />
       </section>
+
+      {articles.error ? null : (
+        <>
+          {articles.articles.length > 0 && (
+            <section className="mt-8 mb-8 px-10 max-md:px-4">
+              <ArticlesPricipals data={articles} events={events} />
+            </section>
+          )}
+        </>
+      )}
 
       <section className="mt-8 mb-8 px-10 max-md:px-4">
         <Hr />
@@ -210,4 +223,18 @@ function Horarios() {
       </li>
     </ul>
   )
+}
+
+export async function getServerSideProps(context) {
+  const { page, title } = context.query
+
+  const articles = await getArticles(page, title, 'educacion')
+  const events = await getEvents('educacion')
+
+  return {
+    props: {
+      articles,
+      events,
+    },
+  }
 }

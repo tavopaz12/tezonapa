@@ -14,6 +14,9 @@ import fut2 from '/public/images/Comude/fut1.webp'
 import fut3 from '/public/images/Comude/fut-2.webp'
 import fut4 from '/public/images/Comude/fut-3.webp'
 import Hr from '@/components/UI/Hr'
+import { getArticles } from '@/services/article/getArticles'
+import { getEvents } from '@/services/event/getEvents'
+import ArticlesPricipals from '@/components/UI/ArticlesPricipals'
 
 const images = [
   {
@@ -26,7 +29,8 @@ const images = [
 
 const imagesGallery = [fut2, fut1, futbolFemenil, fut3, fut4]
 
-export default function Index() {
+export default function Index({ articles, events }) {
+  console.log(articles)
   return (
     <Layout
       title="Fútbol | Comude | H. Ayuntamiento Tezonapa"
@@ -34,6 +38,16 @@ export default function Index() {
       <NavComude menuLinks={comudeSubLinks} active="futbol" />
 
       <Carousel images={images} autoPlay showButtons delay="5000" />
+
+      {articles.error ? null : (
+        <>
+          {articles.articles.length > 0 && (
+            <section className="mt-8 mb-8 px-10 max-md:px-4">
+              <ArticlesPricipals data={articles} events={events} />
+            </section>
+          )}
+        </>
+      )}
 
       <section className="px-10 max-md:px-4 mt-10 mb-5 grid place-items-center">
         <Hr />
@@ -75,4 +89,18 @@ export default function Index() {
       </section>
     </Layout>
   )
+}
+
+export async function getServerSideProps(context) {
+  const { page, title } = context.query
+
+  const articles = await getArticles(page, title, 'Comude - Futbol')
+  const events = await getEvents('Comude - Futbol')
+
+  return {
+    props: {
+      articles,
+      events,
+    },
+  }
 }

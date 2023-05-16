@@ -7,7 +7,7 @@ export default function Content({ content }) {
       {content?.map((content, index) => (
         <div
           key={index}
-          class="w-full h-min max-w-sm bg-white border border-gray-200 rounded-lg shadow">
+          className="w-full h-min max-w-sm bg-white border border-gray-200 rounded-lg shadow">
           <Image
             src={content.img}
             alt="rotoplas"
@@ -17,8 +17,8 @@ export default function Content({ content }) {
           <p className="text-left pb-2 px-5 font-bold text-gray-500">
             {content.fecha}
           </p>
-          <div class="px-5 pb-5">
-            <p class="text-lg first-letter:uppercase lowercase font-semibold tracking-tight text-gray-900">
+          <div className="px-5 pb-5">
+            <p className="text-lg first-letter:uppercase lowercase font-semibold tracking-tight text-gray-900">
               {content.title}
             </p>
           </div>

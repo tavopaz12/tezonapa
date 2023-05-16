@@ -5,12 +5,24 @@ import Card from '@/components/Comercio/Card'
 import solicitudAlta from '/public/images/comercio/solicitud_alta.webp'
 import solicitudBaja from '/public/images/comercio/solicitud_baja.webp'
 import solicitudRefrendo from '/public/images/comercio/padron.webp'
+import ArticlesPricipals from '@/components/UI/ArticlesPricipals'
+import { getArticles } from '@/services/article/getArticles'
+import { getEvents } from '@/services/event/getEvents'
 
-export default function Index() {
+export default function Index({ articles, events }) {
   return (
     <Layout
       activeLink="areas-municipales"
       title="Comercio - H. Ayuntamiento, Tezonapa">
+      {articles.error ? null : (
+        <>
+          {articles.articles.length > 0 && (
+            <section className="mt-8 mb-8 px-10 max-md:px-4">
+              <ArticlesPricipals data={articles} events={events} />
+            </section>
+          )}
+        </>
+      )}
       <section className="px-10 max-md:flex-col flex gap-4 justify-between max-md:px-4 mb-6">
         <Card
           title="Solicitud de alta"
@@ -53,4 +65,18 @@ export default function Index() {
       </section>
     </Layout>
   )
+}
+
+export async function getServerSideProps(context) {
+  const { page, title } = context.query
+
+  const articles = await getArticles(page, title, 'Comercio')
+  const events = await getEvents('Comercio')
+
+  return {
+    props: {
+      articles,
+      events,
+    },
+  }
 }

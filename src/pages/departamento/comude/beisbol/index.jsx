@@ -12,13 +12,26 @@ import beis6 from '/public/images/Comude/beis6.webp'
 import beis7 from '/public/images/Comude/beis7.webp'
 import beis8 from '/public/images/Comude/beis8.webp'
 import Title from '@/components/UI/Title'
+import ArticlesPricipals from '@/components/UI/ArticlesPricipals'
+import { getArticles } from '@/services/article/getArticles'
+import { getEvents } from '@/services/event/getEvents'
 
-export default function Index() {
+export default function Index({ articles, events }) {
   return (
     <Layout
       title="Béisbol | Comude | H. Ayuntamiento Tezonapa"
       activeLink="areas-municipales">
       <NavComude menuLinks={comudeSubLinks} active="beisbol" />
+
+      {articles.error ? null : (
+        <>
+          {articles.articles.length > 0 && (
+            <section className="mt-8 mb-8 px-10 max-md:px-4">
+              <ArticlesPricipals data={articles} events={events} />
+            </section>
+          )}
+        </>
+      )}
 
       <section className="text-center px-10 max-md:px-4">
         <Title title="Historia" />
@@ -50,4 +63,18 @@ export default function Index() {
       </section>
     </Layout>
   )
+}
+
+export async function getServerSideProps(context) {
+  const { page, title } = context.query
+
+  const articles = await getArticles(page, title, 'Comude - Beisbol')
+  const events = await getEvents('Comude - Beisbol')
+
+  return {
+    props: {
+      articles,
+      events,
+    },
+  }
 }

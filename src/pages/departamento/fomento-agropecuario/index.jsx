@@ -27,6 +27,9 @@ import Title from '@/components/UI/Title'
 import Image from 'next/image'
 import Hr from '@/components/UI/Hr'
 import Gallery from '@/components/UI/Gallery'
+import ArticlesPricipals from '@/components/UI/ArticlesPricipals'
+import { getArticles } from '@/services/article/getArticles'
+import { getEvents } from '@/services/event/getEvents'
 
 const galleryImages = [
   fomentoG1,
@@ -59,7 +62,7 @@ const images = [
   },
 ]
 
-export default function Index() {
+export default function Index({ articles, events }) {
   return (
     <Layout
       activeLink="areas-municipales"
@@ -67,6 +70,16 @@ export default function Index() {
       <section className="mb-4">
         <Carousel images={images} autoPlay showButtons delay="5000" />
       </section>
+
+      {articles.error ? null : (
+        <>
+          {articles.articles.length > 0 && (
+            <section className="mt-8 mb-8 px-10 max-md:px-4">
+              <ArticlesPricipals data={articles} events={events} />
+            </section>
+          )}
+        </>
+      )}
 
       <section className="mt-8 px-10 max-md:px-4 mb-4">
         <Hr />
@@ -102,8 +115,8 @@ export default function Index() {
         </div>
       </section>
 
-      <section className='px-10 max-md:px-4 mt-8 mb-6'>
-        <Hr/>
+      <section className="px-10 max-md:px-4 mt-8 mb-6">
+        <Hr />
       </section>
 
       <section className="px-10 max-md:px-4 mb-6 text-center">
@@ -112,4 +125,18 @@ export default function Index() {
       </section>
     </Layout>
   )
+}
+
+export async function getServerSideProps(context) {
+  const { page, title } = context.query
+
+  const articles = await getArticles(page, title, 'Fomento Agropecuario')
+  const events = await getEvents('Fomento Agropecuario')
+
+  return {
+    props: {
+      articles,
+      events,
+    },
+  }
 }

@@ -12,6 +12,9 @@ import Title from '@/components/UI/Title'
 import Image from 'next/image'
 
 import { comudeSubLinks } from 'config/comudeSubLinks'
+import { getArticles } from '@/services/article/getArticles'
+import { getEvents } from '@/services/event/getEvents'
+import ArticlesPricipals from '@/components/UI/ArticlesPricipals'
 
 const images = [
   {
@@ -37,7 +40,8 @@ const images = [
   },
 ]
 
-export default function Comude() {
+export default function Comude({ articles, events }) {
+  console.log(articles)
   return (
     <Layout
       activeLink="areas-municipales"
@@ -52,6 +56,16 @@ export default function Comude() {
           delay="8000"
         />
       </section>
+
+      {articles.error ? null : (
+        <>
+          {articles.articles.length > 0 && (
+            <section className="mt-8 mb-8 px-10 max-md:px-4">
+              <ArticlesPricipals data={articles} events={events} />
+            </section>
+          )}
+        </>
+      )}
 
       <section className="px-10 max-md:px-4 mb-8 gap-8 flex justify-between max-md:flex-col max-md:gap-8">
         <div className="w-2/4 text-center max-md:w-full">
@@ -96,4 +110,18 @@ export default function Comude() {
       </section>
     </Layout>
   )
+}
+
+export async function getServerSideProps(context) {
+  const { page, title } = context.query
+
+  const articles = await getArticles(page, title, 'comude')
+  const events = await getEvents('comude')
+
+  return {
+    props: {
+      articles,
+      events,
+    },
+  }
 }

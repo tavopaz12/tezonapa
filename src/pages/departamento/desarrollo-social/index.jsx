@@ -19,6 +19,9 @@ import {
   articleLaminas,
   articleRotoplas,
 } from 'config/desarrolloSocial'
+import { getArticles } from '@/services/article/getArticles'
+import { getEvents } from '@/services/event/getEvents'
+import ArticlesPricipals from '@/components/UI/ArticlesPricipals'
 
 const steps = [
   {
@@ -39,20 +42,22 @@ const steps = [
   },
   {
     title: 'Caxapa',
-    content: articleCaxapa
+    content: articleCaxapa,
   },
   {
     title: 'Guadalupe Victoria',
-    content: articleGuadalupeVictoria
+    content: articleGuadalupeVictoria,
   },
 ]
 
-export default function Index() {
+export default function Index({ articles, events }) {
   const [currentStep, setCurrentStep] = useState(0)
 
   const handleStepSelect = (step) => {
     setCurrentStep(step)
   }
+
+  console.log(articles)
 
   return (
     <Layout
@@ -70,6 +75,16 @@ export default function Index() {
           showButtons={true}
           delay="8000"></Carousel>
       </section>
+
+      {articles.error ? null : (
+        <>
+          {articles.articles.length > 0 && (
+            <section className="mt-8 mb-8 px-10 max-md:px-4">
+              <ArticlesPricipals data={articles} events={events} />
+            </section>
+          )}
+        </>
+      )}
 
       <section className="mt-8 mb-8 px-10 max-md:px-4">
         <Hr />
@@ -113,4 +128,18 @@ export default function Index() {
       <Content content={steps[currentStep]?.content} />
     </Layout>
   )
+}
+
+export async function getServerSideProps(context) {
+  const { page, title } = context.query
+
+  const articles = await getArticles(page, title, 'Desarrollo Social')
+  const events = await getEvents('Desarrollo Social')
+
+  return {
+    props: {
+      articles,
+      events,
+    },
+  }
 }
