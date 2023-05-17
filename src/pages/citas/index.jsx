@@ -162,7 +162,8 @@ export default function Citas() {
     }
   }
 
-  const onSearch = () => {
+  const onSearch = (evt) => {
+    evt.preventDefault()
     router.push(`/citas/folio/${query}`)
   }
 
