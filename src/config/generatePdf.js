@@ -114,7 +114,7 @@ export const generatePdf = async ({
     borderWidth: borderWidth,
   })
 
-  page.drawText(`Folio: ${folio}`, {
+  page.drawText(`Folio: ${folio.toUpperCase()}`, {
     x: secondRectX + 10,
     y: height + 650,
     size: 10,
@@ -251,6 +251,6 @@ export const generatePdf = async ({
   const blob = new Blob([pdfBytes], { type: 'application/pdf' })
   const link = document.createElement('a')
   link.href = window.URL.createObjectURL(blob)
-  link.download = 'acuse.pdf'
+  link.download = `ACUSE DE CITA - ${folio.toUpperCase()}.pdf`
   link.click()
 }

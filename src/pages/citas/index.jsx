@@ -130,7 +130,6 @@ export default function Citas() {
       nombre &&
         fecha &&
         hora &&
-        correo &&
         telefono &&
         area &&
         !error &&
@@ -164,7 +163,7 @@ export default function Citas() {
 
   const onSearch = (evt) => {
     evt.preventDefault()
-    router.push(`/citas/folio/${query}`)
+    router.push(`/citas/folio/${query.toLocaleLowerCase()}`)
   }
 
   return (

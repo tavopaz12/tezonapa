@@ -65,7 +65,7 @@ export default function Citas({ cita }) {
                 <p>
                   <b>Folio:</b>
                   <br />
-                  {cita._id}
+                  {cita._id.toUpperCase()}
                 </p>
               </div>
 
