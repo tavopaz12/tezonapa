@@ -15,7 +15,6 @@ export default function Citas() {
 
   const [nombre, setNombre] = useState('')
   const [fecha, setFecha] = useState(fechaPorDefecto)
-  const [hora, setHora] = useState('08:00 AM')
   const [correo, setCorreo] = useState('')
   const [telefono, setTelefono] = useState('')
   const [area, setArea] = useState('Comude')
@@ -23,7 +22,16 @@ export default function Citas() {
   const [loading, setLoading] = useState(false)
   const [dataCitas, setDataCita] = useState({})
   const [options, setOptions] = useState([])
+  const [hora, setHora] = useState(() => {
+    const now = new Date()
+    const hour = now.getHours()
+    const amOrPm = hour < 12 ? 'AM' : 'PM'
+    const formattedHour = hour % 12 || 12
+    return `${formattedHour}:00 ${amOrPm}`
+  })
   const router = useRouter()
+
+  console.log(hora)
 
   useEffect(() => {
     const today = new Date()
@@ -48,7 +56,7 @@ export default function Citas() {
       const optionHour = parseInt(hora.split(':')[0])
       const optionPeriod = hora.split(' ')[1]
       const hour24Format = optionPeriod === 'PM' ? optionHour + 12 : optionHour
-      return hour24Format > currentHour
+      return hour24Format >= currentHour
     })
 
     if (formattedDate === fecha) {
@@ -59,12 +67,10 @@ export default function Citas() {
     }
   }, [fecha])
 
-  console.log(fechaPorDefecto)
-
   const clearInputs = () => {
     setNombre('')
     setFecha(fechaPorDefecto)
-    setHora('08:00 AM')
+    setHora('')
     setCorreo('')
     setArea('Comude')
     setTelefono('')
@@ -141,19 +147,10 @@ export default function Citas() {
 
     try {
       const res = await createNewCita(newCita)
-
       router.push(router.asPath)
-      clearInputs()
 
-      generatePdf({
-        nombre,
-        fecha,
-        hora,
-        correo,
-        telefono,
-        area,
-        folio: res._id,
-      })
+      router.push(`${router.asPath}/folio/${res._id}`)
+      clearInputs()
     } catch (error) {
       console.log(error)
     }
@@ -204,7 +201,7 @@ export default function Citas() {
                     ? 'La hora seleccionada ya esta ocupada'
                     : ''
                 }
-                value={hora}
+                value={hora || options[0]}
                 handleValueInput={(evt) => setHora(evt.target.value)}
                 title="Hora"
                 defaultSelect="SELECCIONAR HORA"
