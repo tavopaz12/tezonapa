@@ -6,9 +6,9 @@ export const getCitas = async (nameArea) => {
       }`,
     )
 
-    const areas = res.json()
+    const citas = res.json()
 
-    return areas
+    return citas
   } catch (error) {
     console.log('...logging error to our system...')
 

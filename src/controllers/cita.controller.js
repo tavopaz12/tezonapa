@@ -126,7 +126,7 @@ export async function getCitaByDate(req, res) {
 
     if (!citas || citas.length === 0) {
       return res
-        .status(404)
+        .status(200)
         .json({ error: 'No hay citas programadas para esta fecha' })
     }
 
@@ -134,13 +134,37 @@ export async function getCitaByDate(req, res) {
     citas.forEach((cita) => {
       const areaNombre = cita.area.name
       const hora = cita.hour
+      const nombre = cita.nombre
+      const telefono = cita.tel
+
       if (!horasOcupadasPorArea[areaNombre]) {
         horasOcupadasPorArea[areaNombre] = []
       }
-      horasOcupadasPorArea[areaNombre].push(hora)
+
+      horasOcupadasPorArea[areaNombre].push({ hora, nombre, telefono })
+
+      // Ordenar las horas ocupadas por área por hora
+      horasOcupadasPorArea[areaNombre].sort((a, b) => {
+        const horaA = parseInt(a.hora.split(':')[0])
+        const horaB = parseInt(b.hora.split(':')[0])
+        if (horaA < horaB) {
+          return -1
+        }
+        if (horaA > horaB) {
+          return 1
+        }
+        return 0
+      })
     })
 
-    return res.status(200).json({ horasOcupadasPorArea })
+    const areas = Object.keys(horasOcupadasPorArea).map((areaNombre) => {
+      return {
+        nombre: areaNombre,
+        horasOcupadas: horasOcupadasPorArea[areaNombre],
+      }
+    })
+
+    return res.status(200).json({ horasOcupadasPorArea: areas })
   } catch (error) {
     return res.status(500).json({ error: error.message })
   }
@@ -152,18 +176,18 @@ export async function deleteCita(req, res) {
     const { citaId } = req.query
 
     if (!citaId) {
-      return res.status(404).json({ error: 'Cita no encontrada' })
+      return res.status(200).json({ error: 'Cita no encontrada' })
     }
 
     let cita
     try {
       cita = await Cita.findByIdAndDelete(citaId)
     } catch (error) {
-      return res.status(404).json({ error: 'ID invalido' })
+      return res.status(200).json({ error: 'ID invalido' })
     }
 
     if (!cita) {
-      return res.status(404).json({ error: 'Cita no encontrada' })
+      return res.status(200).json({ error: 'Cita no encontrada' })
     }
 
     const area = await Area.findOneAndUpdate(

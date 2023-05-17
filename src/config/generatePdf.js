@@ -1,6 +1,14 @@
 import { PDFDocument, StandardFonts, rgb } from 'pdf-lib'
 
-export const generatePdf = async (data) => {
+export const generatePdf = async ({
+  nombre,
+  fecha,
+  hora,
+  correo,
+  telefono,
+  area,
+  folio,
+}) => {
   // Crear un nuevo documento PDF
   const pdfDoc = await PDFDocument.create()
 
@@ -19,7 +27,7 @@ export const generatePdf = async (data) => {
   const { width, height } = logoImage.scale(0.1)
   page.drawImage(logoImage, {
     x: 20,
-    y: page.getHeight() - height - 5,
+    y: page.getHeight() - height - 25,
     width: width,
     height: height,
   })
@@ -43,27 +51,27 @@ export const generatePdf = async (data) => {
     fontSize,
   )
   page.drawText(tezonapaText, {
-    x: page.getSize().width - tezonapaTextWidth - 10,
-    y: page.getSize().height - 35,
+    x: page.getSize().width - tezonapaTextWidth - 30,
+    y: page.getSize().height - 60,
     size: 12,
     font: helveticaFont,
     color: rgb(0, 0, 0),
   })
 
-  const asunto = `Estimado(a): Jose Octavio Paz Juarez`
+  const asunto = `Estimado(a): ${nombre}`
   const textAsunto =
     'Le informamos que su cita ha sido registrada exitosamente con los siguientes datos:'
 
-  const heighRectangle = 600
-  const heighSubtitule = 608
-  const heighResult = 630
+  const heighRectangle = 590
+  const heighSubtitule = 598
+  const heighResult = 620
   const textX = 80 + (page.getWidth() - 300 - textWidth) / 2
   const borderWidth = 0.5
   const secondRectX = 20 + (page.getWidth() - 300)
 
   page.drawText(asunto, {
     x: 20,
-    y: height + 710,
+    y: height + 690,
     size: 12,
     font: helveticaFont,
     color: rgb(0.2, 0.2, 0.2),
@@ -72,7 +80,7 @@ export const generatePdf = async (data) => {
 
   page.drawText(textAsunto, {
     x: 20,
-    y: height + 695,
+    y: height + 675,
     size: 12,
     font: helveticaFont,
     color: rgb(0.2, 0.2, 0.2),
@@ -81,16 +89,16 @@ export const generatePdf = async (data) => {
 
   page.drawRectangle({
     x: 20,
-    y: height + 650,
+    y: height + 640,
     width: page.getWidth() - 300,
     height: 30,
     borderColor: rgb(0, 0, 0),
     borderWidth: borderWidth,
   })
 
-  page.drawText('Fecha y hora de cita:', {
+  page.drawText(`Fecha y hora de cita: ${`${fecha} / ${hora}`}`, {
     x: 30,
-    y: height + 660,
+    y: height + 650,
     size: 10,
     font: helveticaFont,
     color: rgb(0, 0, 0),
@@ -99,16 +107,16 @@ export const generatePdf = async (data) => {
 
   page.drawRectangle({
     x: secondRectX,
-    y: height + 650,
+    y: height + 640,
     width: page.getWidth() - secondRectX - 20,
     height: 30,
     borderColor: rgb(0, 0, 0),
     borderWidth: borderWidth,
   })
 
-  page.drawText('Folio:', {
+  page.drawText(`Folio: ${folio}`, {
     x: secondRectX + 10,
-    y: height + 660,
+    y: height + 650,
     size: 10,
     font: helveticaFont,
     color: rgb(0, 0, 0),
@@ -133,7 +141,7 @@ export const generatePdf = async (data) => {
     lineHeight: 14,
   })
 
-  page.drawText('Jose Octavio Paz Juarez', {
+  page.drawText(nombre, {
     x: 30 + (page.getWidth() - 300 - textWidth) / 2,
     y: height + heighResult,
     size: 12,
@@ -160,7 +168,7 @@ export const generatePdf = async (data) => {
     lineHeight: 14,
   })
 
-  page.drawText('tavo.paz12@hotmail.com', {
+  page.drawText(correo, {
     x: secondRectX + 20,
     y: height + heighResult,
     size: 12,
@@ -187,7 +195,7 @@ export const generatePdf = async (data) => {
     lineHeight: 14,
   })
 
-  page.drawText('Jose Octavio Paz Juarez', {
+  page.drawText(telefono, {
     x: 30 + (page.getWidth() - 300 - textWidth) / 2,
     y: height + heighResult - 50,
     size: 12,
@@ -214,7 +222,7 @@ export const generatePdf = async (data) => {
     lineHeight: 14,
   })
 
-  page.drawText('tavo.paz12@hotmail.com', {
+  page.drawText(area, {
     x: secondRectX + 20,
     y: height + heighResult - 50,
     size: 12,
@@ -231,7 +239,7 @@ export const generatePdf = async (data) => {
 
   page.drawText(reglas, {
     x: 20,
-    y: height + 545,
+    y: height + 535,
     size: 10,
     font: helveticaFont,
     color: rgb(0.2, 0.2, 0.2),

@@ -16,11 +16,11 @@ export default function ArticlesPricipals({ data, events }) {
         className={`${
           data.articles.length <= 1 ? 'w-full' : 'w-2/4'
         } max-md:w-full bg-gray-200 h-max rounded-2xl p-4`}>
-        <Link href={`/sala-prensa/${data?.articles[0]?.slug}`}>
-          <h2 className="text-2xl font-bold text-justify text-gray-700 max-md:text-center max-md:text-xl">
+        <h2 className="text-2xl font-bold text-justify text-gray-700 max-md:text-center max-md:text-xl">
+          <Link href={`/sala-prensa/${data?.articles[0]?.slug}`}>
             {data?.articles[0].title}
-          </h2>
-        </Link>
+          </Link>
+        </h2>
         <p className="mt-2 mb-2 line-clamp-4 text-justify text-gray-500 max-md:text-justify">
           Tezonpa, Ver. ({formatDate(data?.articles[0]?.createdAt)}).{' '}
           {data?.articles[0]?.content}
@@ -55,7 +55,7 @@ export default function ArticlesPricipals({ data, events }) {
                 loading="lazy"
                 width={500}
                 height={500}
-                className="w-full h-[400px] max-md:h-36 object-cover rounded-2xl"
+                className="w-full h-[400px] max-md:h-36 object-fill rounded-2xl"
                 alt="principal"
                 src={events[0]?.image}
               />

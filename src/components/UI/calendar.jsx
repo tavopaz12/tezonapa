@@ -2,9 +2,11 @@ import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React, { useState, useEffect } from 'react'
 
-export default function DynamicCalendar() {
+export default function DynamicCalendar({ fechas }) {
   const [date, setDate] = useState(new Date())
   const [selectedDate, setSelectedDate] = useState(false)
+  const [listHours, setListHours] = useState(null)
+  const [loading, setLoading] = useState(false)
 
   const days = [
     'Domingo',
@@ -17,21 +19,21 @@ export default function DynamicCalendar() {
   ]
 
   const monthDays = (date) => {
-    const year = date.getFullYear()
-    const month = date.getMonth()
+    const year = date.getUTCFullYear()
+    const month = date.getUTCMonth()
     const firstDay = new Date(year, month, 1)
     const lastDay = new Date(year, month + 1, 0)
     const days = []
 
-    for (let i = 1; i <= lastDay.getDate(); i++) {
+    for (let i = 1; i <= lastDay.getUTCDate(); i++) {
       days.push(new Date(year, month, i))
     }
 
-    for (let i = firstDay.getDay() - 1; i >= 0; i--) {
+    for (let i = firstDay.getUTCDay() - 1; i >= 0; i--) {
       days.unshift(new Date(year, month, -i))
     }
 
-    for (let i = lastDay.getDay() + 1; i <= 6; i++) {
+    for (let i = lastDay.getUTCDay() + 1; i <= 6; i++) {
       days.push(new Date(year, month + 1, i))
     }
 
@@ -39,11 +41,11 @@ export default function DynamicCalendar() {
   }
 
   const handlePrevClick = () => {
-    setDate(new Date(date.getFullYear(), date.getMonth() - 1, 1))
+    setDate(new Date(date.getUTCFullYear(), date.getUTCMonth() - 1, 1))
   }
 
   const handleNextClick = () => {
-    setDate(new Date(date.getFullYear(), date.getMonth() + 1, 1))
+    setDate(new Date(date.getUTCFullYear(), date.getUTCMonth() + 1, 1))
   }
 
   useEffect(() => {
@@ -53,6 +55,47 @@ export default function DynamicCalendar() {
       year: 'numeric',
     })
   }, [date])
+
+  const verifyDate = (day) => {
+    const filteredDates = fechas.filter((fecha) => {
+      const fechaDate = new Date(fecha)
+      return (
+        fechaDate.getUTCMonth() === date.getUTCMonth() &&
+        fechaDate.getUTCFullYear() === date.getUTCFullYear()
+      )
+    })
+
+    return filteredDates.some((fecha) => {
+      const fechaDate = new Date(fecha)
+      const fechaDateString = fechaDate.toLocaleString('en-US', {
+        timeZone: 'America/Mexico_City',
+      })
+      const fechaDay = new Date(fechaDateString).getUTCDate()
+      return fechaDay === day
+    })
+  }
+
+  const handleClickDay = async (day) => {
+    setSelectedDate(!selectedDate)
+    setLoading(true)
+
+    const month = (day.getUTCMonth() + 1).toLocaleString('en-US', {
+      minimumIntegerDigits: 2,
+    })
+    const fecha = `${day.getUTCFullYear()}-${month}-${day.getUTCDate()}`
+
+    try {
+      const res = await fetch(`/api/citas/fecha/${fecha}`)
+
+      const citas = await res.json()
+
+      setListHours(citas)
+      setLoading(false)
+    } catch (error) {
+      setListHours(null)
+      console.log(error)
+    }
+  }
 
   return (
     <>
@@ -89,29 +132,56 @@ export default function DynamicCalendar() {
           <ul className="days grid place-content-center place-items-center grid-cols-7 mt-1">
             {monthDays(date).map((day) => (
               <li
-                onClick={() => setSelectedDate(!selectedDate)}
+                onClick={() => handleClickDay(day)}
                 key={day}
-                className={`mt-10 font-medium grid place-items-center rounded-[50%] cursor-pointer p-4 w-[3rem]
-                ${day.getMonth() !== date.getMonth() ? 'opacity-0 pointer-events-none' : ''}
+                className={`mt-10 ${
+                  verifyDate(day.getUTCDate())
+                    ? 'bg-blue-600 text-white font-bold'
+                    : 'bg-transparent'
+                } grid place-items-center rounded-[50%] cursor-pointer p-4 w-[3rem]
+                ${
+                  day.getUTCMonth() !== date.getUTCMonth()
+                    ? 'opacity-0 pointer-events-none'
+                    : ''
+                } ${
+                  new Date().toLocaleDateString('es-MX') ===
+                  day.toLocaleDateString('es-MX')
+                    ? 'text-red-500 font-semibold'
+                    : 'text-black'
+                }
                 `}>
-                <p>{day.getDate()}</p>
+                <p>{day.getUTCDate()}</p>
+                <p className="text-blue-500 font-semibold">
+                  {new Date().toLocaleDateString('es-MX') ===
+                    day.toLocaleDateString('es-MX') && 'Hoy'}
+                </p>
               </li>
             ))}
           </ul>
         </div>
       </div>
 
-      {selectedDate && <Modal onClose={() => setSelectedDate(!selectedDate)} />}
+      {!loading && (
+        <>
+          {selectedDate && (
+            <Modal
+              list={listHours}
+              onClose={() => setSelectedDate(!selectedDate)}
+            />
+          )}
+        </>
+      )}
     </>
   )
 }
 
-function Modal({ onClose }) {
+function Modal({ onClose, list }) {
   const handleClickOutModal = (evt) => {
     if (evt.target === evt.currentTarget) {
       onClose()
     }
   }
+
   return (
     <div className="fixed z-10 h-screen inset-0 overflow-y-auto">
       <div className="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
@@ -132,10 +202,34 @@ function Modal({ onClose }) {
                 <h3
                   className="text-lg leading-6 font-medium text-gray-900"
                   id="modal-headline"></h3>
-                <div className="mt-2">
-                  <p className="text-sm text-gray-500">
-                    Aquí se mostrarían las citas para esta fecha.
-                  </p>
+                <div className="mt-2 ">
+                  <div className="text-sm text-gray-700">
+                    {list?.error ? (
+                      <p className="text-center text-xl font-bold">
+                        SIN CITAS DISPONIBLES
+                      </p>
+                    ) : (
+                      <>
+                        {list?.horasOcupadasPorArea.map((data, index) => (
+                          <div key={index} className="mb-4">
+                            <p className="font-bold text-base">
+                              Area: {data.nombre}
+                            </p>
+                            <p className="mb-2">Datos de citas: </p>
+                            <ol>
+                              {data.horasOcupadas.map((hora, index) => (
+                                <li key={index} className="mb-4">
+                                  <p>Nombre de solicitante: {hora.nombre}</p>
+                                  <p>Telefono: {hora.telefono}</p>
+                                  <p>Hora de cita: {hora.hora}</p>
+                                </li>
+                              ))}
+                            </ol>
+                          </div>
+                        ))}
+                      </>
+                    )}
+                  </div>
                 </div>
               </div>
             </div>

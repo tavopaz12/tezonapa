@@ -6,6 +6,7 @@ export default function InputSelect({
   handleValueInput,
   value,
   required,
+  errorText,
 }) {
   return (
     <>
@@ -36,6 +37,7 @@ export default function InputSelect({
           </option>
         ))}
       </select>
+      {errorText && <p className="text-red-500 text-sm">{errorText}</p>}
     </>
   )
 }

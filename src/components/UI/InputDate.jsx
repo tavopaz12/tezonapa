@@ -8,6 +8,7 @@ export default function InputDate({
   handleValueInput,
   helperText,
   value,
+  errorText
 }) {
   const [error, setError] = useState('')
   const currentDate = new Date().toISOString().split('T')[0] // obtener fecha actual en formato yyyy-mm-dd
@@ -33,13 +34,9 @@ export default function InputDate({
         className="block mb-2 text-sm font-bold text-gray-900">
         {title}
       </label>
-      {helperText && (
-        <p id="helper-text-explanation" className="my-2 text-sm text-gray-500">
-          {helperText}
-        </p>
-      )}
+
       <input
-        value={value}
+        defaultValue={value}
         onChange={handleChange}
         type="date"
         name={name}
@@ -50,6 +47,7 @@ export default function InputDate({
         placeholder={placeholder}
         required={required && true}
       />
+      {errorText && <p className="text-red-500 text-sm">{errorText}</p>}
       {error && <p className="text-red-500 text-sm">{error}</p>}
     </>
   )

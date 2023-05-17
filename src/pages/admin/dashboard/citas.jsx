@@ -4,10 +4,9 @@ import { getCitas } from '@/services/citas/getCitas'
 import React from 'react'
 
 export default function citas({ citas }) {
-  console.log(citas)
   return (
     <LayoutAdmin title="Eventos - Dashboard | H. Ayuntamiento Tezonapa, Ver">
-      <DynamicCalendar />
+      <DynamicCalendar fechas={citas.fechas} />
     </LayoutAdmin>
   )
 }
