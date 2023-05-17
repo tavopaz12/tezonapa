@@ -54,6 +54,7 @@ export default function DynamicCalendar({ fechas }) {
       month: 'long',
       year: 'numeric',
     })
+
   }, [date])
 
   const verifyDate = (day) => {
@@ -151,10 +152,6 @@ export default function DynamicCalendar({ fechas }) {
                 }
                 `}>
                 <p>{day.getUTCDate()}</p>
-                <p className="text-blue-500 font-semibold">
-                  {new Date().toLocaleDateString('es-MX') ===
-                    day.toLocaleDateString('es-MX') && 'Hoy'}
-                </p>
               </li>
             ))}
           </ul>

@@ -8,10 +8,13 @@ export default function InputDate({
   handleValueInput,
   helperText,
   value,
-  errorText
+  errorText,
 }) {
   const [error, setError] = useState('')
-  const currentDate = new Date().toISOString().split('T')[0] // obtener fecha actual en formato yyyy-mm-dd
+  const currentDate = new Date().toISOString().split('T')[0]
+
+  const fechaActual = new Date()
+  const fechaPorDefecto = fechaActual.toISOString().slice(0, 10)
 
   const validateDate = (date) => {
     const day = new Date(date).getDay()
@@ -36,7 +39,7 @@ export default function InputDate({
       </label>
 
       <input
-        defaultValue={value}
+        value={value ? value : fechaPorDefecto}
         onChange={handleChange}
         type="date"
         name={name}

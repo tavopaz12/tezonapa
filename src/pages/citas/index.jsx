@@ -6,12 +6,12 @@ import { createNewCita } from '@/services/citas/postCita'
 import { generatePdf } from 'config/generatePdf'
 import { useRouter } from 'next/router'
 import React from 'react'
+import { useEffect } from 'react'
 import { useState } from 'react'
 
 export default function Citas() {
   const fechaActual = new Date()
-  const fechaPorDefecto = fechaActual.toISOString().slice(0, 10) //obtiene la fecha en formato 'AAAA-MM-DD'
-  const currentHour = fechaActual.getHours()
+  const fechaPorDefecto = fechaActual.toISOString().slice(0, 10)
 
   const [nombre, setNombre] = useState('')
   const [fecha, setFecha] = useState(fechaPorDefecto)
@@ -22,26 +22,44 @@ export default function Citas() {
   const [error, setError] = useState(false)
   const [loading, setLoading] = useState(false)
   const [dataCitas, setDataCita] = useState({})
+  const [options, setOptions] = useState([])
   const router = useRouter()
 
-  const horas = [
-    '08:00 AM',
-    '09:00 AM',
-    '10:00 AM',
-    '11:00 AM',
-    '12:00 PM',
-    '1:00 PM',
-    '2:00 PM',
-  ]
+  useEffect(() => {
+    const today = new Date()
+    const currentHour = today.getHours()
 
-  const filteredOptions = horas.filter((hora) => {
-    const optionHour = parseInt(hora.split(':')[0])
-    const optionPeriod = hora.split(' ')[1]
-    const hour24Format = optionPeriod === 'PM' ? optionHour + 12 : optionHour
-    return hour24Format > currentHour
-  })
+    const year = today.getFullYear()
+    const month = (today.getMonth() + 1).toString().padStart(2, '0')
+    const day = today.getDate().toString().padStart(2, '0')
+    const formattedDate = `${year}-${month}-${day}`
 
-  console.log(filteredOptions)
+    const horas = [
+      '08:00 AM',
+      '09:00 AM',
+      '10:00 AM',
+      '11:00 AM',
+      '12:00 PM',
+      '1:00 PM',
+      '2:00 PM',
+    ]
+
+    const filteredOptions = horas.filter((hora) => {
+      const optionHour = parseInt(hora.split(':')[0])
+      const optionPeriod = hora.split(' ')[1]
+      const hour24Format = optionPeriod === 'PM' ? optionHour + 12 : optionHour
+      return hour24Format > currentHour
+    })
+
+    if (formattedDate === fecha) {
+      setOptions(filteredOptions)
+      return
+    } else {
+      setOptions(horas)
+    }
+  }, [fecha])
+
+  console.log(fechaPorDefecto)
 
   const clearInputs = () => {
     setNombre('')
@@ -51,6 +69,14 @@ export default function Citas() {
     setArea('Comude')
     setTelefono('')
   }
+
+  useEffect(() => {
+    const today = new Date()
+    const formattedDate = `${today.getFullYear()}-${(today.getMonth() + 1)
+      .toString()
+      .padStart(2, '0')}-${today.getDate().toString().padStart(2, '0')}`
+    validateDate({ target: { value: formattedDate } })
+  }, [])
 
   const validateDate = async (evt) => {
     setLoading(true)
@@ -182,7 +208,7 @@ export default function Citas() {
                 handleValueInput={(evt) => setHora(evt.target.value)}
                 title="Hora"
                 defaultSelect="SELECCIONAR HORA"
-                options={filteredOptions}
+                options={options}
               />
             </div>
           </div>
