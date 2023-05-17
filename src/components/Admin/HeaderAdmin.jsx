@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   faBuilding,
   faCalendar,
+  faCalendarCheck,
   faHome,
   faNewspaper,
   faRightFromBracket,
@@ -32,6 +33,11 @@ const links = [
     title: 'Eventos',
     link: '/admin/dashboard/eventos',
     icon: <FontAwesomeIcon className="h-4 w-4" icon={faCalendar} />,
+  },
+  {
+    title: 'Citas',
+    link: '/admin/dashboard/citas',
+    icon: <FontAwesomeIcon className="h-4 w-4" icon={faCalendarCheck} />,
   },
 ]
 

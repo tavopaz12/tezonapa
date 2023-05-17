@@ -7,6 +7,9 @@ export async function getCitas(req, res) {
     const area = req.query.area || ''
     const sortCriteria = { createdAt: -1 }
 
+    const perPage = 10
+    const page = parseInt(req.query.page) || 1
+
     let areaFilter = {}
 
     if (area) {
@@ -20,12 +23,19 @@ export async function getCitas(req, res) {
       areaFilter = { area: matchingArea._id }
     }
 
+    const count = await Cita.countDocuments(areaFilter)
+    const pages = Math.ceil(count / perPage)
+
     const citas = await Cita.find(areaFilter)
       .populate('area')
       .sort(sortCriteria)
+      .skip(perPage * page - perPage)
+      .limit(perPage)
 
     if (!citas) return res.status(404).json({ error: 'Datos no encontrados' })
-    res.status(201).json(citas)
+    res
+      .status(201)
+      .json({ currentPage: page, count: count, pages: pages, citas: citas })
   } catch (error) {
     res.status(404).json({ error: 'Error mientras se obtenias los datos' })
   }
@@ -101,31 +111,32 @@ export async function patchCita(req, res) {
 
 // get : api/citas/fecha
 export async function getCitaByDate(req, res) {
-  const { fecha } = req.query;
+  const { fecha } = req.query
 
   try {
-    const citas = await Cita.find({ date: fecha }).populate('area');
+    const citas = await Cita.find({ date: fecha }).populate('area')
 
     if (!citas || citas.length === 0) {
-      return res.status(404).json({ error: 'No hay citas programadas para esta fecha' });
+      return res
+        .status(404)
+        .json({ error: 'No hay citas programadas para esta fecha' })
     }
 
-    const horasOcupadasPorArea = {};
+    const horasOcupadasPorArea = {}
     citas.forEach((cita) => {
-      const areaNombre = cita.area.name;
-      const hora = cita.hour;
+      const areaNombre = cita.area.name
+      const hora = cita.hour
       if (!horasOcupadasPorArea[areaNombre]) {
-        horasOcupadasPorArea[areaNombre] = [];
+        horasOcupadasPorArea[areaNombre] = []
       }
-      horasOcupadasPorArea[areaNombre].push(hora);
-    });
+      horasOcupadasPorArea[areaNombre].push(hora)
+    })
 
-    return res.status(200).json({ horasOcupadasPorArea });
+    return res.status(200).json({ horasOcupadasPorArea })
   } catch (error) {
-    return res.status(500).json({ error: error.message });
+    return res.status(500).json({ error: error.message })
   }
 }
-
 
 // delete : api/citas/1
 export async function deleteCita(req, res) {
