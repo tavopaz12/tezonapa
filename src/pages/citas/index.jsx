@@ -170,7 +170,7 @@ export default function Citas() {
     <Layout title="Generar Cita - H. Ayuntamiento, Tezonapa" activeLink="citas">
       <section className="px-10 mb-4 max-md:px-4 flex">
         <div className="w-full flex max-md:block justify-end align-middle gap-4">
-          <p className="mt-2">Buscar cita por numero de folio: </p>
+          <p className="mt-2 font-bold">Buscar cita por numero de folio: </p>
           <div className="w-[30%] max-md:w-full">
             <InputSearch
               handleInputValue={(evt) => setQuery(evt.target.value)}
