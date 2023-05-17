@@ -1,5 +1,6 @@
 import Layout from '@/components/Home/Layout'
 import InputDate from '@/components/UI/InputDate'
+import InputSearch from '@/components/UI/InputSearch'
 import InputSelect from '@/components/UI/InputSelect'
 import InputText from '@/components/UI/InputText'
 import { createNewCita } from '@/services/citas/postCita'
@@ -29,6 +30,7 @@ export default function Citas() {
     const formattedHour = hour % 12 || 12
     return `${formattedHour}:00 ${amOrPm}`
   })
+  const [query, setQuery] = useState('')
   const router = useRouter()
 
   console.log(hora)
@@ -55,7 +57,11 @@ export default function Citas() {
     const filteredOptions = horas.filter((hora) => {
       const optionHour = parseInt(hora.split(':')[0])
       const optionPeriod = hora.split(' ')[1]
-      const hour24Format = optionPeriod === 'PM' ? optionHour + 12 : optionHour
+      const hour24Format =
+        optionPeriod === 'PM' && optionHour !== 12
+          ? optionHour + 12
+          : optionHour
+
       return hour24Format >= currentHour
     })
 
@@ -156,12 +162,28 @@ export default function Citas() {
     }
   }
 
+  const onSearch = () => {
+    router.push(`/citas/folio/${query}`)
+  }
+
   return (
     <Layout title="Generar Cita - H. Ayuntamiento, Tezonapa" activeLink="citas">
-      <section className="grid place-items-center my-8">
+      <section className="px-10 mb-4 max-md:px-4 flex">
+        <div className="w-full flex max-md:block justify-end align-middle gap-4">
+          <p className="mt-2">Buscar cita por numero de folio: </p>
+          <div className="w-[30%] max-md:w-full">
+            <InputSearch
+              handleInputValue={(evt) => setQuery(evt.target.value)}
+              handleSearch={onSearch}
+              placeholder="Número de folio"
+            />
+          </div>
+        </div>
+      </section>
+      <section className="grid place-items-center my-8 max-md:px-4">
         <form
           onSubmit={onSubmit}
-          className="w-2/4 bg-gray-200 p-10 text-2xl rounded-md flex flex-col gap-4">
+          className="w-2/4 max-md:w-full bg-gray-200 p-10 text-2xl rounded-md flex flex-col gap-4">
           <h2 className="text-center font-bold">Generar Cita</h2>
           <div>
             <InputText

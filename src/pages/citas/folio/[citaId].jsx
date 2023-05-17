@@ -1,9 +1,15 @@
+import DeleteConfirmationModal from '@/components/Admin/DeleteConfirmationModal'
 import Layout from '@/components/Home/Layout'
+import { deleteCita } from '@/services/citas/deleteCita'
 import { getCitaById } from '@/services/citas/getCitaById'
 import { generatePdf } from 'config/generatePdf'
-import React, { useState } from 'react'
+import { useRouter } from 'next/router'
+import { useState } from 'react'
 
 export default function Citas({ cita }) {
+  const [showModal, setShowModal] = useState(false)
+  const router = useRouter()
+
   const handleClickGeneratePdf = () => {
     const dataCita = {
       nombre: cita.nombre,
@@ -17,10 +23,21 @@ export default function Citas({ cita }) {
     generatePdf(dataCita)
   }
 
+  const handleDeleteCita = async () => {
+    try {
+      const res = await deleteCita(cita._id)
+
+      router.push(router.asPath)
+      setShowModal(!showModal)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   return (
     <Layout title="Generar Cita - H. Ayuntamiento, Tezonapa" activeLink="citas">
-      <section className="grid place-items-center my-8">
-        <div className="w-2/4 max-md:w-3/4 bg-gray-100 shadow-md border border-gray-300 p-10 text-base rounded-md flex flex-col gap-4">
+      <section className="grid place-items-center my-8 px-4">
+        <div className="w-2/4 max-md:w-full bg-gray-100 shadow-md border border-gray-300 p-10 text-base rounded-md flex flex-col gap-4">
           <h2 className="text-center text-xl font-bold">Datos de Cita</h2>
 
           {cita.error ? (
@@ -39,12 +56,16 @@ export default function Citas({ cita }) {
                 </p>
               </div>
 
-              <div className="flex justify-between border border-black p-2">
+              <div className="flex max-md:block justify-between border border-black p-2">
                 <p>
-                  <b>Fecha y hora de cita:</b> {cita.date} - {cita.hour}
+                  <b>Fecha y hora de cita:</b>
+                  <br />
+                  {cita.date} - {cita.hour}
                 </p>
                 <p>
-                  <b>Folio:</b> {cita._id}
+                  <b>Folio:</b>
+                  <br />
+                  {cita._id}
                 </p>
               </div>
 
@@ -78,10 +99,16 @@ export default function Citas({ cita }) {
                 </li>
               </ul>
 
-              <div className="grid place-items-center mt-2">
+              <div className="flex gap-4 place-items-center mt-2">
+                <button
+                  onClick={() => setShowModal(!showModal)}
+                  className="bg-red-600 p-2 w-2/4 max-md:w-full text-white font-bold rounded-lg"
+                  type="submit">
+                  Cancelar Cita
+                </button>
                 <button
                   onClick={handleClickGeneratePdf}
-                  className="bg-blue-600 p-2 w-2/4 text-white font-bold rounded-lg"
+                  className="bg-blue-600 p-2 w-2/4 max-md:w-full text-white font-bold rounded-lg"
                   type="submit">
                   Descargar Pdf
                 </button>
@@ -89,6 +116,14 @@ export default function Citas({ cita }) {
             </>
           )}
         </div>
+
+        {showModal && (
+          <DeleteConfirmationModal
+            message="¿Esta seguro(a) de que quiere cancelar su cita?"
+            handleClickConfirmate={handleDeleteCita}
+            toogleOpen={() => setShowModal(!showModal)}
+          />
+        )}
       </section>
     </Layout>
   )

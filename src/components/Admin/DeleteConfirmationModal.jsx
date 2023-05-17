@@ -1,4 +1,8 @@
-export default function DeleteConfirmationModal({ toogleOpen, handleClickConfirmate }) {
+export default function DeleteConfirmationModal({
+  toogleOpen,
+  message,
+  handleClickConfirmate,
+}) {
   return (
     <div
       id="deleteModal"
@@ -37,7 +41,7 @@ export default function DeleteConfirmationModal({ toogleOpen, handleClickConfirm
               clipRule="evenodd"></path>
           </svg>
           <p className="mb-4 text-gray-500">
-            ¿Estas seguro de eliminar este item?
+            {message ? message : '¿Estas seguro de eliminar este item?'}
           </p>
           <div className="flex justify-center items-center space-x-4">
             <button
@@ -51,7 +55,7 @@ export default function DeleteConfirmationModal({ toogleOpen, handleClickConfirm
               type="submit"
               onClick={handleClickConfirmate}
               className="py-2 px-3 text-sm font-medium text-center text-white bg-red-600 rounded-lg hover:bg-red-700">
-              Si, estoy seguro
+              Si, estoy seguro(a)
             </button>
           </div>
         </div>
