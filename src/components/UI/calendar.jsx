@@ -62,14 +62,14 @@ export default function DynamicCalendar() {
           <div className="icons flex gap-8">
             <span
               id="prev"
-              className="material-symbols-rounded flex items-center gap-2"
+              className="material-symbols-rounded cursor-pointer flex items-center gap-2"
               onClick={handlePrevClick}>
               <FontAwesomeIcon icon={faArrowLeft} className="h-4 w-4" />
               Siguiente
             </span>
             <span
               id="next"
-              className="material-symbols-rounded flex items-center gap-2"
+              className="material-symbols-rounded cursor-pointer flex items-center gap-2"
               onClick={handleNextClick}>
               Anterior
               <FontAwesomeIcon icon={faArrowRight} className="h-4 w-4" />
@@ -81,7 +81,7 @@ export default function DynamicCalendar() {
             {days.map((day) => (
               <li
                 key={day}
-                className="text-gray-500 font-medium w-full text-center py-2">
+                className="text-gray-500 font-semibold w-full text-center py-2">
                 {day}
               </li>
             ))}
@@ -92,7 +92,7 @@ export default function DynamicCalendar() {
                 onClick={() => setSelectedDate(!selectedDate)}
                 key={day}
                 className={`mt-10 font-medium grid place-items-center rounded-[50%] cursor-pointer p-4 w-[3rem]
-                ${day.getMonth() !== date.getMonth() ? 'opacity-0' : ''}
+                ${day.getMonth() !== date.getMonth() ? 'opacity-0 pointer-events-none' : ''}
                 `}>
                 <p>{day.getDate()}</p>
               </li>

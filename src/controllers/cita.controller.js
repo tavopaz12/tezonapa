@@ -23,7 +23,10 @@ export async function getCitas(req, res) {
       areaFilter = { area: matchingArea._id }
     }
 
-    const count = await Cita.countDocuments(areaFilter)
+    // Obtener todas las fechas de las citas
+    const fechas = await Cita.distinct('date', areaFilter)
+
+    const count = fechas.length
     const pages = Math.ceil(count / perPage)
 
     const citas = await Cita.find(areaFilter)
@@ -33,9 +36,14 @@ export async function getCitas(req, res) {
       .limit(perPage)
 
     if (!citas) return res.status(404).json({ error: 'Datos no encontrados' })
-    res
-      .status(201)
-      .json({ currentPage: page, count: count, pages: pages, citas: citas })
+
+    res.status(201).json({
+      currentPage: page,
+      count: count,
+      pages: pages,
+      fechas: fechas,
+      citas: citas,
+    })
   } catch (error) {
     res.status(404).json({ error: 'Error mientras se obtenias los datos' })
   }
