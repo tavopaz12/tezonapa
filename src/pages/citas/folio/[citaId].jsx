@@ -1,16 +1,18 @@
 import Layout from '@/components/Home/Layout'
+import { getCitaById } from '@/services/citas/getCitaById'
 import React from 'react'
 
-export default function Citas() {
+export default function Citas({ cita }) {
+  console.log(cita)
   return (
     <Layout title="Generar Cita - H. Ayuntamiento, Tezonapa" activeLink="citas">
       <section className="grid place-items-center my-8">
-        <div className="w-2/4 bg-gray-100 shadow-md border border-gray-300 p-10 text-base rounded-md flex flex-col gap-4">
+        <div className="w-2/4 max-md:w-3/4 bg-gray-100 shadow-md border border-gray-300 p-10 text-base rounded-md flex flex-col gap-4">
           <h2 className="text-center text-xl font-bold">Datos de Cita</h2>
 
           <div>
             <p>
-              <b>Estimado:</b> Jose Octavio
+              <b>Estimado:</b> {cita.nombre}
             </p>
             <p>
               Le informamos que su cita ha sido registrada exitosamente con los
@@ -20,25 +22,25 @@ export default function Citas() {
 
           <div className="flex justify-between border border-black p-2">
             <p>
-              <b>Fecha y hora de cita:</b> 12 - 03 - 25
+              <b>Fecha y hora de cita:</b> {cita.date} - {cita.hour}
             </p>
             <p>
-              <b>Folio:</b> akakkakakaka
+              <b>Folio:</b> {cita._id}
             </p>
           </div>
 
           <div className="border border-black p-2 leading-9">
             <p>
-              <b>Nombre:</b> Jose octavio paz juarez
+              <b>Nombre:</b> {cita.nombre}
             </p>
             <p>
-              <b>Correo:</b> Jose octavio paz juarez
+              <b>Correo:</b> {cita.email}
             </p>
             <p>
-              <b>Telefono:</b> Jose octavio paz juarez
+              <b>Telefono:</b> {cita.tel}
             </p>
             <p>
-              <b>Area de cita:</b> Jose octavio paz juarez
+              <b>Area de cita:</b> {cita.area.nombre}
             </p>
           </div>
 
@@ -71,12 +73,11 @@ export default function Citas() {
 }
 
 export async function getServerSideProps(context) {
-  const { title } = context.query
+  const { citaId } = context.query
 
-  const article = await getArticleBySlug(title)
-  const articles = await getArticles()
+  const cita = await getCitaById(citaId)
 
-  if (article.error) {
+  if (cita.error) {
     return {
       notFound: true,
     }
@@ -84,8 +85,7 @@ export async function getServerSideProps(context) {
 
   return {
     props: {
-      article,
-      articles,
+      cita,
     },
   }
 }

@@ -1,12 +1,10 @@
-export const getArticleBySlug = async (citaId) => {
+export const getCitaById = async (citaId) => {
   try {
-    const res = await fetch(
-      `https://tezonapa.vercel.app/api/citas/${citaId}`,
-    )
+    const res = await fetch(`https://tezonapa.vercel.app/api/citas/${citaId}`)
 
-    const articles = res.json()
+    const citas = res.json()
 
-    return articles
+    return citas
   } catch (error) {
     console.log('...logging error to our system...')
 

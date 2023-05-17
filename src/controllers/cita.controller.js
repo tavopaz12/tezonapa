@@ -54,7 +54,7 @@ export async function getCita(req, res) {
   try {
     const { citaId } = req.query
 
-    const cita = await Cita.findById(citaId)
+    const cita = await Cita.findById(citaId).populate('area')
 
     if (!cita) {
       throw new Error('Cita no encontrada')
