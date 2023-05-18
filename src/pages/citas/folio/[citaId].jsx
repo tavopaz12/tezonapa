@@ -93,10 +93,6 @@ export default function Citas({ cita }) {
                   - Para recibir la atención es indispensable contar con su
                   acuse y portar una identificación vigente
                 </li>
-                <li>
-                  - Para recibir la atención es indispensable contar con su
-                  acuse y portar una identificación vigente
-                </li>
               </ul>
 
               <div className="flex gap-4 place-items-center mt-2">
