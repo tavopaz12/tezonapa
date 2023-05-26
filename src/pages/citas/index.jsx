@@ -125,6 +125,12 @@ export default function Citas() {
     )
   }
 
+  const validedInputNumber = (evt) => {
+    const value = evt.target.value
+    const phoneNumber = value.replace(/\D/g, '')
+    setTelefono(phoneNumber)
+  }
+
   const validateInputTrim = () => {
     return Boolean(
       nombre &&
@@ -233,6 +239,7 @@ export default function Citas() {
           </div>
           <div>
             <InputText
+              inputType="email"
               value={correo}
               handleValueInput={(evt) => setCorreo(evt.target.value)}
               title="Correo Electronico"
@@ -241,7 +248,7 @@ export default function Citas() {
           <div>
             <InputText
               value={telefono}
-              handleValueInput={(evt) => setTelefono(evt.target.value)}
+              handleValueInput={validedInputNumber}
               title="Telefono"
             />
           </div>

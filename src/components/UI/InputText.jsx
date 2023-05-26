@@ -5,7 +5,8 @@ export default function InputText({
   required,
   handleValueInput,
   helperText,
-  value
+  value,
+  inputType,
 }) {
   return (
     <>
@@ -22,7 +23,7 @@ export default function InputText({
       <input
         value={value}
         onChange={handleValueInput}
-        type="text"
+        type={inputType ? inputType : 'text'}
         name={name}
         id={name}
         className="bg-gray-50 outline-none border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
